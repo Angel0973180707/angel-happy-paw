@@ -6,13 +6,7 @@
     <title>教養幸福經 - 天使笑長 Angel 概念館</title>
     <style>
         :root { --primary: #8FB9A8; --bg: #FFF5EE; --text: #5D4037; }
-        
-        /* 🚀 終極鎖定字體補丁 - 確保全平台一致 */
-        html { 
-            -webkit-text-size-adjust: none !important; 
-            text-size-adjust: none !important; 
-        }
-        
+        html { -webkit-text-size-adjust: none !important; text-size-adjust: none !important; }
         body { 
             font-family: 'PingFang TC', sans-serif; 
             background-color: var(--bg); 
@@ -20,84 +14,18 @@
             color: var(--text); 
             line-height: 1.6; 
             font-size: 16px !important; 
+            max-height: 999999px; /* 強制鎖定 */
         }
-
         .container { padding: 15px 10px; max-width: 600px; margin: 0 auto; }
-        
-        /* 展項卡片風格 */
-        .article-card { 
-            background: white; 
-            padding: 25px 18px; 
-            border-radius: 20px; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
-            position: relative;
-            overflow: hidden;
-        }
-
-        /* 裝飾性展項編號 */
-        .article-card::before {
-            content: "EXHIBIT 01";
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            font-size: 0.6rem;
-            color: #DDD;
-            letter-spacing: 2px;
-        }
-
-        .category-tag {
-            display: inline-block;
-            color: var(--primary);
-            font-size: 0.7rem;
-            font-weight: bold;
-            letter-spacing: 2px;
-            margin-bottom: 10px;
-            border-bottom: 1px solid var(--primary);
-        }
-
-        h1 { color: var(--text); font-size: 1.25rem !important; margin: 5px 0 20px; letter-spacing: 1px; }
-        
-        p { margin-bottom: 1.2em; text-align: justify; font-size: 0.85rem !important; letter-spacing: 0.3px; color: #666; }
-        
+        .article-card { background: white; padding: 25px 18px; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); position: relative; overflow: hidden; }
+        .article-card::before { content: "EXHIBIT 01"; position: absolute; top: 15px; right: 15px; font-size: 0.6rem; color: #DDD; letter-spacing: 2px; }
+        .category-tag { display: inline-block; color: var(--primary); font-size: 0.7rem; font-weight: bold; letter-spacing: 2px; margin-bottom: 10px; border-bottom: 1px solid var(--primary); }
+        h1 { color: var(--text); font-size: 1.25rem !important; margin: 5px 0 20px; }
+        p { margin-bottom: 1.2em; text-align: justify; font-size: 0.85rem !important; color: #666; }
         .highlight { color: var(--primary); font-weight: bold; border-bottom: 1px dashed var(--primary); }
-        .no-break { white-space: nowrap; display: inline-block; }
-
-        /* 詩意引言區 */
-        .poem-box { 
-            background: #fdfaf6; 
-            border-left: 4px solid var(--primary); 
-            padding: 20px 10px; 
-            margin: 25px 0; 
-            text-align: center; 
-            font-size: 0.85rem !important; 
-            color: var(--text);
-            font-style: italic;
-        }
-
-        /* 科學導覽區 */
-        .science-box { 
-            background: #F0F7F4; 
-            border-radius: 12px; 
-            padding: 15px; 
-            margin-top: 30px; 
-            font-size: 0.78rem !important; 
-            border: 1px solid #e0edec; 
-            line-height: 1.7;
-        }
-
-        .btn-back { 
-            display: block; 
-            background: var(--primary); 
-            color: white; 
-            padding: 12px; 
-            border-radius: 30px; 
-            text-decoration: none; 
-            font-weight: bold; 
-            text-align: center; 
-            margin-top: 25px; 
-            font-size: 0.85rem !important; 
-            box-shadow: 0 4px 12px rgba(143,185,168,0.2);
-        }
+        .poem-box { background: #fdfaf6; border-left: 4px solid var(--primary); padding: 20px 10px; margin: 25px 0; text-align: center; font-size: 0.85rem !important; font-style: italic; }
+        .science-box { background: #F0F7F4; border-radius: 12px; padding: 15px; margin-top: 30px; font-size: 0.78rem !important; border: 1px solid #e0edec; }
+        .btn-back { display: block; background: var(--primary); color: white; padding: 12px; border-radius: 30px; text-decoration: none; font-weight: bold; text-align: center; margin-top: 25px; font-size: 0.85rem !important; }
     </style>
 </head>
 <body>
@@ -105,26 +33,20 @@
         <div class="article-card">
             <span class="category-tag">館長推薦筆記</span>
             <h1>🌿 教養幸福經</h1>
-            
-            <p>教養是一場開拓心靈幸福空間的探索之旅。在無數次的互動中我體會到：<span class="highlight">「與其想怎麼管教，不如想怎麼愛；與其想怎麼要求，不如想怎麼感恩。」</span></p>
-            
-            <p>這裡的「感恩」，<span class="highlight">不侷限於感謝之意，更是練習去感受美好的感覺</span>。當感恩的身教做足了，理性的空間才會浮現，溝通才真正開始有效。</p>
-            
+            <p>教養是一場開拓心靈幸福空間的探索之旅。在互動中我體會到：<span class="highlight">「與其想怎麼管教，不如想怎麼愛；與其想怎麼要求，不如想怎麼感恩。」</span></p>
+            <p>這裡的「感恩」，<span class="highlight">不侷限於感謝之意，更是練習去感受美好的感覺</span>。當感恩的身教做足了，理性的空間才會浮現，溝通才有效。</p>
             <div class="poem-box">
-                愛在情人眼裡出<span class="no-break"><b>西施</b></span>，是竉愛<br>
+                愛在情人眼裡出<b>西施</b>，是竉愛<br>
                 愛在滿足予取予求，是溺愛<br>
                 愛在不得要領，是錯愛<br>
                 愛在寬闊無私且得法的智慧，是<b>大愛</b>！
             </div>
-            
             <p>幸福沒有目的地，因為幸福可以無限擴充；幸福沒有目的，因為幸福是活著的權利與義務，活著就該幸福！</p>
-            
             <div class="science-box">
                 <b style="color:var(--primary);">🧠 展廳導覽：腦科學小知識</b><br>
-                持續感受美好的感覺（感恩）能活化腦部，激發產生愉悅感與情緒穩定的<b>多巴胺</b>與<b>血清素</b>，並促進產生<b>愛的荷爾蒙（催產素）</b>。這是一場腦神經的「幸福鍛鍊」，能讓頭腦更靈活、更有同理心。
+                持續感受美好的感覺（感恩）能活化腦部，產生愉悅感與情緒穩定的多巴胺與血清素。
             </div>
         </div>
-        
         <a href="index.html" class="btn-back">← 離開展廳．返回大廳</a>
     </div>
 </body>
