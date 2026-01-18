@@ -3,93 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>天使笑長 Angel - 數位教養旗艦店</title>
+    <title>天使笑長 Angel - 幸福教養概念館</title>
     <style>
         :root { --primary: #8FB9A8; --bg: #FFF5EE; --text: #5D4037; --accent: #EE3E2B; }
         
-        /* 終極鎖定字體補丁 */
+        /* 終極鎖定字體補丁 - 對抗 Line 縮放 */
         html { -webkit-text-size-adjust: none !important; text-size-adjust: none !important; }
         body { font-family: 'PingFang TC', sans-serif; background-color: var(--bg); margin: 0; color: var(--text); line-height: 1.5; font-size: 16px !important; }
         
-        .header { background: white; padding: 15px; text-align: center; }
+        .header { background: white; padding: 20px 15px; text-align: center; border-bottom: 1px solid #f0e6dd; }
         .hero-img { width: 100%; max-width: 1200px; display: block; margin: 0 auto; border-radius: 0 0 25px 25px; }
         .container { padding: 10px; max-width: 800px; margin: 0 auto; }
         
-        /* 動態欄位 + 下拉提醒 */
+        /* 動態欄位 */
         .news-bar { margin: 15px 0; background: #FFF; border-radius: 12px; padding: 12px; border-left: 5px solid var(--primary); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
         .news-tag { background: var(--primary); color: white; font-size: 0.65rem; padding: 2px 8px; border-radius: 4px; font-weight: bold; margin-right: 8px; }
-        .refresh-note { float: right; font-size: 0.65rem; color: #BBB; font-weight: normal; }
+        .refresh-note { float: right; font-size: 0.65rem; color: #BBB; }
         
-        /* 安裝引導小卡 */
-        .install-card { background: linear-gradient(135deg, #ffffff 0%, #f9fdfc 100%); border: 1px dashed var(--primary); border-radius: 15px; padding: 15px; margin: 25px 0; text-align: center; }
-        .install-btn { display: inline-block; background: var(--primary); color: white; padding: 8px 20px; border-radius: 20px; text-decoration: none; font-size: 0.85rem; font-weight: bold; margin-top: 10px; }
-
-        /* 其他既有樣式 */
-        .spirit-section { background: white; border-radius: 20px; padding: 15px 12px; margin-bottom: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); text-align: center; }
-        .spirit-section h3 { color: var(--primary); font-size: 1rem !important; margin-bottom: 12px; }
-        .spirit-list { text-align: left; font-size: 0.82rem !important; line-height: 1.6; }
-        .no-wrap { display: inline-block; white-space: nowrap; }
+        .spirit-section { background: white; border-radius: 20px; padding: 18px 15px; margin-bottom: 25px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); text-align: center; }
+        .spirit-section h3 { color: var(--primary); font-size: 1.1rem !important; margin-bottom: 15px; letter-spacing: 1.5px; }
+        
+        /* 網格選單：四大展廳 */
+        .nav-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .nav-item { background: white; border-radius: 15px; padding: 10px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.05); text-decoration: none; color: inherit; }
+        .nav-item img { width: 100%; border-radius: 12px; aspect-ratio: 4/3; object-fit: cover; margin-bottom: 8px; }
+        .nav-item h3 { font-size: 0.85rem !important; margin: 5px 0; font-weight: bold; color: var(--text); }
+        
+        /* 實踐工房特區 */
+        .dojo-section { grid-column: span 2; background: linear-gradient(135deg, #8FB9A8 0%, #769f8f 100%); color: white; display: flex; align-items: center; padding: 15px; border-radius: 15px; text-decoration: none; margin-top: 10px; }
+        .dojo-img { width: 50px; height: 50px; border-radius: 10px; margin-right: 12px; border: 2px solid rgba(255,255,255,0.3); }
+        
         .btn-read { display: block; background: #96B9AD; color: white; padding: 12px; border-radius: 40px; text-decoration: none; margin-bottom: 12px; font-weight: bold; font-size: 0.9rem !important; text-align: center; }
         .btn-yt { display: block; background: var(--accent); color: white; padding: 12px; border-radius: 40px; text-decoration: none; font-weight: bold; font-size: 0.9rem !important; text-align: center; }
-        .nav-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .nav-item { background: white; border-radius: 15px; padding: 8px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.05); text-decoration: none; color: inherit; }
-        .nav-item img { width: 100%; border-radius: 12px; aspect-ratio: 4/3; object-fit: cover; }
-        .nav-item h3 { font-size: 0.8rem !important; margin: 6px 0; }
-        .dojo-section { grid-column: span 2; background: linear-gradient(135deg, #8FB9A8 0%, #769f8f 100%); color: white; display: flex; align-items: center; padding: 12px; border-radius: 15px; text-decoration: none; margin-top: 10px; }
-        .dojo-img { width: 45px; height: 45px; border-radius: 8px; margin-right: 10px; }
-        h2 { font-size: 1rem !important; border-left: 5px solid var(--primary); padding-left: 8px; margin: 20px 0 12px; }
-        footer { text-align: center; padding: 30px 20px; font-size: 0.75rem !important; color: #999; }
-        .ai-note { font-size: 0.6rem !important; color: #BBB; margin-top: 5px; }
+        
+        h2 { font-size: 1rem !important; border-left: 5px solid var(--primary); padding-left: 10px; margin: 25px 0 15px; letter-spacing: 1px; }
+        
+        .install-card { background: #FFF; border: 1px dashed var(--primary); border-radius: 15px; padding: 18px; margin: 30px 0; text-align: center; }
+        .install-btn { display: inline-block; background: var(--primary); color: white; padding: 8px 25px; border-radius: 20px; text-decoration: none; font-size: 0.85rem; font-weight: bold; margin-top: 12px; }
+
+        footer { text-align: center; padding: 40px 20px; font-size: 0.75rem !important; color: #999; line-height: 1.8; }
+        .ai-note { font-size: 0.6rem !important; color: #CCC; margin-top: 8px; letter-spacing: 0.5px; }
     </style>
 </head>
 <body>
-    <div class="header"><h1 style="margin:0; font-size: 1.4rem;">天使笑長 Angel</h1></div>
+    <div class="header">
+        <h1 style="margin:0; font-size: 1.4rem; letter-spacing: 2px;">天使笑長 Angel</h1>
+        <div style="font-size: 0.75rem; color: var(--primary); font-weight: bold; margin-top: 5px; letter-spacing: 3px;">幸福教養概念館</div>
+    </div>
+    
     <img src="assets/home.webp" class="hero-img">
 
     <div class="container">
         <div class="news-bar">
             <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
-                <div><span class="news-tag">笑長動態</span></div>
-                <div class="refresh-note">若內容未更新請下拉整理 ↻</div>
+                <div><span class="news-tag">館內動態</span></div>
+                <div class="refresh-note">下拉可同步最新展訊 ↻</div>
             </div>
             <div style="font-size: 0.85rem; color: var(--text); font-weight: bold; line-height: 1.4;">
-                📌 主題回顧：教養幸福經，愛得得法的智慧<br>
-                <span style="color: var(--primary); font-size: 0.75rem; font-weight: normal;">🛠️ 好用工具：情緒調解深呼吸小卡 (即將上線)</span>
+                📌 本月策展：教養幸福經，愛得得法的智慧<br>
+                <span style="color: var(--primary); font-size: 0.75rem; font-weight: normal;">🛠️ 工房推薦：情緒調解深呼吸小卡 (即將上線)</span>
             </div>
         </div>
 
-        <h2>🌿 核心精神與導覽</h2>
+        <h2>🌿 概念館精神</h2>
         <div class="spirit-section">
             <h3>讓教養變簡單，讓家庭變溫暖</h3>
-            <div class="spirit-list">
-                <div>✨ <span class="no-wrap"><b>我們的精神：</b></span><span class="no-wrap">結合心腦科學與愛的感悟</span></div>
-                <div>✨ <span class="no-wrap"><b>旗艦店目的：</b></span><span class="no-wrap">提供「看得懂、學得會」的幸福系統</span></div>
-            </div>
-            <a href="story_detail.html" class="btn-read">📖 必讀心法：教養幸福經</a>
-            <a href="https://www.youtube.com/@%E5%A4%A9%E4%BD%BF%E7%AC%91%E9%95%B7" target="_blank" class="btn-yt">📺 前往頻道觀看影片</a>
+            <p style="font-size: 0.82rem; color: #777; margin-bottom: 20px;">結合心腦科學與愛的感悟，解決數位時代的教養焦慮。</p>
+            <a href="story_detail.html" class="btn-read">📖 館長推薦：必讀幸福經</a>
+            <a href="https://www.youtube.com/@%E5%A4%A9%E4%BD%BF%E7%AC%91%E9%95%B7" target="_blank" class="btn-yt">📺 影音導覽：前往頻道</a>
         </div>
 
-        <h2>💡 核心智慧專區</h2>
+        <h2>💡 核心展廳</h2>
         <div class="nav-grid">
-            <div class="nav-item"><img src="assets/brain.webp"><h3>心腦科學</h3></div>
-            <div class="nav-item"><img src="assets/soul.webp"><h3>心靈感悟</h3></div>
-            <div class="nav-item"><img src="assets/relation.webp"><h3>幸福關係</h3></div>
-            <div class="nav-item"><img src="assets/story.webp"><h3>教養故事</h3></div>
+            <div class="nav-item"><img src="assets/brain.webp"><h3>心腦展廳</h3></div>
+            <div class="nav-item"><img src="assets/soul.webp"><h3>心靈會所</h3></div>
+            <div class="nav-item"><img src="assets/relation.webp"><h3>關係雅座</h3></div>
+            <div class="nav-item"><img src="assets/story.webp"><h3>生命劇場</h3></div>
+            
             <a href="dojo.html" class="dojo-section">
                 <img src="assets/tool.webp" class="dojo-img">
-                <div class="text"><h3>幸福練功房</h3><p style="margin:0; font-size:0.7rem;">實作工具與練習</p></div>
+                <div class="text">
+                    <h3 style="margin:0; font-size: 1rem; letter-spacing: 1px;">實踐工房</h3>
+                    <p style="margin:2px 0 0; font-size:0.7rem; opacity: 0.9;">實作工具與日常練習</p>
+                </div>
             </a>
         </div>
 
         <div class="install-card">
-            <div style="font-size: 0.9rem; font-weight: bold; color: var(--primary);">把「旗艦店」帶在身邊</div>
-            <div style="font-size: 0.75rem; color: #888; margin-top: 5px;">點擊瀏覽器選單「加入主螢幕」，隨時隨地翻閱心法</div>
+            <div style="font-size: 0.95rem; font-weight: bold; color: var(--primary);">把「概念館」收藏至手機</div>
+            <div style="font-size: 0.75rem; color: #888; margin-top: 8px;">點擊瀏覽器選單「加入主螢幕」<br>隨時翻閱這份給家庭的溫暖禮物</div>
             <div class="install-btn">立即收藏 PWA</div>
         </div>
     </div>
 
     <footer>
-        <div>© 天使笑長 Angel · 致力於每個家庭的笑容</div>
+        <div>© 天使笑長 Angel · 幸福教養概念館</div>
+        <div>致力於每個家庭的笑容與成長</div>
         <div class="ai-note">本站視覺影像與數位導覽由 AI 技術輔助創作</div>
     </footer>
 </body>
