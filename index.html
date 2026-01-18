@@ -6,25 +6,21 @@
     <title>天使笑長 Angel - 數位教養旗艦店</title>
     <style>
         :root { --primary: #8FB9A8; --bg: #FFF5EE; --text: #5D4037; }
-        body { font-family: 'PingFang TC', sans-serif; background-color: var(--bg); margin: 0; color: var(--text); line-height: 1.5; -webkit-text-size-adjust: 100%; }
+        body { font-family: 'PingFang TC', 'Microsoft JhengHei', sans-serif; background-color: var(--bg); margin: 0; color: var(--text); line-height: 1.5; -webkit-text-size-adjust: 100%; }
         .header { background: white; padding: 15px; text-align: center; }
         .hero-img { width: 100%; max-width: 1200px; display: block; margin: 0 auto; border-radius: 0 0 25px 25px; }
         .container { padding: 10px; max-width: 800px; margin: 0 auto; }
         
         .spirit-section { background: white; border-radius: 20px; padding: 15px 12px; margin-bottom: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); text-align: center; }
-        
-        /* 1. 大標題縮小 2 號 */
         .spirit-section h3 { color: #8FB9A8; font-size: 1rem; margin-bottom: 12px; letter-spacing: 1px; }
         
-        /* 2. 字的大小平均化，並防止斷字 */
-        .spirit-list { text-align: left; font-size: 0.8rem; margin: 10px 0; padding: 0 5px; line-height: 1.6; }
+        .spirit-list { text-align: left; font-size: 0.82rem; margin: 10px 0; padding: 0 5px; line-height: 1.6; }
         .spirit-list div { margin-bottom: 8px; }
         .no-wrap { display: inline-block; white-space: nowrap; }
         .spirit-list b { color: #8FB9A8; }
 
-        /* 3. 按鈕文字保護，確保「幸福經」不拆散 */
-        .btn-read { display: block; background: #96B9AD; color: white; padding: 12px; border-radius: 40px; text-decoration: none; margin-bottom: 12px; font-weight: bold; font-size: 0.9rem; text-align: center; }
-        .btn-yt { display: block; background: #EE3E2B; color: white; padding: 12px; border-radius: 40px; text-decoration: none; font-weight: bold; font-size: 0.9rem; text-align: center; }
+        .btn-read { display: block; background: #96B9AD; color: white; padding: 12px; border-radius: 40px; text-decoration: none; margin-bottom: 12px; font-weight: bold; font-size: 0.9rem; text-align: center; box-shadow: 0 4px 10px rgba(150,185,173,0.3); }
+        .btn-yt { display: block; background: #EE3E2B; color: white; padding: 12px; border-radius: 40px; text-decoration: none; font-weight: bold; font-size: 0.9rem; text-align: center; box-shadow: 0 4px 10px rgba(238,62,43,0.2); }
         
         .nav-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
         .nav-item { background: white; border-radius: 15px; padding: 8px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.05); text-decoration: none; color: inherit; }
@@ -34,18 +30,23 @@
         .dojo-section { grid-column: span 2; background: linear-gradient(135deg, #8FB9A8 0%, #769f8f 100%); color: white; margin-top: 10px; display: flex; align-items: center; padding: 12px; border-radius: 15px; text-decoration: none; }
         .dojo-img { width: 45px; height: 45px; border-radius: 8px; margin-right: 10px; }
         h2 { font-size: 1rem; border-left: 5px solid var(--primary); padding-left: 8px; margin: 20px 0 12px; }
+        
+        footer { text-align: center; padding: 40px 20px; font-size: 0.8rem; color: #999; line-height: 1.6; }
+        .ai-note { font-size: 0.65rem; color: #BBB; font-weight: 300; letter-spacing: 0.5px; margin-top: 5px; }
     </style>
 </head>
 <body>
     <div class="header"><h1 style="margin:0; font-size: 1.4rem;">天使笑長 Angel</h1></div>
+    
     <img src="assets/home.webp" class="hero-img">
+
     <div class="container">
         <h2>🌿 核心精神與導覽</h2>
         <div class="spirit-section">
             <h3>讓教養變簡單，讓家庭變溫暖</h3>
             <div class="spirit-list">
-                <div>✨ <span class="no-wrap"><b>我們的精神：</b></span><span class="no-wrap">結合心腦科學與愛的感悟，</span><span class="no-wrap">解決數位教養焦慮。</span></div>
-                <div>✨ <span class="no-wrap"><b>旗艦店目的：</b></span><span class="no-wrap">提供一套「看得懂、學得會、</span><span class="no-wrap">能實作」的幸福系統。</span></div>
+                <div>✨ <span class="no-wrap"><b>我們的精神：</b></span><span class="no-wrap">結合心腦科學與愛的感悟，</span>解決數位教養焦慮。</div>
+                <div>✨ <span class="no-wrap"><b>旗艦店目的：</b></span><span class="no-wrap">提供一套「看得懂、學得會、</span>能實作」的幸福系統。</div>
             </div>
             
             <a href="story_detail.html" class="btn-read">
@@ -69,5 +70,10 @@
             </a>
         </div>
     </div>
+
+    <footer>
+        <div>© 天使笑長 Angel · 致力於每個家庭的笑容</div>
+        <div class="ai-note">本站視覺影像與數位導覽由 AI 技術輔助創作</div>
+    </footer>
 </body>
 </html>
