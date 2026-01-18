@@ -19,7 +19,7 @@
 
         /* 四大區塊 Grid */
         .nav-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .nav-item { background: white; border-radius: 20px; padding: 12px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.05); transition: 0.3s; cursor: pointer; }
+        .nav-item { background: white; border-radius: 20px; padding: 12px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.05); transition: 0.3s; text-decoration: none; display: block; }
         .nav-item:active { transform: scale(0.98); }
         .nav-item img { width: 100%; border-radius: 15px; aspect-ratio: 4/3; object-fit: cover; }
         .nav-item h3 { font-size: 1rem; margin: 10px 0 5px; color: var(--text); }
@@ -32,7 +32,7 @@
         .dojo-text h3 { margin: 0; color: white; font-size: 1.2rem; }
         .dojo-text p { margin: 2px 0 0; font-size: 0.85rem; opacity: 0.9; }
 
-        .btn-mini { background: var(--primary); color: white; border: none; padding: 6px 15px; border-radius: 15px; font-size: 0.8rem; cursor: pointer; }
+        .btn-mini { background: var(--primary); color: white; border: none; padding: 6px 15px; border-radius: 15px; font-size: 0.8rem; cursor: pointer; display: inline-block; margin-top: 5px; }
         h2 { font-size: 1.2rem; border-left: 5px solid var(--primary); padding-left: 10px; margin-bottom: 15px; margin-top: 25px; }
     </style>
 </head>
@@ -49,7 +49,7 @@
         <h2>🎬 同步 YouTube 最新影片</h2>
         <div class="yt-section">
             <div class="video-container">
-                <iframe src="https://www.youtube.com/embed?listType=user_uploads&list=UU9ChutBPhBMV4UGu2k-JqrQ" frameborder="0" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/vWz3m_N8m_0?rel=0&modestbranding=1&playsinline=1" frameborder="0" allowfullscreen></iframe>
             </div>
             <p style="font-size: 0.9rem; margin: 10px 0 0; color: #8FB9A8; font-weight: bold;">✨ 天使笑長智慧頻道即時更新</p>
         </div>
@@ -59,22 +59,22 @@
             <div class="nav-item">
                 <img src="assets/brain.webp" alt="心腦科學">
                 <h3>心腦科學</h3>
-                <button class="btn-mini">進入探索</button>
+                <div class="btn-mini">進入探索</div>
             </div>
             <div class="nav-item">
                 <img src="assets/soul.webp" alt="心靈感悟">
                 <h3>心靈感悟</h3>
-                <button class="btn-mini">尋找力量</button>
+                <div class="btn-mini">尋找力量</div>
             </div>
             <div class="nav-item">
                 <img src="assets/relation.webp" alt="幸福關係">
                 <h3>幸福關係</h3>
-                <button class="btn-mini">學習連結</button>
+                <div class="btn-mini">學習連結</div>
             </div>
             <div class="nav-item">
                 <img src="assets/story.webp" alt="教養故事">
                 <h3>教養故事</h3>
-                <button class="btn-mini">看案例分享</button>
+                <div class="btn-mini">看案例</div>
             </div>
             
             <a href="dojo.html" class="dojo-section">
