@@ -5,22 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>天使笑長 Angel - 數位教養旗艦店</title>
     <style>
-        :root { --primary: #8FB9A8; --bg: #FFF5EE; --text: #5D4037; }
+        :root { --primary: #8FB9A8; --bg: #FFF5EE; --text: #5D4037; --accent: #EE3E2B; }
         body { font-family: 'PingFang TC', 'Microsoft JhengHei', sans-serif; background-color: var(--bg); margin: 0; color: var(--text); line-height: 1.5; -webkit-text-size-adjust: 100%; }
         .header { background: white; padding: 15px; text-align: center; }
         .hero-img { width: 100%; max-width: 1200px; display: block; margin: 0 auto; border-radius: 0 0 25px 25px; }
         .container { padding: 10px; max-width: 800px; margin: 0 auto; }
         
+        /* 最新快報樣式 */
+        .news-bar { margin: 15px 0; background: #FFF; border-radius: 12px; padding: 12px; border-left: 5px solid var(--accent); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+        .news-tag { background: var(--accent); color: white; font-size: 0.65rem; padding: 2px 8px; border-radius: 4px; font-weight: bold; margin-right: 8px; }
+        
         .spirit-section { background: white; border-radius: 20px; padding: 15px 12px; margin-bottom: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); text-align: center; }
-        .spirit-section h3 { color: #8FB9A8; font-size: 1rem; margin-bottom: 12px; letter-spacing: 1px; }
+        .spirit-section h3 { color: var(--primary); font-size: 1rem; margin-bottom: 12px; letter-spacing: 1px; }
         
         .spirit-list { text-align: left; font-size: 0.82rem; margin: 10px 0; padding: 0 5px; line-height: 1.6; }
         .spirit-list div { margin-bottom: 8px; }
         .no-wrap { display: inline-block; white-space: nowrap; }
-        .spirit-list b { color: #8FB9A8; }
+        .spirit-list b { color: var(--primary); }
 
         .btn-read { display: block; background: #96B9AD; color: white; padding: 12px; border-radius: 40px; text-decoration: none; margin-bottom: 12px; font-weight: bold; font-size: 0.9rem; text-align: center; box-shadow: 0 4px 10px rgba(150,185,173,0.3); }
-        .btn-yt { display: block; background: #EE3E2B; color: white; padding: 12px; border-radius: 40px; text-decoration: none; font-weight: bold; font-size: 0.9rem; text-align: center; box-shadow: 0 4px 10px rgba(238,62,43,0.2); }
+        .btn-yt { display: block; background: var(--accent); color: white; padding: 12px; border-radius: 40px; text-decoration: none; font-weight: bold; font-size: 0.9rem; text-align: center; box-shadow: 0 4px 10px rgba(238,62,43,0.2); }
         
         .nav-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
         .nav-item { background: white; border-radius: 15px; padding: 8px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.05); text-decoration: none; color: inherit; }
@@ -31,8 +35,8 @@
         .dojo-img { width: 45px; height: 45px; border-radius: 8px; margin-right: 10px; }
         h2 { font-size: 1rem; border-left: 5px solid var(--primary); padding-left: 8px; margin: 20px 0 12px; }
         
-        footer { text-align: center; padding: 40px 20px; font-size: 0.8rem; color: #999; line-height: 1.6; }
-        .ai-note { font-size: 0.65rem; color: #BBB; font-weight: 300; letter-spacing: 0.5px; margin-top: 5px; }
+        footer { text-align: center; padding: 40px 20px; font-size: 0.75rem; color: #999; line-height: 1.6; }
+        .ai-note { font-size: 0.6rem; color: #BBB; font-weight: 300; letter-spacing: 0.5px; margin-top: 5px; }
     </style>
 </head>
 <body>
@@ -41,6 +45,17 @@
     <img src="assets/home.webp" class="hero-img">
 
     <div class="container">
+        <div class="news-bar">
+            <div style="display: flex; align-items: center; margin-bottom: 6px;">
+                <span class="news-tag">最新快報</span>
+                <span style="font-size: 0.7rem; color: #BBB;">2026/01/18 更新</span>
+            </div>
+            <div style="font-size: 0.85rem; color: var(--text); font-weight: bold; line-height: 1.4;">
+                🎥 本週新片：如何解決孩子的數位焦慮？<br>
+                <span style="color: var(--primary); font-size: 0.75rem; font-weight: normal;">📅 1/21 (三) 晚上 8:00 線上教養分享會</span>
+            </div>
+        </div>
+
         <h2>🌿 核心精神與導覽</h2>
         <div class="spirit-section">
             <h3>讓教養變簡單，讓家庭變溫暖</h3>
