@@ -19,20 +19,21 @@
 
         /* 四大區塊 Grid */
         .nav-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .nav-item { background: white; border-radius: 20px; padding: 12px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.05); transition: 0.3s; }
+        .nav-item { background: white; border-radius: 20px; padding: 12px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.05); transition: 0.3s; cursor: pointer; }
         .nav-item:active { transform: scale(0.98); }
         .nav-item img { width: 100%; border-radius: 15px; aspect-ratio: 4/3; object-fit: cover; }
         .nav-item h3 { font-size: 1rem; margin: 10px 0 5px; color: var(--text); }
         
-        /* 5. 練功房獨立入口 */
-        .dojo-section { grid-column: span 2; background: linear-gradient(135deg, #8FB9A8 0%, #769f8f 100%); color: white; margin-top: 10px; display: flex; align-items: center; padding: 15px; border-radius: 20px; text-decoration: none; }
-        .dojo-img { width: 80px !important; height: 80px !important; border-radius: 12px !important; margin-right: 15px; }
+        /* 5. 幸福練功房入口 */
+        .dojo-section { grid-column: span 2; background: linear-gradient(135deg, #8FB9A8 0%, #769f8f 100%); color: white; margin-top: 10px; display: flex; align-items: center; padding: 15px; border-radius: 20px; text-decoration: none; transition: 0.3s; }
+        .dojo-section:active { transform: scale(0.98); }
+        .dojo-img { width: 80px !important; height: 80px !important; border-radius: 12px !important; margin-right: 15px; object-fit: cover; }
         .dojo-text { text-align: left; }
         .dojo-text h3 { margin: 0; color: white; font-size: 1.2rem; }
         .dojo-text p { margin: 2px 0 0; font-size: 0.85rem; opacity: 0.9; }
 
         .btn-mini { background: var(--primary); color: white; border: none; padding: 6px 15px; border-radius: 15px; font-size: 0.8rem; cursor: pointer; }
-        h2 { font-size: 1.2rem; border-left: 5px solid var(--primary); padding-left: 10px; margin-bottom: 15px; }
+        h2 { font-size: 1.2rem; border-left: 5px solid var(--primary); padding-left: 10px; margin-bottom: 15px; margin-top: 25px; }
     </style>
 </head>
 <body>
@@ -45,12 +46,12 @@
     <img src="assets/home.webp" class="hero-img" alt="幸福笑長">
 
     <div class="container">
-        <h2>🎬 最新教養影音</h2>
+        <h2>🎬 同步 YouTube 最新影片</h2>
         <div class="yt-section">
             <div class="video-container">
-                <iframe src="https://www.youtube.com/embed?listType=user_uploads&list=Angel-happy-paw" frameborder="0" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed?listType=user_uploads&list=UU9ChutBPhBMV4UGu2k-JqrQ" frameborder="0" allowfullscreen></iframe>
             </div>
-            <p style="font-size: 0.9rem; margin: 10px 0 0;">同步追蹤最新教養智慧</p>
+            <p style="font-size: 0.9rem; margin: 10px 0 0; color: #8FB9A8; font-weight: bold;">✨ 天使笑長智慧頻道即時更新</p>
         </div>
 
         <h2>💡 核心智慧專區</h2>
@@ -66,27 +67,33 @@
                 <button class="btn-mini">尋找力量</button>
             </div>
             <div class="nav-item">
-                <img src="assets/story.webp" alt="幸福教養">
-                <h3>教養故事</h3>
-                <button class="btn-mini">看案例</button>
+                <img src="assets/relation.webp" alt="幸福關係">
+                <h3>幸福關係</h3>
+                <button class="btn-mini">學習連結</button>
             </div>
-            <a href="#" class="dojo-section">
+            <div class="nav-item">
+                <img src="assets/story.webp" alt="教養故事">
+                <h3>教養故事</h3>
+                <button class="btn-mini">看案例分享</button>
+            </div>
+            
+            <a href="dojo.html" class="dojo-section">
                 <img src="assets/tool.webp" class="dojo-img" alt="練功房">
                 <div class="dojo-text">
                     <h3>幸福練功房</h3>
-                    <p>情緒量表、資源管理等實作工具...</p>
+                    <p>資源管理、關係練習等實作工具</p>
                 </div>
             </a>
         </div>
     </div>
 
     <footer style="text-align:center; padding: 40px 20px; font-size: 0.8rem; color: #999;">
-        © 幸福笑長 Angel - 用智慧守護家庭
+        © 幸福笑長 Angel - 致力於每個家庭的笑容
     </footer>
 
     <script type="module">
         import firebaseConfig from './firebase-config.js';
-        console.log("Firebase 連結成功，練功房數據守護中！");
+        console.log("Firebase 雲端守護中！");
     </script>
 </body>
 </html>
