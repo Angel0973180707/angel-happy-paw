@@ -2,43 +2,61 @@
 <html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>天使笑長 Angel - 數位教養旗艦店</title>
     <style>
         :root { --primary: #8FB9A8; --bg: #FFF5EE; --text: #5D4037; }
-        body { font-family: 'PingFang TC', sans-serif; background-color: var(--bg); margin: 0; color: var(--text); line-height: 1.5; }
-        .header { background: white; padding: 20px; text-align: center; }
-        .hero-img { width: 100%; max-width: 1200px; display: block; margin: 0 auto; border-radius: 0 0 30px 30px; }
+        body { font-family: 'PingFang TC', sans-serif; background-color: var(--bg); margin: 0; color: var(--text); line-height: 1.5; -webkit-text-size-adjust: 100%; }
+        .header { background: white; padding: 15px; text-align: center; }
+        .hero-img { width: 100%; max-width: 1200px; display: block; margin: 0 auto; border-radius: 0 0 25px 25px; }
         .container { padding: 10px; max-width: 800px; margin: 0 auto; }
-        .spirit-section { background: white; border-radius: 20px; padding: 15px 10px; margin-bottom: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); text-align: center; }
-        .spirit-list { text-align: left; font-size: 0.8rem; margin: 10px 0; padding: 0 5px; line-height: 1.4; }
+        
+        .spirit-section { background: white; border-radius: 20px; padding: 15px 12px; margin-bottom: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); text-align: center; }
+        
+        /* 1. 大標題縮小 2 號 */
+        .spirit-section h3 { color: #8FB9A8; font-size: 1rem; margin-bottom: 12px; letter-spacing: 1px; }
+        
+        /* 2. 字的大小平均化，並防止斷字 */
+        .spirit-list { text-align: left; font-size: 0.8rem; margin: 10px 0; padding: 0 5px; line-height: 1.6; }
         .spirit-list div { margin-bottom: 8px; }
-        .spirit-list b { color: #8FB9A8; white-space: nowrap; display: inline-block; }
-        .btn-read { display: block; background: #96B9AD; color: white; padding: 12px; border-radius: 40px; text-decoration: none; margin-bottom: 12px; font-weight: bold; font-size: 0.95rem; text-align: center; }
-        .btn-yt { display: block; background: #EE3E2B; color: white; padding: 12px; border-radius: 40px; text-decoration: none; font-weight: bold; font-size: 0.95rem; text-align: center; }
+        .no-wrap { display: inline-block; white-space: nowrap; }
+        .spirit-list b { color: #8FB9A8; }
+
+        /* 3. 按鈕文字保護，確保「幸福經」不拆散 */
+        .btn-read { display: block; background: #96B9AD; color: white; padding: 12px; border-radius: 40px; text-decoration: none; margin-bottom: 12px; font-weight: bold; font-size: 0.9rem; text-align: center; }
+        .btn-yt { display: block; background: #EE3E2B; color: white; padding: 12px; border-radius: 40px; text-decoration: none; font-weight: bold; font-size: 0.9rem; text-align: center; }
+        
         .nav-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
         .nav-item { background: white; border-radius: 15px; padding: 8px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.05); text-decoration: none; color: inherit; }
         .nav-item img { width: 100%; border-radius: 12px; aspect-ratio: 4/3; object-fit: cover; }
-        .nav-item h3 { font-size: 0.85rem; margin: 6px 0; }
+        .nav-item h3 { font-size: 0.8rem; margin: 6px 0; }
+        
         .dojo-section { grid-column: span 2; background: linear-gradient(135deg, #8FB9A8 0%, #769f8f 100%); color: white; margin-top: 10px; display: flex; align-items: center; padding: 12px; border-radius: 15px; text-decoration: none; }
         .dojo-img { width: 45px; height: 45px; border-radius: 8px; margin-right: 10px; }
-        h2 { font-size: 1.1rem; border-left: 5px solid var(--primary); padding-left: 8px; margin: 20px 0 12px; }
+        h2 { font-size: 1rem; border-left: 5px solid var(--primary); padding-left: 8px; margin: 20px 0 12px; }
     </style>
 </head>
 <body>
-    <div class="header"><h1 style="margin:0; font-size: 1.5rem;">天使笑長 Angel</h1></div>
+    <div class="header"><h1 style="margin:0; font-size: 1.4rem;">天使笑長 Angel</h1></div>
     <img src="assets/home.webp" class="hero-img">
     <div class="container">
         <h2>🌿 核心精神與導覽</h2>
         <div class="spirit-section">
-            <h3 style="color:#8FB9A8; font-size:1.1rem; margin-bottom:10px;">讓教養變簡單，讓家庭變溫暖</h3>
+            <h3>讓教養變簡單，讓家庭變溫暖</h3>
             <div class="spirit-list">
-                <div>✨ <b>我們的精神：</b>結合心腦科學與愛的感悟，解決數位教養焦慮。</div>
-                <div>✨ <b>旗艦店目的：</b>提供一套「看得懂、學得會、能實作」的幸福系統。</div>
+                <div>✨ <span class="no-wrap"><b>我們的精神：</b></span><span class="no-wrap">結合心腦科學與愛的感悟，</span><span class="no-wrap">解決數位教養焦慮。</span></div>
+                <div>✨ <span class="no-wrap"><b>旗艦店目的：</b></span><span class="no-wrap">提供一套「看得懂、學得會、</span><span class="no-wrap">能實作」的幸福系統。</span></div>
             </div>
-            <a href="story_detail.html" class="btn-read">📖 必讀心法：教養幸福經</a>
-            <a href="https://www.youtube.com/@%E5%A4%A9%E4%BD%BF%E7%AC%91%E9%95%B7" target="_blank" class="btn-yt">📺 前往頻道觀看影片</a>
+            
+            <a href="story_detail.html" class="btn-read">
+                📖 <span class="no-wrap">必讀心法：</span><span class="no-wrap">教養幸福經</span>
+            </a>
+            
+            <a href="https://www.youtube.com/@%E5%A4%A9%E4%BD%BF%E7%AC%91%E9%95%B7" target="_blank" class="btn-yt">
+                📺 <span class="no-wrap">前往頻道觀看影片</span>
+            </a>
         </div>
+
         <h2>💡 核心智慧專區</h2>
         <div class="nav-grid">
             <div class="nav-item"><img src="assets/brain.webp"><h3>心腦科學</h3></div>
