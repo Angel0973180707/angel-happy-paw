@@ -3,51 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>幸福笑長 Angel - 數位教養旗艦店</title>
+    <title>天使笑長 Angel - 數位教養旗艦店</title>
     <style>
-        :root { --primary: #8FB9A8; --bg: #FFF5EE; --text: #5D4037; --accent: #F4A460; }
-        body { font-family: 'PingFang TC', 'Microsoft JhengHei', sans-serif; background-color: var(--bg); margin: 0; color: var(--text); line-height: 1.6; }
+        :root { --primary: #8FB9A8; --bg: #FFF5EE; --text: #5D4037; }
+        body { font-family: 'PingFang TC', sans-serif; background-color: var(--bg); margin: 0; color: var(--text); }
         .header { background: white; padding: 25px 20px; text-align: center; box-shadow: 0 2px 15px rgba(0,0,0,0.05); }
         .hero-img { width: 100%; max-width: 1200px; display: block; margin: 0 auto; border-radius: 0 0 30px 30px; }
         .container { padding: 20px; max-width: 800px; margin: 0 auto; }
-        .yt-section { background: #fff; border-radius: 20px; padding: 15px; margin-bottom: 25px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
-        .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px; }
+        .yt-section { background: #fff; border-radius: 20px; padding: 15px; margin-bottom: 25px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); text-align: center; }
+        .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px; margin-bottom: 15px; }
         .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+        .btn-yt { background: #FF0000; color: white; border: none; padding: 10px 20px; border-radius: 25px; text-decoration: none; font-weight: bold; display: inline-block; }
         .nav-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .nav-item { background: white; border-radius: 20px; padding: 12px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.05); transition: 0.3s; text-decoration: none; display: block; }
-        .nav-item:active { transform: scale(0.98); }
+        .nav-item { background: white; border-radius: 20px; padding: 12px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.05); text-decoration: none; color: inherit; }
         .nav-item img { width: 100%; border-radius: 15px; aspect-ratio: 4/3; object-fit: cover; }
-        .nav-item h3 { font-size: 1rem; margin: 10px 0 5px; color: var(--text); }
         .dojo-section { grid-column: span 2; background: linear-gradient(135deg, #8FB9A8 0%, #769f8f 100%); color: white; margin-top: 10px; display: flex; align-items: center; padding: 15px; border-radius: 20px; text-decoration: none; }
-        .dojo-img { width: 80px !important; height: 80px !important; border-radius: 12px !important; margin-right: 15px; object-fit: cover; }
-        .dojo-text { text-align: left; }
-        .dojo-text h3 { margin: 0; color: white; font-size: 1.2rem; }
-        .dojo-text p { margin: 2px 0 0; font-size: 0.85rem; opacity: 0.9; }
-        .btn-mini { background: var(--primary); color: white; border: none; padding: 6px 15px; border-radius: 15px; font-size: 0.8rem; cursor: pointer; display: inline-block; margin-top: 5px; }
-        h2 { font-size: 1.2rem; border-left: 5px solid var(--primary); padding-left: 10px; margin-bottom: 15px; margin-top: 25px; }
+        .dojo-img { width: 60px; height: 60px; border-radius: 12px; margin-right: 15px; }
+        h2 { font-size: 1.2rem; border-left: 5px solid var(--primary); padding-left: 10px; margin: 25px 0 15px; }
     </style>
 </head>
 <body>
     <div class="header">
-        <h1 style="margin:0; font-size: 1.6rem;">幸福笑長 Angel</h1>
+        <h1 style="margin:0; font-size: 1.6rem;">天使笑長 Angel</h1>
+        <p style="margin:5px 0 0; font-size: 0.9rem;">陪您把家變成最溫暖的地方</p>
     </div>
-    <img src="assets/home.webp" class="hero-img" alt="幸福笑長">
+    <img src="assets/home.webp" class="hero-img">
     <div class="container">
         <h2>🎬 同步 YouTube 最新影片</h2>
         <div class="yt-section">
             <div class="video-container">
-                <iframe src="https://www.youtube.com/embed/vWz3m_N8m_0?rel=0&modestbranding=1&playsinline=1" frameborder="0" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/vWz3m_N8m_0?modestbranding=1&playsinline=1" frameborder="0" allowfullscreen></iframe>
             </div>
+            <a href="https://www.youtube.com/@%E5%A4%A9%E4%BD%BF%E7%AC%91%E9%95%B7" target="_blank" class="btn-yt">▶ 前往天使笑長頻道看更多</a>
         </div>
+
         <h2>💡 核心智慧專區</h2>
         <div class="nav-grid">
-            <div class="nav-item"><img src="assets/brain.webp"><h3>心腦科學</h3><div class="btn-mini">進入探索</div></div>
-            <div class="nav-item"><img src="assets/soul.webp"><h3>心靈感悟</h3><div class="btn-mini">尋找力量</div></div>
-            <div class="nav-item"><img src="assets/relation.webp"><h3>幸福關係</h3><div class="btn-mini">學習連結</div></div>
-            <div class="nav-item"><img src="assets/story.webp"><h3>教養故事</h3><div class="btn-mini">看案例</div></div>
+            <div class="nav-item"><img src="assets/brain.webp"><h3>心腦科學</h3></div>
+            <div class="nav-item"><img src="assets/soul.webp"><h3>心靈感悟</h3></div>
+            <div class="nav-item"><img src="assets/relation.webp"><h3>幸福關係</h3></div>
+            <div class="nav-item"><img src="assets/story.webp"><h3>教養故事</h3></div>
             <a href="dojo.html" class="dojo-section">
                 <img src="assets/tool.webp" class="dojo-img">
-                <div class="dojo-text"><h3>幸福練功房</h3><p>實作工具箱</p></div>
+                <div class="text"><h3>幸福練功房</h3><p style="margin:0; font-size:0.8rem;">實作工具與練習</p></div>
             </a>
         </div>
     </div>
