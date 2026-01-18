@@ -5,37 +5,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>教養幸福經 - 天使笑長 Angel</title>
     <style>
-        body { font-family: 'PingFang TC', sans-serif; background: #FFF5EE; color: #5D4037; line-height: 1.8; margin: 0; padding: 0; }
-        .content-card { background: white; margin: 20px auto; max-width: 700px; padding: 30px 25px; border-radius: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-        h1 { color: #8FB9A8; text-align: center; font-size: 1.6rem; }
-        p { text-align: justify; margin-bottom: 20px; text-indent: 2em; }
-        .poem { background: #f9fdfb; border-left: 4px solid #8FB9A8; padding: 20px; margin: 30px 0; font-style: italic; text-indent: 0; text-align: center; }
-        .science-note { background: #F0F7F4; border-radius: 15px; padding: 20px; font-size: 0.9rem; }
-        .back-btn { display: block; text-align: center; margin: 30px; color: #8FB9A8; text-decoration: none; font-weight: bold; }
-        b { color: #8FB9A8; }
+        :root { --primary: #8FB9A8; --bg: #FFF5EE; --text: #5D4037; }
+        body { font-family: 'PingFang TC', sans-serif; background-color: var(--bg); margin: 0; color: var(--text); line-height: 1.8; }
+        .container { padding: 15px; max-width: 700px; margin: 0 auto; }
+        .article-card { background: white; padding: 25px 18px; border-radius: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        h1 { color: var(--primary); font-size: 1.5rem; text-align: center; margin-bottom: 20px; }
+        
+        /* 修正內文斷字：減少左右間距，字體縮小一點 */
+        p { margin-bottom: 1.2em; text-align: justify; font-size: 0.95rem; }
+        
+        /* 詩句區塊：移除過大的左右 Padding，讓每行字能伸展開 */
+        .poem-box { background: #fdfaf6; border-left: 5px solid var(--primary); padding: 15px 10px; margin: 25px 0; text-align: center; font-size: 1rem; color: #704232; }
+        
+        .science-box { background: #F0F7F4; border-radius: 15px; padding: 15px; margin-top: 30px; font-size: 0.9rem; }
+        .footer-nav { text-align: center; margin: 30px 0; }
+        .btn-back { background: var(--primary); color: white; padding: 12px 40px; border-radius: 30px; text-decoration: none; font-weight: bold; display: inline-block; }
     </style>
 </head>
 <body>
-    <div class="content-card">
-        <h1>🌿 教養幸福經</h1>
-        <p>教養經驗對既身為老師且身為家長的我而言，是一場深刻且充滿挑戰的教學相長體驗，也是一場開拓心靈幸福空間的探索之旅。</p>
-        <p>不論在家庭或在班上，常面臨「想教」而行不通的窘境... <b>「與其想怎麼管教，不如想怎麼愛；與其想怎麼要求，不如想怎麼感恩」</b>...</p>
-        
-        <div class="poem">
-            愛在情人眼裡出西施，是竉愛<br>
-            愛在滿足予取予求，是溺愛<br>
-            愛在不得要領，是錯愛<br>
-            愛在寬闊無私且得法的智慧，是大愛！
-        </div>
+    <div class="container">
+        <div class="article-card">
+            <h1>🌿 教養幸福經</h1>
+            <p>教養經驗對既身為老師且身為家長的我而言，是一場深刻且充滿挑戰的教學相長體驗，也是一場開拓心靈幸福空間的探索之旅。</p>
+            <p>珍惜孩子們給予自己機會領悟與學習如何<b>「愛得得法」</b>與<b>「歡喜付出」</b>，「心甘情願」與「自得其樂」，帶來了追尋幸福的動力。</p>
 
-        <p>幸福沒有目的地，因為幸福可以無限擴充；幸福沒有目的，因為幸福是活著的權利與義務，活著就該幸福！</p>
+            <div class="poem-box">
+                愛在情人眼裡出西施，是竉愛<br>
+                愛在滿足予取予求，是溺愛<br>
+                愛在不得要領，是錯愛<br>
+                愛在寬闊無私且得法的智慧，是<b>大愛</b>！
+            </div>
 
-        <div class="science-note">
-            <b>💡 腦科學小筆記：</b><br>
-            感恩（不侷限感謝之意，還可擴充為感受美好的感覺）能帶動與活化產生同理心的腦部區域（前扣帶皮質與前額葉內側皮質），激發產生愉悅感的<b>多巴胺</b>與<b>血清素</b>，以及產生愛的感受的<b>催產素</b>。
+            <p>幸福沒有目的地，因為幸福可以無限擴充；幸福沒有目的，因為幸福是活著的權利與義務，活著就該幸福！</p>
+            
+            <div class="science-box">
+                <b style="color:var(--primary);">🧠 腦科學小語：</b><br>
+                感恩（不侷限感謝之意，更是感受美好感覺的能力）能活化產生同理心的大腦區域，激發愉悅的多巴胺與血清素。這是一場腦神經的鍛鍊，讓頭腦更靈活、更富有同理心！
+            </div>
         </div>
-        
+        <div class="footer-nav">
+            <a href="index.html" class="btn-back">← 返回首頁</a>
+        </div>
     </div>
-    <a href="index.html" class="back-btn">← 回到主選單</a>
 </body>
 </html>
