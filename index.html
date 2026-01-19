@@ -19,7 +19,6 @@ body { font-family: 'PingFang TC', sans-serif; background-color: var(--bg); marg
 .nav-item { background: white; border-radius: 15px; padding: 10px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
 .nav-item img { width: 100%; border-radius: 12px; aspect-ratio: 4/3; object-fit: cover; }
 .content-area { max-height: 140px; overflow-y: auto; margin-top: 8px; font-size: 0.75rem; text-align: left; scrollbar-width: none; }
-.content-area::-webkit-scrollbar { display: none; }
 .dojo-section { grid-column: span 2; background: linear-gradient(135deg, #8FB9A8 0%, #769f8f 100%); color: white; padding: 15px; border-radius: 15px; margin-top: 10px; }
 #dojo-groups { max-height: 250px; overflow-y: auto; }
 .card-mini { background: #fdfaf7; border-radius: 10px; padding: 8px; margin-bottom: 8px; font-size: 0.75rem; border: 1px solid #f0ebe4; color: var(--text); }
@@ -39,7 +38,7 @@ footer { text-align: center; padding: 30px 20px; font-size: 0.7rem; color: #999;
 <div class="container">
 <div class="news-bar">
     <div><span class="news-tag">館內動態</span><span class="refresh-note">下拉更新 ↻</span></div>
-    <div id="latest-news" style="font-weight: bold; font-size: 0.85rem; margin-top:5px;">📌 正在同步雲端動態...</div>
+    <div id="latest-news" style="font-weight: bold; font-size: 0.85rem; margin-top:5px;">📌 歡迎光臨幸福教養概念館</div>
 </div>
 <h2>🌿 概念館精神</h2>
 <div class="spirit-section">
@@ -50,7 +49,6 @@ footer { text-align: center; padding: 30px 20px; font-size: 0.7rem; color: #999;
 <h2>👩‍🏫 關於天使館長</h2>
 <div class="spirit-section">
 <h3 style="margin-bottom:5px;">天使笑長 Angel</h3>
-<div style="font-size: 0.75rem; color: #999; margin-bottom:15px;">家長的正能量女神</div>
 <div class="bio-text">她是退休國小教師，也是學校寶貝心目中的大朋友和家裡兩個寶貝的幸福姑；致力幸福教養推廣，用心腦科學理論融入實踐讓愛發揮力量。</div>
 </div>
 <h2>💡 核心展廳</h2>
@@ -83,14 +81,6 @@ async function loadData() {
         const rawData = await response.json();
         const groupsMap = { "緊急": "🆘 緊急救火區", "心靈": "🧘 心靈養分區", "檢測": "🔍 觀察檢測區", "教養": "📚 教養實戰區", "其他": "💡 其他實作" };
         
-        // 優先處理最新活動
-        const latest = rawData.find(item => String(item["展示廳"] || "").includes("最新活動"));
-        if (latest) {
-            document.getElementById('latest-news').innerText = `📌 ${latest["標題"]}`;
-        } else {
-            document.getElementById('latest-news').innerText = "📌 歡迎來到幸福教養概念館";
-        }
-
         rawData.forEach(item => {
             let row = {};
             Object.keys(item).forEach(k => { row[k.trim()] = item[k]; });
@@ -102,8 +92,13 @@ async function loadData() {
             const concept = String(row["核心理念"] || "").trim();
             const link = String(row["影音連結"] || "").trim();
 
-            if (hall.includes("最新活動")) return; // 已處理
+            // 1. 優先處理最新活動，即使報錯也不影響後續
+            if (hall.includes("最新活動")) {
+                try { document.getElementById('latest-news').innerText = `📌 ${title}`; } catch(e){}
+                return;
+            }
 
+            // 2. 處理核心展廳與工具
             let container;
             if (hall.includes("工具") || hall.includes("影音")) {
                 let cat = "其他";
@@ -135,7 +130,7 @@ async function loadData() {
                 container.appendChild(card);
             }
         });
-    } catch (e) { document.getElementById('latest-news').innerText = "❌ 資料載入異常"; }
+    } catch (e) { console.error("載入失敗"); }
 }
 loadData();
 </script>
