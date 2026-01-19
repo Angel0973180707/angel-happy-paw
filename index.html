@@ -2,78 +2,102 @@
 <html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>幸福教養概念館</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>天使笑長 Angel - 幸福教養概念館</title>
     <style>
-        :root { --primary-color: #f4f1ea; --accent-color: #8d775f; --text-color: #4a4a4a; }
-        body { font-family: "Microsoft JhengHei", sans-serif; background-color: var(--primary-color); color: var(--text-color); margin: 0; padding: 20px; }
-        header { text-align: center; padding: 40px 0; border-bottom: 1px solid #ddd; }
-        .museum-section { max-width: 800px; margin: 40px auto; }
-        .card { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin-bottom: 20px; }
-        .card h3 { color: var(--accent-color); margin-top: 0; }
-        .tag { font-size: 0.8em; background: #e0dcd0; padding: 2px 8px; border-radius: 4px; margin-right: 5px; }
-        .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; margin-bottom: 15px; }
-        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 8px; }
-        .content { line-height: 1.6; white-space: pre-wrap; }
+        /* 保留您最愛的粉綠色調與樣式 */
+        :root { --primary: #8FB9A8; --bg: #FFF5EE; --text: #5D4037; --accent: #EE3E2B; }
+        body { font-family: 'PingFang TC', sans-serif; background-color: var(--bg); margin: 0; color: var(--text); line-height: 1.5; }
+        .header { background: white; padding: 20px 15px; text-align: center; border-bottom: 1px solid #f0e6dd; }
+        .hero-img { width: 100%; max-width: 1200px; display: block; margin: 0 auto; border-radius: 0 0 25px 25px; }
+        .container { padding: 10px; max-width: 800px; margin: 0 auto; }
+        .news-bar { margin: 15px 0; background: #FFF; border-radius: 12px; padding: 12px; border-left: 5px solid var(--primary); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+        .spirit-section { background: white; border-radius: 20px; padding: 18px 15px; margin-bottom: 25px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); text-align: center; }
+        .bio-text { text-align: left; font-size: 0.85rem; line-height: 1.8; color: var(--text); padding: 0 10px; }
+        .btn-read { display: block; background: #96B9AD; color: white; padding: 12px; border-radius: 40px; text-decoration: none; margin-bottom: 12px; font-weight: bold; text-align: center; }
+        .nav-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px; }
+        .nav-item { background: white; border-radius: 15px; padding: 10px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.05); text-decoration: none; color: inherit; }
+        .nav-item img { width: 100%; border-radius: 12px; aspect-ratio: 4/3; object-fit: cover; }
+        
+        /* 這裡是新加入的：自動抓取倉庫資料的卡片樣式 */
+        .dynamic-card { background: white; border-radius: 15px; padding: 15px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; margin: 10px 0; border-radius: 8px; }
+        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+        .tag { background: var(--primary); color: white; font-size: 0.7rem; padding: 2px 8px; border-radius: 4px; }
     </style>
 </head>
 <body>
 
-<header>
-    <h1>幸福教養概念館</h1>
-    <p>—— 笑長的數位策展空間 ——</p>
-    <p style="font-size: 0.9em; color: #888;">(只要改試算表，這裡就會自動更新)</p>
-</header>
-
-<div id="museum-content" class="museum-section">
-    <p style="text-align: center;">正在從倉庫提貨中...</p>
+<div class="header">
+    <h1 style="margin:0; font-size: 1.4rem; letter-spacing: 2px;">天使笑長 Angel</h1>
+    <div style="font-size: 0.75rem; color: var(--primary); font-weight: bold; margin-top: 5px; letter-spacing: 3px;">幸福教養概念館</div>
 </div>
 
+<img src="assets/home.webp" class="hero-img">
+
+<div class="container">
+    <div class="news-bar">
+        <div style="font-size: 0.85rem; font-weight: bold;">📌 本月策展：教養幸福經，愛得得法的智慧</div>
+    </div>
+
+    <h2>🌿 概念館精神</h2>
+    <div class="spirit-section">
+        <h3>教養愉悅，家庭溫暖</h3>
+        <a href="story_detail.html" class="btn-read">📖 館藏：教養幸福經</a>
+    </div>
+
+    <h2 id="dynamic-title">✨ 館長最新策展</h2>
+    <div id="data-container">
+        <p style="text-align:center; color:#999;">正在從倉庫提貨中...</p>
+    </div>
+
+    <h2>💡 核心展廳</h2>
+    <div class="nav-grid">
+        <div class="nav-item"><img src="assets/brain.webp"><h3>心腦展廳</h3></div>
+        <div class="nav-item"><img src="assets/soul.webp"><h3>心靈會所</h3></div>
+        <div class="nav-item"><img src="assets/relation.webp"><h3>關係雅座</h3></div>
+        <div class="nav-item"><img src="assets/story.webp"><h3>生命劇場</h3></div>
+    </div>
+</div>
+
+<footer>
+    <div>© ＜幸福教養概念館＞歡迎您！</div>
+</footer>
+
 <script>
-    // 這是您的專屬倉庫連線網址
+    // 這裡填入您的 API 網址
     const API_URL = "https://script.google.com/macros/s/AKfycbzeuQFds9g_H5_Wa7CIYSQs5k2KHBdDG45zPNNJF74xPfYU9NkSYXLBSKDZzcCWjaF3OA/exec";
 
-    async function loadMuseum() {
+    async function fetchData() {
         try {
             const response = await fetch(API_URL);
             const data = await response.json();
-            const container = document.getElementById('museum-content');
-            container.innerHTML = ""; 
-
-            if (data.length === 0) {
-                container.innerHTML = "<p style='text-align:center;'>倉庫目前是空的，請在試算表填入資料並設為「已上架」。</p>";
-                return;
-            }
+            const container = document.getElementById('data-container');
+            container.innerHTML = ""; // 清空載入中文字
 
             data.forEach(item => {
                 const card = document.createElement('div');
-                card.className = 'card';
+                card.className = 'dynamic-card';
                 
                 let videoHTML = "";
-                if (item["影音連結"] && item["影音連結"].includes("youtube.com")) {
-                    // 簡單處理 YouTube 網址轉換
-                    const videoId = item["影音連結"].split('v=')[1]?.split('&')[0];
-                    if (videoId) {
-                        videoHTML = `<div class="video-container"><iframe src="https://www.youtube.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe></div>`;
-                    }
+                if (item["影音連結"] && item["影音連結"].includes("youtube")) {
+                    const vId = item["影音連結"].split('v=')[1]?.split('&')[0] || item["影音連結"].split('/').pop();
+                    videoHTML = `<div class="video-container"><iframe src="https://www.youtube.com/embed/${vId}" allowfullscreen></iframe></div>`;
                 }
 
                 card.innerHTML = `
-                    <span class="tag">${item["展示廳"]}展廳</span>
-                    <span class="tag">理念：${item["核心理念"]}</span>
-                    <h3>${item["標題"]}</h3>
+                    <span class="tag">${item["核心理念"]}</span>
+                    <h3 style="margin:10px 0; font-size:1.1rem;">${item["標題"]}</h3>
                     ${videoHTML}
-                    <div class="content">${item["感悟內文"]}</div>
-                    <p style="font-size: 0.7em; color: #bbb; margin-top: 15px;">發布日期：${item["發布日期"]}</p>
+                    <div style="font-size:0.9rem; white-space:pre-wrap;">${item["感悟內文"]}</div>
                 `;
                 container.appendChild(card);
             });
-        } catch (error) {
-            console.error(error);
-            document.getElementById('museum-content').innerHTML = "<p style='text-align:center;'>連線成功，但倉庫裡還沒有「已上架」的內容喔！</p>";
+        } catch (e) {
+            document.getElementById('data-container').innerHTML = "暫時無法取得倉庫資料";
         }
     }
-    loadMuseum();
+    fetchData();
 </script>
 
 </body>
