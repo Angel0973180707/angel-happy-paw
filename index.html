@@ -27,27 +27,27 @@ body { font-family: 'PingFang TC', sans-serif; background-color: var(--bg); marg
 
 /* 實踐工房 */
 .dojo-section { grid-column: span 2; background: linear-gradient(135deg, #8FB9A8 0%, #769f8f 100%); color: white; padding: 20px; border-radius: 20px; margin-top: 20px; }
-.card-mini { background: #fdfaf7; border-radius: 15px; padding: 15px; margin-bottom: 15px; border: 1px solid #f0ebe4; box-shadow: 0 2px 8px rgba(0,0,0,0.03); color: var(--text); }
+.card-mini { background: white; border-radius: 15px; padding: 12px; margin-bottom: 12px; border: 1px solid #f0ebe4; box-shadow: 0 2px 8px rgba(0,0,0,0.03); color: var(--text); }
 
-/* 影片大封面（極速靈敏版） */
-.video-link-box { position: relative; display: block; margin: 12px 0; border-radius: 12px; overflow: hidden; background: #000; border: 1px solid #EEE; }
+/* 影片大封面 */
+.video-link-box { position: relative; display: block; margin: 8px 0; border-radius: 10px; overflow: hidden; background: #000; border: 1px solid #EEE; }
 .video-link-box img { width: 100%; display: block; opacity: 0.9; }
 .play-btn-overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: flex; align-items: center; justify-content: center; }
-.play-circle { width: 45px; height: 45px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 10px rgba(0,0,0,0.3); }
+.play-circle { width: 40px; height: 40px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 10px rgba(0,0,0,0.3); }
 .play-triangle { width: 0; height: 0; border-style: solid; border-width: 8px 0 8px 15px; border-color: transparent transparent transparent white; margin-left: 4px; }
 
-/* 實體按鈕 */
-.btn-link { display: inline-block; padding: 10px 20px; border-radius: 30px; text-decoration: none; font-weight: bold; font-size: 0.85rem; margin-top: 10px; text-align: center; }
-.btn-tool { background: #4A90E2; color: white; box-shadow: 0 3px 0 #357ABD; }
-.btn-good { background: var(--primary); color: white; box-shadow: 0 3px 0 #769f8f; }
-.btn-link:active { transform: translateY(2px); box-shadow: none; }
+/* 精緻化的小按鈕 (修正取用工具過大的問題) */
+.btn-link { display: inline-block; padding: 6px 15px; border-radius: 20px; text-decoration: none; font-weight: bold; font-size: 0.75rem; margin: 5px 0; transition: 0.2s; }
+.btn-tool { background: #4A90E2; color: white; }
+.btn-good { background: var(--primary); color: white; }
+.btn-link:active { transform: scale(0.95); }
 
 /* 安裝收藏卡片 */
 .install-card { background: #FFF; border: 1px dashed var(--primary); border-radius: 15px; padding: 18px; margin: 30px 0; text-align: center; }
 
-.status-text { display: inline-block; color: #999; font-size: 0.75rem; margin: 8px 0; font-weight: bold; padding-left: 8px; border-left: 3px solid #EEE; }
+.status-text { display: inline-block; color: #999; font-size: 0.7rem; margin: 4px 0; font-weight: bold; padding-left: 8px; border-left: 3px solid #EEE; }
 footer { text-align: center; padding: 40px 20px; font-size: 0.8rem; color: #999; }
-h2 { color: var(--text); border-left: 5px solid var(--primary); padding-left: 10px; margin-top: 30px; }
+h2 { color: var(--text); border-left: 5px solid var(--primary); padding-left: 10px; margin-top: 30px; font-size: 1.1rem; }
 </style>
 </head>
 <body>
@@ -60,7 +60,7 @@ h2 { color: var(--text); border-left: 5px solid var(--primary); padding-left: 10
 <div class="container">
     <div class="news-bar">
         <div style="margin-bottom: 5px;"><span class="news-tag">館內動態</span></div>
-        <div id="latest-news" style="font-weight: bold; font-size: 0.85rem; color: var(--text);">📌 正在獲取最新展訊...</div>
+        <div id="latest-news" style="font-weight: bold; font-size: 0.85rem; color: var(--text);">📌 載入館藏中...</div>
     </div>
 
     <h2>🌿 概念館精神</h2>
@@ -165,18 +165,19 @@ async function loadData() {
 
                 const ytId = getYTId(videoLink);
                 if (ytId) {
-                    videoHTML = `<a href="https://www.youtube.com/watch?v=${ytId}" target="_blank" style="text-decoration:none;"><div class="video-link-box"><img src="https://img.youtube.com/vi/${ytId}/mqdefault.jpg"><div class="play-btn-overlay"><div class="play-circle"><div class="play-triangle"></div></div></div></div></a><div class="status-text">🎬 影片欣賞</div>`;
+                    videoHTML = `<a href="https://www.youtube.com/watch?v=${ytId}" target="_blank" style="text-decoration:none;"><div class="video-link-box"><img src="https://img.youtube.com/vi/${ytId}/mqdefault.jpg"><div class="play-btn-overlay"><div class="play-circle"><div class="play-triangle"></div></div></div></div></a>`;
+                    otherLinkHTML = `<div class="status-text">🎬 影片欣賞</div>`;
                 } else if (videoLink && videoLink.startsWith("http")) {
                     otherLinkHTML = `<a href="${videoLink}" target="_blank" class="btn-link btn-good">💎 好料分享</a>`;
-                } else if (!videoLink) {
+                } else {
                     otherLinkHTML = `<div class="status-text">📜 好文分享</div>`;
                 }
 
                 if (toolLink) {
-                    toolBtnHTML = `<a href="${toolLink}" target="_blank" class="btn-link btn-tool" style="display:block;">🚀 取用實踐工具</a>`;
+                    toolBtnHTML = `<div><a href="${toolLink}" target="_blank" class="btn-link btn-tool">🚀 取用實踐工具</a></div>`;
                 }
 
-                card.innerHTML = `<div style="font-weight:bold; font-size:1rem;">${title}</div>${videoHTML}${otherLinkHTML}${toolBtnHTML}<div style="color:#777; font-size:0.85rem; margin-top:8px;">${concept}</div>`;
+                card.innerHTML = `<div style="font-weight:bold; font-size:0.95rem;">${title}</div>${videoHTML}${otherLinkHTML}${toolBtnHTML}<div style="color:#777; font-size:0.8rem; margin-top:5px; line-height:1.4;">${concept}</div>`;
                 container.appendChild(card);
             }
         });
