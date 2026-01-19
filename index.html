@@ -23,6 +23,7 @@ body { font-family: 'PingFang TC', sans-serif; background-color: var(--bg); marg
 .container { padding: 10px; max-width: 800px; margin: 0 auto; }
 .news-bar { margin: 15px 0; background: #FFF; border-radius: 12px; padding: 12px; border-left: 5px solid var(--primary); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
 .news-tag { background: var(--primary); color: white; font-size: 0.65rem; padding: 2px 8px; border-radius: 4px; font-weight: bold; margin-right: 8px; }
+.refresh-note { float: right; font-size: 0.65rem; color: #BBB; }
 .spirit-section { background: white; border-radius: 20px; padding: 18px 15px; margin-bottom: 25px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); text-align: center; }
 .spirit-section h3 { color: var(--primary); font-size: 1.1rem !important; margin-bottom: 10px; }
 .bio-text { text-align: left; font-size: 0.85rem; line-height: 1.8; color: var(--text); padding: 0 10px; }
@@ -53,7 +54,13 @@ footer { text-align: center; padding: 40px 20px; font-size: 0.75rem !important; 
 </div>
 <img src="assets/home.webp" class="hero-img">
 <div class="container">
-<div class="news-bar"><span class="news-tag">館內動態</span><span id="latest-news" style="font-size: 0.85rem; font-weight: bold;">📌 載入中...</span></div>
+<div class="news-bar">
+    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+        <div><span class="news-tag">館內動態</span></div>
+        <div class="refresh-note">下拉更新展訊 ↻</div>
+    </div>
+    <div id="latest-news" style="font-size: 0.85rem; color: var(--text); font-weight: bold;">📌 載入中...</div>
+</div>
 <h2>🌿 概念館精神</h2>
 <div class="spirit-section">
 <h3>教養愉悅，家庭溫暖</h3>
@@ -94,17 +101,24 @@ const API_URL = "https://script.google.com/macros/s/AKfycbzeuQFds9g_H5_Wa7CIYSQs
 async function loadData() {
     try {
         const response = await fetch(API_URL);
-        const data = await response.json();
+        const rawData = await response.json();
         const groupsMap = { "緊急": "🆘 緊急救火區", "心靈": "🧘 心靈養分區", "檢測": "🔍 觀察檢測區", "教養": "📚 教養實戰區", "其他": "💡 其他實作" };
         
+        // 核心修正：自動去除標題列多餘空格
+        const data = rawData.map(row => {
+            let cleanRow = {};
+            Object.keys(row).forEach(key => { cleanRow[key.trim()] = row[key]; });
+            return cleanRow;
+        });
+
         data.forEach(item => {
-            const status = String(item["發布狀態"] || "");
+            const status = String(item["發布狀態"] || "").trim();
             if (!status.includes("上架") && !status.includes("發佈")) return;
 
-            const hall = String(item["展示廳"] || "");
-            const title = String(item["標題"] || "");
-            const concept = String(item["核心理念"] || "");
-            const link = String(item["影音連結"] || "");
+            const hall = String(item["展示廳"] || "").trim();
+            const title = String(item["標題"] || "").trim();
+            const concept = String(item["核心理念"] || "").trim();
+            const link = String(item["影音連結"] || "").trim();
 
             if (hall === "最新活動") {
                 document.getElementById('latest-news').innerText = `📌 ${title}`;
@@ -124,7 +138,11 @@ async function loadData() {
                     document.getElementById('dojo-groups').appendChild(container);
                 }
             } else {
-                container = document.getElementById(`content-${hall}`);
+                // 如果抓不到精準展廳名，檢查是否包含該字眼
+                const possibleHalls = ["心腦", "心靈", "關係", "生命"];
+                let matchedHall = hall;
+                possibleHalls.forEach(h => { if(hall.includes(h)) matchedHall = h; });
+                container = document.getElementById(`content-${matchedHall}`);
             }
 
             if (container) {
