@@ -32,7 +32,7 @@ body.show-tip #pullIndicator { transform: translateY(0); }
 /* 展廳：局部捲動 */
 .nav-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 10px; }
 .nav-item { background: white; border-radius: 18px; padding: 15px 8px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.04); display: flex; flex-direction: column; }
-.nav-item img { width: 75%; border-radius: 12px; margin: 0 auto 8px; } /* 恢復展廳圖示大小 */
+.nav-item img { width: 85%; border-radius: 12px; margin: 0 auto 8px; } /* 【優化：展廳圖示變大至 85%】 */
 .nav-item h3 { font-size: 1rem; margin: 5px 0; }
 
 .content-area { 
@@ -50,7 +50,7 @@ body.show-tip #pullIndicator { transform: translateY(0); }
 .dojo-title img { width: 48px; height: 48px; margin-right: 12px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2)); }
 .card-mini { background: white; border-radius: 12px; padding: 10px; margin-bottom: 10px; color: var(--text); border: 1px solid #f0ebe4; }
 
-/* 影片播放鈕：極致縮小到 20px */
+/* 影片播放鈕：維持極致縮小到 20px */
 .video-link-box { position: relative; display: block; margin: 6px 0; border-radius: 8px; overflow: hidden; background: #000; }
 .video-link-box img { width: 100%; display: block; opacity: 0.85; }
 .play-btn-overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: flex; align-items: center; justify-content: center; }
@@ -61,7 +61,7 @@ body.show-tip #pullIndicator { transform: translateY(0); }
 .btn-link { 
     display: inline-block; padding: 4px 10px; border-radius: 20px; 
     text-decoration: none; font-weight: bold; font-size: 0.65rem; 
-    margin: 4px 0; white-space: nowrap; 
+    margin: 3px 0; white-space: nowrap; 
 }
 .btn-tool { background: #4A90E2; color: white; }
 .btn-good { background: var(--primary); color: white; }
