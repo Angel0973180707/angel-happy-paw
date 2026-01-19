@@ -1,0 +1,21 @@
+{
+  "name": "幸福教養概念館",
+  "short_name": "幸福教養",
+  "description": "天使笑長 Angel 的幸福教養概念館",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#FFF5EE",
+  "theme_color": "#8FB9A8",
+  "icons": [
+    {
+      "src": "assets/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
