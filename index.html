@@ -25,7 +25,6 @@ body { font-family: 'PingFang TC', sans-serif; background-color: var(--bg); marg
 .card-mini { background: #fdfaf7; border-radius: 10px; padding: 10px; margin-bottom: 10px; font-size: 0.75rem; border: 1px solid #f0ebe4; color: var(--text); }
 .video-box { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; margin: 8px 0; border-radius: 8px; background: #000; }
 .video-box iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0; }
-/* 修改後的影片與連結樣式 */
 .link-text { display: inline-block; color: var(--primary); text-decoration: none; margin: 5px 0; font-weight: bold; font-size: 0.8rem; border-bottom: 1px solid var(--primary); }
 .install-card { background: #FFF; border: 1px dashed var(--primary); border-radius: 15px; padding: 18px; margin: 30px 0; text-align: center; }
 footer { text-align: center; padding: 30px 20px; font-size: 0.7rem; color: #999; }
@@ -78,7 +77,6 @@ footer { text-align: center; padding: 30px 20px; font-size: 0.7rem; color: #999;
 <script>
 const API_URL = "https://script.google.com/macros/s/AKfycbzeuQFds9g_H5_Wa7CIYSQs5k2KHBdDG45zPNNJF74xPfYU9NkSYXLBSKDZzcCWjaF3OA/exec";
 
-// 強化版影片辨識
 function getYTId(url) {
     if (!url) return null;
     const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
@@ -93,6 +91,7 @@ async function loadData() {
         const groupsMap = { "緊急": "🆘 緊急救火區", "心靈": "🧘 心靈養分區", "檢測": "🔍 觀察檢測區", "教養": "📚 教養實戰區", "其他": "💡 其他實作" };
         
         let foundNews = false;
+        ["心腦", "心靈", "關係", "生命"].forEach(h => document.getElementById(`content-${h}`).innerHTML = "");
 
         rawData.forEach(item => {
             let row = {};
@@ -137,7 +136,7 @@ async function loadData() {
                 if (ytId) {
                     mediaHTML = `<div class="video-box"><iframe src="https://www.youtube.com/embed/${ytId}" allowfullscreen></iframe></div>`;
                 } else if (link.startsWith("http")) {
-                    // 改為文字樣式
+                    // 全館統一比照辦理：移除按鈕樣式，改為優雅文字
                     mediaHTML = `<a href="${link}" target="_blank" class="link-text">🎬 影片欣賞</a>`;
                 }
                 
