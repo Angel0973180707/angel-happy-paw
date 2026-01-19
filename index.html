@@ -43,25 +43,22 @@ max-height: 999999px;
 .nav-item { background: white; border-radius: 15px; padding: 10px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.05); text-decoration: none; color: inherit; }
 .nav-item img { width: 100%; border-radius: 12px; aspect-ratio: 4/3; object-fit: cover; margin-bottom: 8px; }
 .nav-item h3 { font-size: 0.85rem !important; margin: 5px 0; font-weight: bold; }
-
-/* 實踐工房專屬容器 */
 .dojo-section { grid-column: span 2; background: linear-gradient(135deg, #8FB9A8 0%, #769f8f 100%); color: white; padding: 15px; border-radius: 15px; text-decoration: none; margin-top: 10px; display: block; }
 .dojo-header { display: flex; align-items: center; margin-bottom: 10px; }
 .dojo-img { width: 50px; height: 50px; border-radius: 10px; margin-right: 12px; border: 2px solid rgba(255,255,255,0.3); }
-
 h2 { font-size: 1rem !important; border-left: 5px solid var(--primary); padding-left: 10px; margin: 25px 0 15px; }
 .install-card { background: #FFF; border: 1px dashed var(--primary); border-radius: 15px; padding: 18px; margin: 30px 0; text-align: center; }
 .install-btn { display: inline-block; background: var(--primary); color: white; padding: 12px 30px; border-radius: 40px; text-decoration: none; font-size: 0.85rem; font-weight: bold; margin-top: 12px; box-shadow: 0 4px 10px rgba(143,185,168,0.3); }
-
-/* 自動提貨樣式 */
-.dynamic-area { text-align: left; }
-.card-mini { background: #fdfaf7; border-radius: 8px; padding: 10px; margin-bottom: 10px; font-size: 0.75rem; border: 1px solid #f0ebe4; color: var(--text); }
-.video-box { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; margin: 8px 0; border-radius: 4px; }
-.video-box iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0; }
-.tool-tag { background: var(--accent); color: white; font-size: 0.6rem; padding: 1px 5px; border-radius: 3px; margin-right: 5px; }
-
 footer { text-align: center; padding: 40px 20px; font-size: 0.75rem !important; color: #999; line-height: 1.8; }
 .ai-note { font-size: 0.6rem !important; color: #CCC; margin-top: 8px; }
+
+/* 自動提貨隔間樣式 */
+.dynamic-area { text-align: left; margin-top: 10px; }
+.card-mini { background: #fdfaf7; border-radius: 10px; padding: 12px; margin-bottom: 12px; font-size: 0.8rem; border: 1px solid #f0ebe4; color: var(--text); box-shadow: 0 2px 5px rgba(0,0,0,0.02); }
+.video-box { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; margin: 10px 0; border-radius: 6px; }
+.video-box iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0; }
+.tool-btn { display: block; background: #96B9AD; color: white; text-align: center; padding: 10px; border-radius: 25px; text-decoration: none; margin: 10px 0; font-size: 0.8rem; font-weight: bold; }
+.tool-tag { background: var(--accent); color: white; font-size: 0.65rem; padding: 2px 6px; border-radius: 4px; margin-right: 6px; vertical-align: middle; }
 </style>
 </head>
 <body>
@@ -76,7 +73,7 @@ footer { text-align: center; padding: 40px 20px; font-size: 0.75rem !important; 
 <div><span class="news-tag">館內動態</span></div>
 <div class="refresh-note">下拉更新展訊 ↻</div>
 </div>
-<div id="latest-news" style="font-size: 0.85rem; color: var(--text); font-weight: bold;">📌 本月策展：最新內容同步中...</div>
+<div id="latest-news" style="font-size: 0.85rem; color: var(--text); font-weight: bold;">📌 本月策展：載入中...</div>
 </div>
 
 <h2>🌿 概念館精神</h2>
@@ -92,7 +89,7 @@ footer { text-align: center; padding: 40px 20px; font-size: 0.75rem !important; 
 <h3 style="margin-bottom:5px;">天使笑長 Angel</h3>
 <span class="bio-title">家長的正能量女神</span>
 <hr style="border: 0; border-top: 1px solid #EEE; margin: 15px 0;">
-<div class="bio-text">她是退休國小教師，也是學校孩子心目中的大朋友；目前的幸福教養推廣者。</div>
+<div class="bio-text">她是退休國小教師，也是學校孩子心目中的大朋友；目前的幸福教養推廣者，致力於用心腦科學讓愛發揮力量。</div>
 </div>
 
 <h2>💡 核心展廳</h2>
@@ -119,7 +116,7 @@ footer { text-align: center; padding: 40px 20px; font-size: 0.75rem !important; 
 <img src="assets/tool.webp" class="dojo-img">
 <div class="text">
 <h3 style="margin:0; font-size: 1rem;">實踐工房</h3>
-<p style="margin:2px 0 0; font-size:0.7rem; opacity: 0.9;">實作工具與影片教學</p>
+<p style="margin:2px 0 0; font-size:0.7rem; opacity: 0.9;">實作工具與教學影片</p>
 </div>
 </div>
 <div id="content-影音" class="dynamic-area"></div>
@@ -157,14 +154,18 @@ return;
 if (container) {
 const card = document.createElement('div');
 card.className = 'card-mini';
-let videoHTML = "";
-if (item["影音連結"] && item["影音連結"].includes("youtube")) {
-const vId = item["影音連結"].split('v=')[1]?.split('&')[0] || item["影音連結"].split('/').pop();
-videoHTML = `<div class="video-box"><iframe src="https://www.youtube.com/embed/${vId}" allowfullscreen></iframe></div>`;
+let mediaHTML = "";
+const link = item["影音連結"];
+
+if (link && link.includes("youtube")) {
+const vId = link.split('v=')[1]?.split('&')[0] || link.split('/').pop();
+mediaHTML = `<div class="video-box"><iframe src="https://www.youtube.com/embed/${vId}" allowfullscreen></iframe></div>`;
+} else if (link && link.startsWith("http")) {
+mediaHTML = `<a href="${link}" target="_blank" class="tool-btn">🛠️ 開啟實踐工具</a>`;
 }
-// 如果是工具，加上一個紅色小標籤
+
 let tag = (item["展示廳"] === "工具") ? `<span class="tool-tag">工具</span>` : "";
-card.innerHTML = `<div style="font-weight:bold; color:var(--primary);">${tag}${item["標題"]}</div>${videoHTML}<div style="font-size:0.7rem; color:#888;">${item["核心理念"]}</div>`;
+card.innerHTML = `<div style="font-weight:bold; color:var(--primary);">${tag}${item["標題"]}</div>${mediaHTML}<div style="font-size:0.75rem; color:#888; white-space:pre-wrap;">${item["核心理念"]}</div>`;
 container.appendChild(card);
 }
 });
