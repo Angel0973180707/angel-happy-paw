@@ -18,13 +18,14 @@ body { font-family: 'PingFang TC', sans-serif; background-color: var(--bg); marg
 .nav-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px; }
 .nav-item { background: white; border-radius: 15px; padding: 10px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
 .nav-item img { width: 100%; border-radius: 12px; aspect-ratio: 4/3; object-fit: cover; }
-.content-area { max-height: 140px; overflow-y: auto; margin-top: 8px; font-size: 0.75rem; text-align: left; }
+.content-area { max-height: 160px; overflow-y: auto; margin-top: 8px; font-size: 0.75rem; text-align: left; scrollbar-width: none; }
+.content-area::-webkit-scrollbar { display: none; }
 .dojo-section { grid-column: span 2; background: linear-gradient(135deg, #8FB9A8 0%, #769f8f 100%); color: white; padding: 15px; border-radius: 15px; margin-top: 10px; }
 #dojo-groups { max-height: 250px; overflow-y: auto; }
 .card-mini { background: #fdfaf7; border-radius: 10px; padding: 8px; margin-bottom: 8px; font-size: 0.75rem; border: 1px solid #f0ebe4; color: var(--text); }
-.video-box { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; margin: 5px 0; border-radius: 6px; }
+.video-box { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; margin: 8px 0; border-radius: 8px; background: #000; }
 .video-box iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0; }
-.tool-btn { display: block; background: #96B9AD; color: white; text-align: center; padding: 8px; border-radius: 20px; text-decoration: none; margin: 5px 0; font-size: 0.7rem; font-weight: bold; }
+.tool-btn { display: block; background: #96B9AD; color: white; text-align: center; padding: 8px; border-radius: 20px; text-decoration: none; margin: 8px 0; font-size: 0.75rem; font-weight: bold; }
 .install-card { background: #FFF; border: 1px dashed var(--primary); border-radius: 15px; padding: 18px; margin: 30px 0; text-align: center; }
 footer { text-align: center; padding: 30px 20px; font-size: 0.7rem; color: #999; }
 </style>
@@ -38,11 +39,11 @@ footer { text-align: center; padding: 30px 20px; font-size: 0.7rem; color: #999;
 <div class="container">
 <div class="news-bar">
     <div style="margin-bottom: 5px;"><span class="news-tag">館內動態</span><span class="refresh-note">下拉更新 ↻</span></div>
-    <div id="latest-news" style="font-weight: bold; font-size: 0.85rem; color: var(--text);">📌 同步中，請稍候...</div>
+    <div id="latest-news" style="font-weight: bold; font-size: 0.85rem; color: var(--text);">📌 正在獲取最新展訊...</div>
 </div>
 <h2>🌿 概念館精神</h2>
 <div class="spirit-section">
-<h3 style="color:var(--primary);">教養愉悅，家庭溫暖</h3>
+<h3 style="color:var(--primary); margin-bottom:15px;">教養愉悅，家庭溫暖</h3>
 <a href="story_detail.html" style="background:#96B9AD; color:white; padding:12px; display:block; border-radius:40px; text-decoration:none; margin-bottom:12px; font-weight:bold; font-size:0.9rem; text-align:center;">📖 館藏：教養幸福經</a>
 <a href="https://www.youtube.com/@%E5%A4%A9%E4%BD%BF%E7%AC%91%E9%95%B7" target="_blank" style="background:var(--accent); color:white; padding:12px; display:block; border-radius:40px; text-decoration:none; font-weight:bold; font-size:0.9rem; text-align:center;">📺 影音導覽：前往頻道</a>
 </div>
@@ -75,6 +76,12 @@ footer { text-align: center; padding: 30px 20px; font-size: 0.7rem; color: #999;
 
 <script>
 const API_URL = "https://script.google.com/macros/s/AKfycbzeuQFds9g_H5_Wa7CIYSQs5k2KHBdDG45zPNNJF74xPfYU9NkSYXLBSKDZzcCWjaF3OA/exec";
+function getYTId(url) {
+    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+    const match = url.match(regExp);
+    return (match && match[2].length === 11) ? match[2] : null;
+}
+
 async function loadData() {
     try {
         const response = await fetch(API_URL);
@@ -82,6 +89,8 @@ async function loadData() {
         const groupsMap = { "緊急": "🆘 緊急救火區", "心靈": "🧘 心靈養分區", "檢測": "🔍 觀察檢測區", "教養": "📚 教養實戰區", "其他": "💡 其他實作" };
         
         let foundNews = false;
+        // 清除舊內容
+        ["心腦", "心靈", "關係", "生命"].forEach(h => document.getElementById(`content-${h}`).innerHTML = "");
 
         rawData.forEach(item => {
             let row = {};
@@ -94,7 +103,6 @@ async function loadData() {
             const concept = String(row["核心理念"] || "").trim();
             const link = String(row["影音連結"] || "").trim();
 
-            // 模糊搜尋「最新」或「動態」相關字眼
             if (hall.includes("最新") || hall.includes("動態")) {
                 document.getElementById('latest-news').innerText = `📌 ${title}`;
                 foundNews = true;
@@ -121,23 +129,21 @@ async function loadData() {
             if (container) {
                 const card = document.createElement('div');
                 card.className = 'card-mini';
-                let media = "";
-                if (link.includes("youtube")) {
-                    const vId = link.split('v=')[1]?.split('&')[0] || link.split('/').pop();
-                    media = `<div class="video-box"><iframe src="https://www.youtube.com/embed/${vId}" allowfullscreen></iframe></div>`;
+                let mediaHTML = "";
+                const ytId = getYTId(link);
+                
+                if (ytId) {
+                    mediaHTML = `<div class="video-box"><iframe src="https://www.youtube.com/embed/${ytId}" allowfullscreen></iframe></div>`;
                 } else if (link.startsWith("http")) {
-                    media = `<a href="${link}" target="_blank" class="tool-btn">🚀 啟動工具</a>`;
+                    mediaHTML = `<a href="${link}" target="_blank" class="tool-btn">🚀 啟動工具</a>`;
                 }
-                card.innerHTML = `<strong>${title}</strong>${media}<div style="color:#888; margin-top:3px; line-height:1.3;">${concept}</div>`;
+                
+                card.innerHTML = `<strong>${title}</strong>${mediaHTML}<div style="color:#888; margin-top:3px; line-height:1.3;">${concept}</div>`;
                 container.appendChild(card);
             }
         });
-
-        if (!foundNews) {
-            document.getElementById('latest-news').innerText = "📌 歡迎光臨幸福教養概念館";
-        }
-
-    } catch (e) { document.getElementById('latest-news').innerText = "❌ 資料連線中..."; }
+        if (!foundNews) document.getElementById('latest-news').innerText = "📌 歡迎光臨幸福教養概念館";
+    } catch (e) { document.getElementById('latest-news').innerText = "❌ 資料更新中..."; }
 }
 loadData();
 </script>
