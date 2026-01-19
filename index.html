@@ -8,16 +8,16 @@
 :root { --primary: #8FB9A8; --bg: #FFF5EE; --text: #5D4037; --accent: #EE3E2B; }
 body { font-family: 'PingFang TC', sans-serif; background-color: var(--bg); margin: 0; color: var(--text); line-height: 1.5; -webkit-text-size-adjust: none; }
 
-/* 頂端下拉觸發提示 */
-.pull-refresh-indicator { 
+/* 強化的下拉提示：固定在最上方 */
+#pullIndicator { 
     position: fixed; top: 0; left: 0; right: 0;
-    text-align: center; font-size: 0.75rem; color: white; background: var(--primary); 
-    padding: 8px 0; z-index: 999; transform: translateY(-100%); transition: transform 0.3s ease;
-    font-weight: bold; box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    text-align: center; font-size: 0.8rem; color: white; background: var(--primary); 
+    padding: 12px 0; z-index: 9999; transform: translateY(-100%); transition: transform 0.3s cubic-bezier(0.17, 0.67, 0.83, 0.67);
+    font-weight: bold; box-shadow: 0 2px 10px rgba(0,0,0,0.1); pointer-events: none;
 }
-body.is-pulling .pull-refresh-indicator { transform: translateY(0); }
+body.show-tip #pullIndicator { transform: translateY(0); }
 
-.header { background: white; padding: 15px; text-align: center; border-bottom: 1px solid #f0e6dd; position: relative; z-index: 100; }
+.header { background: white; padding: 15px; text-align: center; border-bottom: 1px solid #f0e6dd; }
 .hero-img { width: 100%; max-width: 1200px; display: block; margin: 0 auto; border-radius: 0 0 20px 20px; }
 .container { padding: 12px; max-width: 800px; margin: 0 auto; }
 
@@ -25,44 +25,41 @@ body.is-pulling .pull-refresh-indicator { transform: translateY(0); }
 .news-bar { margin: 10px 0; background: #FFF; border-radius: 12px; padding: 12px; border-left: 5px solid var(--primary); box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
 .news-tag { background: var(--primary); color: white; font-size: 0.65rem; padding: 2px 6px; border-radius: 4px; font-weight: bold; margin-right: 6px; }
 
-/* 精神與介紹 */
+/* 介紹區 */
 .spirit-section { background: white; border-radius: 15px; padding: 15px; margin-bottom: 20px; box-shadow: 0 3px 10px rgba(0,0,0,0.05); text-align: center; }
 .bio-text { text-align: left; font-size: 0.85rem; line-height: 1.7; color: var(--text); padding: 0 10px; }
 
-/* 核心展廳：維持高度收納 */
+/* 展廳：局部捲動 */
 .nav-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 15px; }
 .nav-item { background: white; border-radius: 18px; padding: 12px 8px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.04); display: flex; flex-direction: column; }
 .nav-item img { width: 70%; border-radius: 12px; margin: 0 auto 8px; }
 .content-area { flex: 1; max-height: 280px; overflow-y: auto; text-align: left; padding: 0 4px; }
-.content-area::-webkit-scrollbar { width: 2px; }
 
-/* 實踐工房：百寶箱加大 */
+/* 工房：加大百寶箱 */
 .dojo-section { grid-column: span 2; background: linear-gradient(135deg, #8FB9A8 0%, #769f8f 100%); color: white; padding: 20px; border-radius: 20px; margin-top: 15px; }
 .dojo-title { display: flex; align-items: center; margin-bottom: 15px; }
-.dojo-title img { width: 45px; height: 45px; margin-right: 12px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2)); }
+.dojo-title img { width: 48px; height: 48px; margin-right: 12px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2)); }
 .card-mini { background: white; border-radius: 12px; padding: 10px; margin-bottom: 10px; color: var(--text); border: 1px solid #f0ebe4; }
 
-/* 影片播放鈕：極小化 */
+/* 影片播放鈕：極小 */
 .video-link-box { position: relative; display: block; margin: 6px 0; border-radius: 8px; overflow: hidden; background: #000; }
 .video-link-box img { width: 100%; display: block; opacity: 0.8; }
 .play-btn-overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: flex; align-items: center; justify-content: center; }
-.play-circle { width: 28px; height: 28px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
-.play-triangle { width: 0; height: 0; border-style: solid; border-width: 5px 0 5px 8px; border-color: transparent transparent transparent white; margin-left: 2px; }
+.play-circle { width: 26px; height: 26px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+.play-triangle { width: 0; height: 0; border-style: solid; border-width: 4px 0 4px 7px; border-color: transparent transparent transparent white; margin-left: 2px; }
 
-/* 按鈕：精緻膠囊化 */
-.btn-link { display: inline-block; padding: 4px 12px; border-radius: 20px; text-decoration: none; font-weight: bold; font-size: 0.68rem; margin: 4px 0; transition: transform 0.1s; }
+/* 按鈕樣式 */
+.btn-link { display: inline-block; padding: 4px 12px; border-radius: 20px; text-decoration: none; font-weight: bold; font-size: 0.68rem; margin: 4px 0; }
 .btn-tool { background: #4A90E2; color: white; }
 .btn-good { background: var(--primary); color: white; }
-.btn-link:active { transform: scale(0.95); }
 
-.status-text { display: inline-block; color: #999; font-size: 0.65rem; margin: 2px 0; font-weight: bold; padding-left: 6px; border-left: 2px solid #EEE; }
 .install-card { background: #FFF; border: 1px dashed var(--primary); border-radius: 15px; padding: 18px; margin: 30px 0; text-align: center; }
 footer { text-align: center; padding: 35px 20px; font-size: 0.75rem; color: #999; }
 h2 { color: var(--text); border-left: 5px solid var(--primary); padding-left: 8px; margin-top: 25px; font-size: 1rem; }
 </style>
 </head>
-<body onscroll="checkPull()">
-<div id="pullIndicator" class="pull-refresh-indicator">✨ 繼續往下拉更新最新展訊 ✨</div>
+<body>
+<div id="pullIndicator">✨ 鬆開即可更新最新展訊 ✨</div>
 
 <div class="header">
     <h1 style="margin:0; font-size: 1.4rem;">天使笑長 Angel</h1>
@@ -73,7 +70,7 @@ h2 { color: var(--text); border-left: 5px solid var(--primary); padding-left: 8p
 <div class="container">
     <div class="news-bar">
         <div><span class="news-tag">館內動態</span></div>
-        <div id="latest-news" style="font-weight: bold; font-size: 0.85rem;">📌 同步雲端資料中...</div>
+        <div id="latest-news" style="font-weight: bold; font-size: 0.85rem;">📌 載入館藏中...</div>
     </div>
 
     <h2>🌿 概念館精神</h2>
@@ -113,14 +110,23 @@ h2 { color: var(--text); border-left: 5px solid var(--primary); padding-left: 8p
 <script>
 const API_URL = "https://script.google.com/macros/s/AKfycbzeuQFds9g_H5_Wa7CIYSQs5k2KHBdDG45zPNNJF74xPfYU9NkSYXLBSKDZzcCWjaF3OA/exec";
 
-// 下拉提示邏輯
-function checkPull() {
-    if (window.scrollY < -10) {
-        document.body.classList.add('is-pulling');
-    } else {
-        document.body.classList.remove('is-pulling');
+// --- 觸控下拉偵測邏輯 ---
+let touchStart = 0;
+window.addEventListener('touchstart', (e) => { touchStart = e.touches[0].pageY; }, {passive: true});
+window.addEventListener('touchmove', (e) => {
+    const touchDiff = e.touches[0].pageY - touchStart;
+    if (window.scrollY === 0 && touchDiff > 50) {
+        document.body.classList.add('show-tip');
+    } else if (touchDiff < 0) {
+        document.body.classList.remove('show-tip');
     }
-}
+}, {passive: true});
+window.addEventListener('touchend', () => {
+    if(document.body.classList.contains('show-tip')){
+        setTimeout(() => document.body.classList.remove('show-tip'), 1500);
+        // 此處可觸發資料重載 loadData();
+    }
+});
 
 function getYTId(url) {
     if (!url) return null;
@@ -189,7 +195,7 @@ async function loadData() {
                 const ytId = getYTId(videoLink);
                 if (ytId) {
                     videoHTML = `<a href="https://www.youtube.com/watch?v=${ytId}" target="_blank"><div class="video-link-box"><img src="https://img.youtube.com/vi/${ytId}/mqdefault.jpg"><div class="play-btn-overlay"><div class="play-circle"><div class="play-triangle"></div></div></div></div></a>`;
-                    otherLinkHTML = `<div class="status-text">🎬 影片</div>`;
+                    otherLinkHTML = `<div class="status-text" style="font-size:0.6rem;">🎬 影片</div>`;
                 } else if (videoLink && videoLink.startsWith("http")) {
                     const label = isDojoContent ? "🚀 取用工具" : "💎 分享";
                     otherLinkHTML = `<a href="${videoLink}" target="_blank" class="btn-link ${isDojoContent?'btn-tool':'btn-good'}">${label}</a>`;
