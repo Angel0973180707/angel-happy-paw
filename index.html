@@ -18,14 +18,15 @@ body { font-family: 'PingFang TC', sans-serif; background-color: var(--bg); marg
 .nav-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px; }
 .nav-item { background: white; border-radius: 15px; padding: 10px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
 .nav-item img { width: 100%; border-radius: 12px; aspect-ratio: 4/3; object-fit: cover; }
-.content-area { max-height: 160px; overflow-y: auto; margin-top: 8px; font-size: 0.75rem; text-align: left; scrollbar-width: none; }
+.content-area { max-height: 180px; overflow-y: auto; margin-top: 8px; font-size: 0.75rem; text-align: left; scrollbar-width: none; }
 .content-area::-webkit-scrollbar { display: none; }
 .dojo-section { grid-column: span 2; background: linear-gradient(135deg, #8FB9A8 0%, #769f8f 100%); color: white; padding: 15px; border-radius: 15px; margin-top: 10px; }
 #dojo-groups { max-height: 250px; overflow-y: auto; }
-.card-mini { background: #fdfaf7; border-radius: 10px; padding: 8px; margin-bottom: 8px; font-size: 0.75rem; border: 1px solid #f0ebe4; color: var(--text); }
+.card-mini { background: #fdfaf7; border-radius: 10px; padding: 10px; margin-bottom: 10px; font-size: 0.75rem; border: 1px solid #f0ebe4; color: var(--text); }
 .video-box { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; margin: 8px 0; border-radius: 8px; background: #000; }
 .video-box iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0; }
-.tool-btn { display: block; background: #96B9AD; color: white; text-align: center; padding: 8px; border-radius: 20px; text-decoration: none; margin: 8px 0; font-size: 0.75rem; font-weight: bold; }
+/* 修改後的影片與連結樣式 */
+.link-text { display: inline-block; color: var(--primary); text-decoration: none; margin: 5px 0; font-weight: bold; font-size: 0.8rem; border-bottom: 1px solid var(--primary); }
 .install-card { background: #FFF; border: 1px dashed var(--primary); border-radius: 15px; padding: 18px; margin: 30px 0; text-align: center; }
 footer { text-align: center; padding: 30px 20px; font-size: 0.7rem; color: #999; }
 </style>
@@ -76,7 +77,10 @@ footer { text-align: center; padding: 30px 20px; font-size: 0.7rem; color: #999;
 
 <script>
 const API_URL = "https://script.google.com/macros/s/AKfycbzeuQFds9g_H5_Wa7CIYSQs5k2KHBdDG45zPNNJF74xPfYU9NkSYXLBSKDZzcCWjaF3OA/exec";
+
+// 強化版影片辨識
 function getYTId(url) {
+    if (!url) return null;
     const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
     const match = url.match(regExp);
     return (match && match[2].length === 11) ? match[2] : null;
@@ -89,8 +93,6 @@ async function loadData() {
         const groupsMap = { "緊急": "🆘 緊急救火區", "心靈": "🧘 心靈養分區", "檢測": "🔍 觀察檢測區", "教養": "📚 教養實戰區", "其他": "💡 其他實作" };
         
         let foundNews = false;
-        // 清除舊內容
-        ["心腦", "心靈", "關係", "生命"].forEach(h => document.getElementById(`content-${h}`).innerHTML = "");
 
         rawData.forEach(item => {
             let row = {};
@@ -135,7 +137,8 @@ async function loadData() {
                 if (ytId) {
                     mediaHTML = `<div class="video-box"><iframe src="https://www.youtube.com/embed/${ytId}" allowfullscreen></iframe></div>`;
                 } else if (link.startsWith("http")) {
-                    mediaHTML = `<a href="${link}" target="_blank" class="tool-btn">🚀 啟動工具</a>`;
+                    // 改為文字樣式
+                    mediaHTML = `<a href="${link}" target="_blank" class="link-text">🎬 影片欣賞</a>`;
                 }
                 
                 card.innerHTML = `<strong>${title}</strong>${mediaHTML}<div style="color:#888; margin-top:3px; line-height:1.3;">${concept}</div>`;
@@ -143,7 +146,7 @@ async function loadData() {
             }
         });
         if (!foundNews) document.getElementById('latest-news').innerText = "📌 歡迎光臨幸福教養概念館";
-    } catch (e) { document.getElementById('latest-news').innerText = "❌ 資料更新中..."; }
+    } catch (e) { document.getElementById('latest-news').innerText = "❌ 資料連線中..."; }
 }
 loadData();
 </script>
