@@ -14,62 +14,49 @@ body { font-family: 'PingFang TC', sans-serif; background-color: var(--bg); marg
 .news-tag { background: var(--primary); color: white; font-size: 0.65rem; padding: 2px 8px; border-radius: 4px; font-weight: bold; margin-right: 8px; }
 .refresh-note { float: right; font-size: 0.65rem; color: #BBB; }
 .spirit-section { background: white; border-radius: 20px; padding: 18px 15px; margin-bottom: 25px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); text-align: center; }
-.bio-text { text-align: left; font-size: 0.85rem; line-height: 1.8; color: var(--text); padding: 0 10px; }
-.btn-read { display: block; background: #96B9AD; color: white; padding: 12px; border-radius: 40px; text-decoration: none; margin-bottom: 12px; font-weight: bold; text-align: center; }
-.btn-yt { display: block; background: var(--accent); color: white; padding: 12px; border-radius: 40px; text-decoration: none; font-weight: bold; text-align: center; }
 .nav-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px; }
-.nav-item { background: white; border-radius: 15px; padding: 10px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-.nav-item img { width: 100%; border-radius: 12px; aspect-ratio: 4/3; object-fit: cover; margin-bottom: 8px; }
+.nav-item { background: white; border-radius: 15px; padding: 10px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.05); overflow: hidden; height: fit-content; }
+.nav-item img { width: 100%; border-radius: 12px; aspect-ratio: 4/3; object-fit: cover; }
+/* 限制展廳內容高度，超過會出現微型捲軸 */
+.content-area { max-height: 150px; overflow-y: auto; margin-top: 8px; font-size: 0.75rem; text-align: left; }
 .dojo-section { grid-column: span 2; background: linear-gradient(135deg, #8FB9A8 0%, #769f8f 100%); color: white; padding: 15px; border-radius: 15px; margin-top: 10px; }
-.dojo-header { display: flex; align-items: center; margin-bottom: 10px; }
-.dojo-img { width: 40px; height: 40px; border-radius: 8px; margin-right: 12px; }
-h2 { font-size: 1rem; border-left: 5px solid var(--primary); padding-left: 10px; margin: 25px 0 15px; }
-.card-mini { background: #fdfaf7; border-radius: 10px; padding: 12px; margin-bottom: 12px; font-size: 0.8rem; border: 1px solid #f0ebe4; color: var(--text); text-align: left; }
-.video-box { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; margin: 10px 0; border-radius: 6px; }
+/* 工房捲軸化 */
+#dojo-groups { max-height: 300px; overflow-y: auto; padding-right: 5px; }
+.card-mini { background: #fdfaf7; border-radius: 10px; padding: 10px; margin-bottom: 8px; font-size: 0.75rem; border: 1px solid #f0ebe4; color: var(--text); }
+.video-box { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; margin: 5px 0; border-radius: 6px; }
 .video-box iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0; }
-.tool-btn { display: block; background: #96B9AD; color: white; text-align: center; padding: 10px; border-radius: 25px; text-decoration: none; margin: 10px 0; font-size: 0.8rem; font-weight: bold; }
-.cat-label { font-size: 0.8rem; font-weight: bold; margin: 15px 0 5px; color: rgba(255,255,255,0.9); border-bottom: 1px dashed rgba(255,255,255,0.3); padding-bottom: 3px; }
-.install-card { background: #FFF; border: 1px dashed var(--primary); border-radius: 15px; padding: 18px; margin: 30px 0; text-align: center; }
-footer { text-align: center; padding: 40px 20px; font-size: 0.7rem; color: #999; }
+.tool-btn { display: block; background: #96B9AD; color: white; text-align: center; padding: 8px; border-radius: 20px; text-decoration: none; margin: 8px 0; font-size: 0.75rem; font-weight: bold; }
+.cat-label { font-size: 0.8rem; font-weight: bold; margin: 12px 0 5px; color: rgba(255,255,255,0.9); border-bottom: 1px dashed rgba(255,255,255,0.3); }
+footer { text-align: center; padding: 30px 20px; font-size: 0.7rem; color: #999; }
 </style>
 </head>
 <body>
 <div class="header">
-<h1 style="margin:0; font-size: 1.4rem;">天使笑長 Angel</h1>
-<div style="font-size: 0.75rem; color: var(--primary); font-weight: bold;">幸福教養概念館</div>
+<h1 style="margin:0; font-size: 1.3rem;">天使笑長 Angel</h1>
+<div style="font-size: 0.7rem; color: var(--primary); font-weight: bold;">幸福教養概念館</div>
 </div>
 <img src="assets/home.webp" class="hero-img">
 <div class="container">
 <div class="news-bar">
-    <div style="margin-bottom: 5px;"><span class="news-tag">館內動態</span><span class="refresh-note">下拉更新 ↻</span></div>
-    <div id="latest-news" style="font-weight: bold;">📌 正在同步雲端資料...</div>
+    <div><span class="news-tag">館內動態</span><span class="refresh-note">下拉更新 ↻</span></div>
+    <div id="latest-news" style="font-weight: bold; font-size: 0.85rem; margin-top:5px;">📌 正在同步雲端資料...</div>
 </div>
 <h2>🌿 概念館精神</h2>
 <div class="spirit-section">
-<h3 style="color:var(--primary);">教養愉悅，家庭溫暖</h3>
-<a href="story_detail.html" class="btn-read">📖 館藏：教養幸福經</a>
-<a href="https://www.youtube.com/@%E5%A4%A9%E4%BD%BF%E7%AC%91%E9%95%B7" target="_blank" class="btn-yt">📺 影音導覽：前往頻道</a>
-</div>
-<h2>👩‍🏫 關於天使館長</h2>
-<div class="spirit-section">
-<h3 style="margin-bottom:5px;">天使笑長 Angel</h3>
-<div class="bio-text">她是退休國小教師，也是學校寶貝心目中的大朋友和家裡兩個寶貝的幸福姑；致力幸福教養推廣，用心腦科學理論融入實踐讓愛發揮力量。</div>
+<h3 style="color:var(--primary); font-size: 1rem;">教養愉悅，家庭溫暖</h3>
+<a href="story_detail.html" class="btn-read" style="background:#96B9AD; color:white; padding:10px; display:block; border-radius:30px; text-decoration:none; margin-bottom:10px; font-size:0.85rem; font-weight:bold;">📖 館藏：教養幸福經</a>
+<a href="https://www.youtube.com/@%E5%A4%A9%E4%BD%BF%E7%AC%91%E9%95%B7" target="_blank" style="background:var(--accent); color:white; padding:10px; display:block; border-radius:30px; text-decoration:none; font-size:0.85rem; font-weight:bold;">📺 影音導覽：前往頻道</a>
 </div>
 <h2>💡 核心展廳</h2>
 <div class="nav-grid">
-<div class="nav-item"><img src="assets/brain.webp"><h3>心腦展廳</h3><div id="content-心腦"></div></div>
-<div class="nav-item"><img src="assets/soul.webp"><h3>心靈會所</h3><div id="content-心靈"></div></div>
-<div class="nav-item"><img src="assets/relation.webp"><h3>關係雅座</h3><div id="content-關係"></div></div>
-<div class="nav-item"><img src="assets/story.webp"><h3>生命劇場</h3><div id="content-生命"></div></div>
+<div class="nav-item"><img src="assets/brain.webp"><h3>心腦展廳</h3><div id="content-心腦" class="content-area"></div></div>
+<div class="nav-item"><img src="assets/soul.webp"><h3>心靈會所</h3><div id="content-心靈" class="content-area"></div></div>
+<div class="nav-item"><img src="assets/relation.webp"><h3>關係雅座</h3><div id="content-關係" class="content-area"></div></div>
+<div class="nav-item"><img src="assets/story.webp"><h3>生命劇場</h3><div id="content-生命" class="content-area"></div></div>
 <div class="dojo-section">
-<div class="dojo-header"><img src="assets/tool.webp" class="dojo-img"><div><h3 style="margin:0;">實踐工房</h3></div></div>
+<div class="dojo-header" style="display:flex; align-items:center;"><img src="assets/tool.webp" style="width:30px; height:30px; margin-right:10px;"><h3>實踐工房</h3></div>
 <div id="dojo-groups"></div>
 </div>
-</div>
-<div class="install-card">
-<div style="font-weight: bold; color: var(--primary);">收藏概念館</div>
-<div style="font-size: 0.75rem; color: #888; margin: 8px 0;">把教養工具箱放在手機桌面</div>
-<a href="#" class="btn-read" style="margin-bottom:0;">立即收藏 PWA</a>
 </div>
 </div>
 <footer>
@@ -85,18 +72,16 @@ async function loadData() {
         const rawData = await response.json();
         const groupsMap = { "緊急": "🆘 緊急救火區", "心靈": "🧘 心靈養分區", "檢測": "🔍 觀察檢測區", "教養": "📚 教養實戰區", "其他": "💡 其他實作" };
         
-        // 萬能解析：自動對準欄位
         rawData.forEach(item => {
             let row = {};
             Object.keys(item).forEach(k => { row[k.trim()] = item[k]; });
-
-            const status = String(row["發布狀態"] || row["發佈狀態"] || "");
+            const status = String(row["發布狀態"] || row["發佈狀態"] || "").trim();
             if (!status.includes("上架") && !status.includes("發佈")) return;
 
-            const hall = String(row["展示廳"] || "");
-            const title = String(row["標題"] || "");
-            const concept = String(row["核心理念"] || "");
-            const link = String(row["影音連結"] || "");
+            const hall = String(row["展示廳"] || "").trim();
+            const title = String(row["標題"] || "").trim();
+            const concept = String(row["核心理念"] || "").trim();
+            const link = String(row["影音連結"] || "").trim();
 
             if (hall.includes("最新活動")) {
                 document.getElementById('latest-news').innerText = `📌 ${title}`;
@@ -130,11 +115,11 @@ async function loadData() {
                 } else if (link.startsWith("http")) {
                     media = `<a href="${link}" target="_blank" class="tool-btn">🚀 啟動工具</a>`;
                 }
-                card.innerHTML = `<strong>${title}</strong>${media}<div style="color:#888; margin-top:5px;">${concept}</div>`;
+                card.innerHTML = `<strong>${title}</strong>${media}<div style="color:#888; margin-top:3px; line-height:1.3;">${concept}</div>`;
                 container.appendChild(card);
             }
         });
-    } catch (e) { document.getElementById('latest-news').innerText = "❌ 資料同步失敗，請檢查網路"; }
+    } catch (e) { document.getElementById('latest-news').innerText = "❌ 資料同步失敗"; }
 }
 loadData();
 </script>
