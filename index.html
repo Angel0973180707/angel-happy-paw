@@ -5,15 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <title>天使笑長 Angel - 幸福教養概念館</title>
 <style>
-:root { --primary: #8FB9A8; --bg: #FFF5EE; --text: #5D4037; --accent: #EE3E2B; }
+:root { --primary: #8FB9A8; --primary-dark: #6e9485; --bg: #FFF5EE; --text: #5D4037; --accent: #EE3E2B; }
 body { font-family: 'PingFang TC', sans-serif; background-color: var(--bg); margin: 0; color: var(--text); line-height: 1.5; -webkit-text-size-adjust: none; }
 
-/* 強化的下拉提示：固定在最上方 */
+/* 下拉更新：深色背景更醒目 */
 #pullIndicator { 
     position: fixed; top: 0; left: 0; right: 0;
-    text-align: center; font-size: 0.8rem; color: white; background: var(--primary); 
-    padding: 12px 0; z-index: 9999; transform: translateY(-100%); transition: transform 0.3s cubic-bezier(0.17, 0.67, 0.83, 0.67);
-    font-weight: bold; box-shadow: 0 2px 10px rgba(0,0,0,0.1); pointer-events: none;
+    text-align: center; font-size: 0.85rem; color: white; background: var(--primary-dark); 
+    padding: 15px 0; z-index: 10000; transform: translateY(-100%); transition: transform 0.2s ease-out;
+    font-weight: bold; box-shadow: 0 3px 15px rgba(0,0,0,0.2); pointer-events: none;
 }
 body.show-tip #pullIndicator { transform: translateY(0); }
 
@@ -25,66 +25,59 @@ body.show-tip #pullIndicator { transform: translateY(0); }
 .news-bar { margin: 10px 0; background: #FFF; border-radius: 12px; padding: 12px; border-left: 5px solid var(--primary); box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
 .news-tag { background: var(--primary); color: white; font-size: 0.65rem; padding: 2px 6px; border-radius: 4px; font-weight: bold; margin-right: 6px; }
 
-/* 介紹區 */
-.spirit-section { background: white; border-radius: 15px; padding: 15px; margin-bottom: 20px; box-shadow: 0 3px 10px rgba(0,0,0,0.05); text-align: center; }
-.bio-text { text-align: left; font-size: 0.85rem; line-height: 1.7; color: var(--text); padding: 0 10px; }
-
-/* 展廳：局部捲動 */
+/* 展廳佈局 */
 .nav-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 15px; }
 .nav-item { background: white; border-radius: 18px; padding: 12px 8px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.04); display: flex; flex-direction: column; }
 .nav-item img { width: 70%; border-radius: 12px; margin: 0 auto 8px; }
-.content-area { flex: 1; max-height: 280px; overflow-y: auto; text-align: left; padding: 0 4px; }
+.content-area { flex: 1; max-height: 280px; overflow-y: auto; text-align: left; padding: 0 2px; }
 
-/* 工房：加大百寶箱 */
+/* 工房：百寶箱維持加大 */
 .dojo-section { grid-column: span 2; background: linear-gradient(135deg, #8FB9A8 0%, #769f8f 100%); color: white; padding: 20px; border-radius: 20px; margin-top: 15px; }
-.dojo-title { display: flex; align-items: center; margin-bottom: 15px; }
-.dojo-title img { width: 48px; height: 48px; margin-right: 12px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2)); }
+.dojo-title { display: flex; align-items: center; margin-bottom: 12px; }
+.dojo-title img { width: 45px; height: 45px; margin-right: 12px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2)); }
 .card-mini { background: white; border-radius: 12px; padding: 10px; margin-bottom: 10px; color: var(--text); border: 1px solid #f0ebe4; }
 
 /* 影片播放鈕：極小 */
 .video-link-box { position: relative; display: block; margin: 6px 0; border-radius: 8px; overflow: hidden; background: #000; }
 .video-link-box img { width: 100%; display: block; opacity: 0.8; }
 .play-btn-overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: flex; align-items: center; justify-content: center; }
-.play-circle { width: 26px; height: 26px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+.play-circle { width: 24px; height: 24px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
 .play-triangle { width: 0; height: 0; border-style: solid; border-width: 4px 0 4px 7px; border-color: transparent transparent transparent white; margin-left: 2px; }
 
-/* 按鈕樣式 */
-.btn-link { display: inline-block; padding: 4px 12px; border-radius: 20px; text-decoration: none; font-weight: bold; font-size: 0.68rem; margin: 4px 0; }
+/* 按鈕窄化修正：文字一排 */
+.btn-link { 
+    display: inline-block; 
+    padding: 4px 10px; /* 縮減左右間距 */
+    border-radius: 20px; 
+    text-decoration: none; 
+    font-weight: bold; 
+    font-size: 0.65rem; /* 微調字體大小 */
+    margin: 4px 0; 
+    white-space: nowrap; /* 強制不換行 */
+    max-width: fit-content;
+}
 .btn-tool { background: #4A90E2; color: white; }
 .btn-good { background: var(--primary); color: white; }
 
-.install-card { background: #FFF; border: 1px dashed var(--primary); border-radius: 15px; padding: 18px; margin: 30px 0; text-align: center; }
+.status-text { display: inline-block; color: #999; font-size: 0.6rem; margin: 2px 0; font-weight: bold; padding-left: 6px; border-left: 2px solid #EEE; }
 footer { text-align: center; padding: 35px 20px; font-size: 0.75rem; color: #999; }
 h2 { color: var(--text); border-left: 5px solid var(--primary); padding-left: 8px; margin-top: 25px; font-size: 1rem; }
 </style>
 </head>
 <body>
-<div id="pullIndicator">✨ 鬆開即可更新最新展訊 ✨</div>
+<div id="pullIndicator">✨ 鬆開即可刷新館藏 ✨</div>
 
 <div class="header">
-    <h1 style="margin:0; font-size: 1.4rem;">天使笑長 Angel</h1>
-    <div style="font-size: 0.75rem; color: var(--primary); font-weight: bold;">幸福教養概念館</div>
+    <h1 style="margin:0; font-size: 1.3rem;">天使笑長 Angel</h1>
+    <div style="font-size: 0.7rem; color: var(--primary); font-weight: bold;">幸福教養概念館</div>
 </div>
-<img src="assets/home.webp" class="hero-img">
 
 <div class="container">
     <div class="news-bar">
         <div><span class="news-tag">館內動態</span></div>
-        <div id="latest-news" style="font-weight: bold; font-size: 0.85rem;">📌 載入館藏中...</div>
+        <div id="latest-news" style="font-weight: bold; font-size: 0.85rem;">📌 正在準備好料...</div>
     </div>
 
-    <h2>🌿 概念館精神</h2>
-    <div class="spirit-section">
-        <a href="story_detail.html" style="background:#96B9AD; color:white; padding:12px; display:block; border-radius:40px; text-decoration:none; margin-bottom:12px; font-weight:bold; font-size:0.9rem;">📖 館藏：教養幸福經</a>
-        <a href="https://www.youtube.com/@%E5%A4%A9%E4%BD%BF%E7%AC%91%E9%95%B7" target="_blank" style="background:#EE3E2B; color:white; padding:12px; display:block; border-radius:40px; text-decoration:none; font-weight:bold; font-size:0.9rem;">🎬 影音導覽</a>
-    </div>
-
-    <h2>👩‍🏫 關於天使館長</h2>
-    <div class="spirit-section">
-        <div class="bio-text">她是退休國小教師，也是學校寶貝的大朋友和家裡的幸福姑；致力推廣幸福教養，讓愛發揮力量。</div>
-    </div>
-
-    <h2>💡 核心展廳</h2>
     <div class="nav-grid">
         <div class="nav-item"><img src="assets/brain.webp"><h3>心腦展廳</h3><div id="content-心腦" class="content-area"></div></div>
         <div class="nav-item"><img src="assets/soul.webp"><h3>心靈會所</h3><div id="content-心靈" class="content-area"></div></div>
@@ -92,17 +85,9 @@ h2 { color: var(--text); border-left: 5px solid var(--primary); padding-left: 8p
         <div class="nav-item"><img src="assets/story.webp"><h3>生命劇場</h3><div id="content-生命" class="content-area"></div></div>
         
         <div class="dojo-section">
-            <div class="dojo-title">
-                <img src="assets/tool.webp" alt="百寶箱">
-                <h3 style="margin:0;">實踐工房</h3>
-            </div>
+            <div class="dojo-title"><img src="assets/tool.webp" alt="百寶箱"><h3 style="margin:0;">實踐工房</h3></div>
             <div id="dojo-groups" class="content-area" style="max-height:450px;"></div>
         </div>
-    </div>
-
-    <div class="install-card">
-        <div style="font-weight: bold; color: var(--primary);">收藏概念館</div>
-        <a href="#" style="display:inline-block; background:var(--primary); color:white; padding:10px 30px; border-radius:40px; text-decoration:none; font-size:0.85rem; font-weight:bold; margin-top:10px;">立即收藏 PWA</a>
     </div>
 </div>
 <footer>© ＜幸福教養概念館＞歡迎您！</footer>
@@ -110,21 +95,25 @@ h2 { color: var(--text); border-left: 5px solid var(--primary); padding-left: 8p
 <script>
 const API_URL = "https://script.google.com/macros/s/AKfycbzeuQFds9g_H5_Wa7CIYSQs5k2KHBdDG45zPNNJF74xPfYU9NkSYXLBSKDZzcCWjaF3OA/exec";
 
-// --- 觸控下拉偵測邏輯 ---
-let touchStart = 0;
-window.addEventListener('touchstart', (e) => { touchStart = e.touches[0].pageY; }, {passive: true});
+// --- 下拉感應強化邏輯 ---
+let startY = 0;
+window.addEventListener('touchstart', (e) => { startY = e.touches[0].pageY; }, {passive: true});
 window.addEventListener('touchmove', (e) => {
-    const touchDiff = e.touches[0].pageY - touchStart;
-    if (window.scrollY === 0 && touchDiff > 50) {
+    const moveY = e.touches[0].pageY;
+    const diff = moveY - startY;
+    if (window.scrollY === 0 && diff > 60) {
         document.body.classList.add('show-tip');
-    } else if (touchDiff < 0) {
+        if (window.navigator.vibrate) window.navigator.vibrate(5); // 微弱震動回饋
+    } else if (diff < 0) {
         document.body.classList.remove('show-tip');
     }
 }, {passive: true});
 window.addEventListener('touchend', () => {
-    if(document.body.classList.contains('show-tip')){
-        setTimeout(() => document.body.classList.remove('show-tip'), 1500);
-        // 此處可觸發資料重載 loadData();
+    if (document.body.classList.contains('show-tip')) {
+        setTimeout(() => {
+            document.body.classList.remove('show-tip');
+            location.reload(); // 真正執行刷新
+        }, 800);
     }
 });
 
@@ -139,8 +128,7 @@ function getYTId(url) {
 
 function extractUrl(text) {
     const urlRegex = /(https?:\/\/[^\s]+)/g;
-    const match = text.match(urlRegex);
-    return match ? match[0] : null;
+    return (text.match(urlRegex) || [])[0] || null;
 }
 
 async function loadData() {
@@ -168,8 +156,7 @@ async function loadData() {
             const toolLink = extractUrl(concept);
             if (toolLink) concept = concept.replace(toolLink, "").trim();
 
-            let isDojoContent = false;
-            let container;
+            let isDojoContent = false, container;
             if (hall.includes("工房") || hall.includes("工具")) {
                 isDojoContent = true;
                 let cat = "其他";
@@ -178,7 +165,7 @@ async function loadData() {
                 if (!container) {
                     container = document.createElement('div');
                     container.id = `group-${cat}`;
-                    container.innerHTML = `<div style="font-size:0.75rem; font-weight:bold; margin:10px 0 5px; color:rgba(255,255,255,0.95); border-bottom:1px dashed rgba(255,255,255,0.3);">${groupsMap[cat]}</div>`;
+                    container.innerHTML = `<div style="font-size:0.7rem; font-weight:bold; margin:8px 0 4px; color:rgba(255,255,255,0.9); border-bottom:1px dashed rgba(255,255,255,0.3);">${groupsMap[cat]}</div>`;
                     document.getElementById('dojo-groups').appendChild(container);
                 }
             } else {
@@ -195,17 +182,16 @@ async function loadData() {
                 const ytId = getYTId(videoLink);
                 if (ytId) {
                     videoHTML = `<a href="https://www.youtube.com/watch?v=${ytId}" target="_blank"><div class="video-link-box"><img src="https://img.youtube.com/vi/${ytId}/mqdefault.jpg"><div class="play-btn-overlay"><div class="play-circle"><div class="play-triangle"></div></div></div></div></a>`;
-                    otherLinkHTML = `<div class="status-text" style="font-size:0.6rem;">🎬 影片</div>`;
+                    otherLinkHTML = `<div class="status-text">🎬 影片</div>`;
                 } else if (videoLink && videoLink.startsWith("http")) {
-                    const label = isDojoContent ? "🚀 取用工具" : "💎 分享";
-                    otherLinkHTML = `<a href="${videoLink}" target="_blank" class="btn-link ${isDojoContent?'btn-tool':'btn-good'}">${label}</a>`;
+                    otherLinkHTML = `<a href="${videoLink}" target="_blank" class="btn-link ${isDojoContent?'btn-tool':'btn-good'}">${isDojoContent?'🚀 取用工具':'💎 分享'}</a>`;
                 }
 
                 if (toolLink) {
                     toolBtnHTML = `<div><a href="${toolLink}" target="_blank" class="btn-link btn-tool">🚀 取用實踐工具</a></div>`;
                 }
 
-                card.innerHTML = `<div style="font-weight:bold; font-size:0.85rem;">${title}</div>${videoHTML}${otherLinkHTML}${toolBtnHTML}<div style="color:#777; font-size:0.75rem; margin-top:4px; line-height:1.4;">${concept}</div>`;
+                card.innerHTML = `<div style="font-weight:bold; font-size:0.85rem; line-height:1.2; margin-bottom:4px;">${title}</div>${videoHTML}${otherLinkHTML}${toolBtnHTML}<div style="color:#777; font-size:0.75rem; margin-top:3px; line-height:1.3;">${concept}</div>`;
                 container.appendChild(card);
             }
         });
