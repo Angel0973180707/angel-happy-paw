@@ -22,12 +22,12 @@ body.show-tip #pullIndicator { transform: translateY(0); }
 .news-bar { 
     margin: 8px 0; background: #FFF; border-radius: 12px; padding: 10px; 
     border-left: 5px solid var(--primary); box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    display: flex; align-items: center; 
-    min-height: 1.5rem; /* 最小高度 */
-    height: auto;       /* 讓高度隨內容自動撐開 */
+    display: flex; align-items: flex-start; /* 改為頂部對齊以利換行 */
+    min-height: 1.5rem; 
+    height: auto;       
     overflow: hidden;
 }
-.news-tag { background: var(--primary); color: white; font-size: 0.6rem; padding: 1px 5px; border-radius: 4px; font-weight: bold; margin-right: 8px; flex-shrink: 0; }
+.news-tag { background: var(--primary); color: white; font-size: 0.6rem; padding: 1px 5px; border-radius: 4px; font-weight: bold; margin-right: 8px; flex-shrink: 0; margin-top: 2px; }
 #latest-news { flex: 1; position: relative; min-height: 1.5rem; }
 .news-item { 
     position: absolute; width: 100%; font-size: 0.85rem; font-weight: bold;
@@ -36,10 +36,11 @@ body.show-tip #pullIndicator { transform: translateY(0); }
     -webkit-line-clamp: 2;    /* 最多顯示兩行 */
     -webkit-box-orient: vertical;
     overflow: hidden; 
-    transform: translateY(100%); opacity: 0; transition: all 0.5s ease-in-out;
+    transform: translateY(20px); opacity: 0; transition: all 0.8s ease-in-out;
 }
-.news-item.active { transform: translateY(0); opacity: 1; position: relative; } /* active 時改為 relative 以撐開高度 */
-.news-item.exit { transform: translateY(-100%); opacity: 0; position: absolute; }
+/* Active 狀態改為 relative 以撐開外框高度 */
+.news-item.active { transform: translateY(0); opacity: 1; position: relative; } 
+.news-item.exit { transform: translateY(-20px); opacity: 0; position: absolute; }
 
 /* 展廳與介紹區 */
 .spirit-section { background: white; border-radius: 15px; padding: 12px; margin-bottom: 15px; box-shadow: 0 3px 10px rgba(0,0,0,0.05); text-align: center; }
@@ -137,12 +138,11 @@ function startNewsRotation() {
     if (newsList.length <= 1) return;
     let currentIndex = 0;
     setInterval(() => {
-        const items = container.querySelectorAll('.news-item');
-        if (items[0]) {
-            items[0].classList.add('exit');
-            items[0].classList.remove('active');
-            // 動畫結束後移除舊元素
-            setTimeout(() => { if(items[0]) items[0].remove(); }, 500);
+        const currentItem = container.querySelector('.news-item.active');
+        if (currentItem) {
+            currentItem.classList.add('exit');
+            currentItem.classList.remove('active');
+            setTimeout(() => { if(currentItem) currentItem.remove(); }, 800);
         }
         
         currentIndex = (currentIndex + 1) % newsList.length;
@@ -153,7 +153,7 @@ function startNewsRotation() {
             newItem.innerHTML = `📌 ${newsList[currentIndex]}`;
             container.appendChild(newItem);
         }, 100);
-    }, 4500);
+    }, 6000); // 這裡已修改為 6 秒
 }
 
 // 下拉刷新
