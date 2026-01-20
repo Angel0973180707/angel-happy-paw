@@ -1,4 +1,4 @@
-const CACHE_NAME = 'angel-pwa-v6';
+const CACHE_NAME = 'angel-pwa-v8';
 const ASSETS = [
   'index.html',
   'assets/home.webp',
