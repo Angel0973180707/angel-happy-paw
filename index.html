@@ -12,9 +12,10 @@
 :root { --primary: #8FB9A8; --primary-dark: #6e9485; --bg: #FFF5EE; --text: #5D4037; --accent: #EE3E2B; }
 body { font-family: 'PingFang TC', sans-serif; background-color: var(--bg); margin: 0; color: var(--text); line-height: 1.4; -webkit-text-size-adjust: none; }
 
-#pullIndicator { 
+/* 下拉更新感應 */
+#pullIndicator {
     position: fixed; top: 0; left: 0; right: 0;
-    text-align: center; font-size: 0.85rem; color: white; background: var(--primary-dark); 
+    text-align: center; font-size: 0.85rem; color: white; background: var(--primary-dark);
     padding: 12px 0; z-index: 10000; transform: translateY(-100%); transition: transform 0.2s ease-out;
     font-weight: bold; pointer-events: none; box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
@@ -24,42 +25,60 @@ body.show-tip #pullIndicator { transform: translateY(0); }
 .hero-img { width: 100%; max-width: 1200px; display: block; margin: 0 auto; border-radius: 0 0 20px 20px; }
 .container { padding: 10px; max-width: 800px; margin: 0 auto; }
 
-.news-bar { margin: 8px 0; background: #FFF; border-radius: 12px; padding: 10px; border-left: 5px solid var(--primary); box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
-.news-tag { background: var(--primary); color: white; font-size: 0.6rem; padding: 1px 5px; border-radius: 4px; font-weight: bold; margin-right: 5px; }
+/* --- 館內動態：優化多則輪播樣式 --- */
+.news-bar { 
+    margin: 8px 0; background: #FFF; border-radius: 12px; padding: 10px; 
+    border-left: 5px solid var(--primary); box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    display: flex; align-items: center; height: 1.2rem; overflow: hidden;
+}
+.news-tag { background: var(--primary); color: white; font-size: 0.6rem; padding: 1px 5px; border-radius: 4px; font-weight: bold; margin-right: 8px; flex-shrink: 0; }
+#latest-news { flex: 1; position: relative; height: 1.2rem; }
+.news-item { 
+    position: absolute; width: 100%; font-size: 0.85rem; font-weight: bold;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    transform: translateY(100%); opacity: 0; transition: all 0.5s ease-in-out;
+}
+.news-item.active { transform: translateY(0); opacity: 1; }
+.news-item.exit { transform: translateY(-100%); opacity: 0; }
 
+/* 介紹區塊 */
 .spirit-section { background: white; border-radius: 15px; padding: 12px; margin-bottom: 15px; box-shadow: 0 3px 10px rgba(0,0,0,0.05); text-align: center; }
 .bio-text { text-align: left; font-size: 0.85rem; line-height: 1.6; color: var(--text); padding: 0 5px; }
 
+/* 展廳：局部捲動 */
 .nav-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 10px; }
 .nav-item { background: white; border-radius: 18px; padding: 15px 8px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.04); display: flex; flex-direction: column; }
-.nav-item img { width: 85%; border-radius: 12px; margin: 0 auto 8px; } /* 展廳圖示維持大尺寸 */
+.nav-item img { width: 85%; border-radius: 12px; margin: 0 auto 8px; }
 .nav-item h3 { font-size: 1rem; margin: 5px 0; }
-
 .content-area { flex: 1; max-height: 240px; overflow-y: auto; text-align: left; padding: 0 3px; }
 .content-area::-webkit-scrollbar { width: 2px; }
 
+/* 工房：加大百寶箱 */
 .dojo-section { grid-column: span 2; background: linear-gradient(135deg, #8FB9A8 0%, #769f8f 100%); color: white; padding: 20px; border-radius: 20px; margin-top: 10px; }
 .dojo-title { display: flex; align-items: center; margin-bottom: 12px; }
 .dojo-title img { width: 48px; height: 48px; margin-right: 12px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2)); }
 .card-mini { background: white; border-radius: 12px; padding: 10px; margin-bottom: 10px; color: var(--text); border: 1px solid #f0ebe4; }
 
+/* 影片播放鈕：維持極致縮小到 20px */
 .video-link-box { position: relative; display: block; margin: 6px 0; border-radius: 8px; overflow: hidden; background: #000; }
 .video-link-box img { width: 100%; display: block; opacity: 0.85; }
 .play-btn-overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: flex; align-items: center; justify-content: center; }
 .play-circle { width: 20px; height: 20px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+.play-triangle { width: 0; height: 0; border-style: solid; border-width: 3.5px 0 3.5px 6px; border-color: transparent transparent transparent white; margin-left: 1.5px; }
 
-.btn-link { display: inline-block; padding: 4px 10px; border-radius: 20px; text-decoration: none; font-weight: bold; font-size: 0.65rem; margin: 4px 0; white-space: nowrap; }
+/* 按鈕窄化 */
+.btn-link { display: inline-block; padding: 4px 10px; border-radius: 20px; text-decoration: none; font-weight: bold; font-size: 0.65rem; margin: 3px 0; white-space: nowrap; }
 .btn-tool { background: #4A90E2; color: white; }
 .btn-good { background: var(--primary); color: white; }
-
 .status-text { display: inline-block; color: #999; font-size: 0.6rem; margin: 2px 0; font-weight: bold; padding-left: 5px; border-left: 2px solid #EEE; }
-.install-card { background: #FFF; border: 1px dashed var(--primary); border-radius: 15px; padding: 18px; margin: 30px 0; text-align: center; }
 
+.install-card { background: #FFF; border: 1px dashed var(--primary); border-radius: 15px; padding: 18px; margin: 30px 0; text-align: center; }
 footer { text-align: center; padding: 30px 20px; font-size: 0.75rem; color: #999; }
 h2 { color: var(--text); border-left: 5px solid var(--primary); padding-left: 8px; margin: 20px 0 10px; font-size: 1rem; }
 </style>
 </head>
 <body>
+
 <div id="pullIndicator">✨ 鬆開即可刷新館藏 ✨</div>
 
 <div class="header">
@@ -70,8 +89,10 @@ h2 { color: var(--text); border-left: 5px solid var(--primary); padding-left: 8p
 
 <div class="container">
     <div class="news-bar">
-        <div><span class="news-tag">館內動態</span></div>
-        <div id="latest-news" style="font-weight: bold; font-size: 0.85rem;">📌 同步雲端館藏中...</div>
+        <span class="news-tag">館內動態</span>
+        <div id="latest-news">
+            <div class="news-item active">📌 載入最新內容中...</div>
+        </div>
     </div>
 
     <h2>🌿 概念館精神</h2>
@@ -82,7 +103,9 @@ h2 { color: var(--text); border-left: 5px solid var(--primary); padding-left: 8p
 
     <h2>👩‍🏫 關於天使館長</h2>
     <div class="spirit-section">
-        <div class="bio-text">她是退休國小教師，也是學校寶貝的大朋友和家裡的幸福姑；更是<b>家長的正能量女神。結合心腦科學實踐，讓愛發揮力量</b>，致力推廣幸福教養。</div>
+        <div class="bio-text">
+            她是退休國小教師，也是學校寶貝的大朋友和家裡的幸福姑；更是<b>家長的正能量女神。結合心腦科學實踐，讓愛發揮力量</b>，致力推廣幸福教養。
+        </div>
     </div>
 
     <h2>💡 核心展廳</h2>
@@ -97,11 +120,12 @@ h2 { color: var(--text); border-left: 5px solid var(--primary); padding-left: 8p
         </div>
     </div>
 
-    <div class="install-card" id="installArea">
-        <div style="font-weight: bold; color: var(--primary); font-size: 0.95rem;">收藏概念館</div>
+    <div class="install-card">
+        <div style="font-weight: bold; color: var(--primary); font-size: 0.95rem;">讓幸福教養與您隨行</div>
         <button id="installBtn" style="display:inline-block; background:var(--primary); color:white; padding:10px 30px; border-radius:40px; border:none; font-size:0.85rem; font-weight:bold; margin-top:10px; cursor:pointer;">立即收藏到桌面</button>
     </div>
 </div>
+
 <footer>© ＜幸福教養概念館＞歡迎您！</footer>
 
 <script>
@@ -110,36 +134,42 @@ if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('sw.js');
 }
 
-// 處理安裝按鈕邏輯
-let deferredPrompt;
-window.addEventListener('beforeinstallprompt', (e) => {
-    e.preventDefault();
-    deferredPrompt = e;
-    document.getElementById('installArea').style.display = 'block';
-});
-
-document.getElementById('installBtn').addEventListener('click', async () => {
-    if (deferredPrompt) {
-        deferredPrompt.prompt();
-        const { outcome } = await deferredPrompt.userChoice;
-        if (outcome === 'accepted') deferredPrompt = null;
-    } else {
-        alert('請點擊瀏覽器選單中的「新增至主螢幕」來收藏館藏喔！');
-    }
-});
-
 const API_URL = "https://script.google.com/macros/s/AKfycbzeuQFds9g_H5_Wa7CIYSQs5k2KHBdDG45zPNNJF74xPfYU9NkSYXLBSKDZzcCWjaF3OA/exec";
+let newsList = [];
 
-// 下拉刷新
+// --- 館內動態輪播邏輯 ---
+function startNewsRotation() {
+    const container = document.getElementById('latest-news');
+    if (newsList.length <= 1) return;
+    let currentIndex = 0;
+    setInterval(() => {
+        const currentItem = container.querySelector('.news-item');
+        currentItem.classList.add('exit');
+        currentItem.classList.remove('active');
+        
+        currentIndex = (currentIndex + 1) % newsList.length;
+        
+        setTimeout(() => {
+            container.innerHTML = `<div class="news-item active">📌 ${newsList[currentIndex]}</div>`;
+        }, 500);
+    }, 4000);
+}
+
+// --- 下拉刷新邏輯 ---
 let startY = 0;
 window.addEventListener('touchstart', (e) => { startY = e.touches[0].pageY; }, {passive: true});
 window.addEventListener('touchmove', (e) => {
     const moveY = e.touches[0].pageY;
-    if (window.scrollY === 0 && (moveY - startY) > 65) document.body.classList.add('show-tip');
-    else if ((moveY - startY) < 0) document.body.classList.remove('show-tip');
+    if (window.scrollY === 0 && (moveY - startY) > 65) {
+        document.body.classList.add('show-tip');
+    } else if ((moveY - startY) < 0) {
+        document.body.classList.remove('show-tip');
+    }
 }, {passive: true});
 window.addEventListener('touchend', () => {
-    if (document.body.classList.contains('show-tip')) setTimeout(() => location.reload(), 800);
+    if (document.body.classList.contains('show-tip')) {
+        setTimeout(() => location.reload(), 800);
+    }
 });
 
 function getYTId(url) {
@@ -173,8 +203,9 @@ async function loadData() {
             let concept = String(row["核心理念"] || "").trim();
             const videoLink = String(row["影音連結"] || "").trim();
 
+            // 收集多則動態
             if (hall.includes("最新") || hall.includes("動態")) {
-                document.getElementById('latest-news').innerText = `📌 ${title}`;
+                newsList.push(title);
                 return;
             }
 
@@ -205,19 +236,43 @@ async function loadData() {
                 let videoHTML = "", toolBtnHTML = "", otherLinkHTML = "";
                 const ytId = getYTId(videoLink);
                 if (ytId) {
-                    videoHTML = `<a href="https://www.youtube.com/watch?v=${ytId}" target="_blank"><div class="video-link-box"><img src="https://img.youtube.com/vi/${ytId}/mqdefault.jpg"><div class="play-btn-overlay"><div class="play-circle"><div style="width:0;height:0;border-style:solid;border-width:3.5px 0 3.5px 6px;border-color:transparent transparent transparent white;margin-left:1.5px;"></div></div></div></div></a>`;
+                    videoHTML = `<a href="https://www.youtube.com/watch?v=${ytId}" target="_blank"><div class="video-link-box"><img src="https://img.youtube.com/vi/${ytId}/mqdefault.jpg"><div class="play-btn-overlay"><div class="play-circle"><div class="play-triangle"></div></div></div></div></a>`;
                     otherLinkHTML = `<div class="status-text">🎬 影片</div>`;
                 } else if (videoLink && videoLink.startsWith("http")) {
                     otherLinkHTML = `<a href="${videoLink}" target="_blank" class="btn-link ${isDojoContent?'btn-tool':'btn-good'}">${isDojoContent?'🚀 取用工具':'💎 分享'}</a>`;
                 }
-                if (toolLink) toolBtnHTML = `<div><a href="${toolLink}" target="_blank" class="btn-link btn-tool">🚀 取用實踐工具</a></div>`;
-
+                if (toolLink) {
+                    toolBtnHTML = `<div><a href="${toolLink}" target="_blank" class="btn-link btn-tool">🚀 取用實踐工具</a></div>`;
+                }
                 card.innerHTML = `<div style="font-weight:bold; font-size:0.85rem; line-height:1.2; margin-bottom:4px;">${title}</div>${videoHTML}${otherLinkHTML}${toolBtnHTML}<div style="color:#777; font-size:0.75rem; margin-top:4px; line-height:1.4;">${concept}</div>`;
                 container.appendChild(card);
             }
         });
+
+        // 啟動動態輪播
+        if (newsList.length > 0) {
+            document.getElementById('latest-news').innerHTML = `<div class="news-item active">📌 ${newsList[0]}</div>`;
+            startNewsRotation();
+        }
     } catch (e) { console.error(e); }
 }
+
+// 安裝按鈕邏輯
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+});
+document.getElementById('installBtn').addEventListener('click', async () => {
+    if (deferredPrompt) {
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        if (outcome === 'accepted') deferredPrompt = null;
+    } else {
+        alert('請點擊瀏覽器選單中的「新增至主螢幕」來收藏館藏喔！');
+    }
+});
+
 loadData();
 </script>
 </body>
