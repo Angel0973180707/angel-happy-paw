@@ -18,59 +18,54 @@ body.show-tip #pullIndicator { transform: translateY(0); }
 .hero-img { width: 100%; max-width: 1200px; display: block; margin: 0 auto; border-radius: 0 0 20px 20px; }
 .container { padding: 10px; max-width: 800px; margin: 0 auto; }
 
-/* 館內動態：修正滾動與換行斷字 */
+/* 館內動態：優化換行與滾動 */
 .news-bar { 
     margin: 8px 0; background: #FFF; border-radius: 12px; padding: 10px; 
     border-left: 5px solid var(--primary); box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    display: flex; align-items: flex-start; /* 改為頂部對齊以利換行 */
-    min-height: 1.5rem; 
-    height: auto;       
-    overflow: hidden;
+    display: flex; align-items: flex-start;
+    min-height: 1.5rem; height: auto; overflow: hidden;
 }
 .news-tag { background: var(--primary); color: white; font-size: 0.6rem; padding: 1px 5px; border-radius: 4px; font-weight: bold; margin-right: 8px; flex-shrink: 0; margin-top: 2px; }
 #latest-news { flex: 1; position: relative; min-height: 1.5rem; }
 .news-item { 
     position: absolute; width: 100%; font-size: 0.85rem; font-weight: bold;
-    white-space: normal;      /* 允許換行 */
-    display: -webkit-box;
-    -webkit-line-clamp: 2;    /* 最多顯示兩行 */
-    -webkit-box-orient: vertical;
-    overflow: hidden; 
-    transform: translateY(20px); opacity: 0; transition: all 0.8s ease-in-out;
+    white-space: normal; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+    overflow: hidden; transform: translateY(20px); opacity: 0; transition: all 0.8s ease-in-out;
 }
-/* Active 狀態改為 relative 以撐開外框高度 */
 .news-item.active { transform: translateY(0); opacity: 1; position: relative; } 
 .news-item.exit { transform: translateY(-20px); opacity: 0; position: absolute; }
 
-/* 展廳與介紹區 */
+/* 協作倉庫按鈕區 */
+.repo-filter-box { display: flex; gap: 8px; overflow-x: auto; padding: 5px 0 15px; scrollbar-width: none; }
+.repo-filter-box::-webkit-scrollbar { display: none; }
+.filter-btn { flex-shrink: 0; padding: 6px 15px; border-radius: 20px; background: white; border: 1px solid var(--primary); color: var(--primary); font-size: 0.8rem; font-weight: bold; cursor: pointer; transition: 0.3s; }
+.filter-btn.active { background: var(--primary); color: white; }
+
+/* 展廳與內容 */
 .spirit-section { background: white; border-radius: 15px; padding: 12px; margin-bottom: 15px; box-shadow: 0 3px 10px rgba(0,0,0,0.05); text-align: center; }
 .bio-text { text-align: left; font-size: 0.85rem; line-height: 1.6; color: var(--text); padding: 0 5px; }
 .nav-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 10px; }
 .nav-item { background: white; border-radius: 18px; padding: 15px 8px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.04); display: flex; flex-direction: column; }
 .nav-item img { width: 85%; border-radius: 12px; margin: 0 auto 8px; }
 .nav-item h3 { font-size: 1rem; margin: 5px 0; }
-.content-area { flex: 1; max-height: 240px; overflow-y: auto; text-align: left; padding: 0 3px; }
+.content-area { flex: 1; max-height: 240px; overflow-y: auto; text-align: left; padding: 0 3px; transition: opacity 0.3s; }
 .content-area::-webkit-scrollbar { width: 2px; }
 
 /* 工房 */
 .dojo-section { grid-column: span 2; background: linear-gradient(135deg, #8FB9A8 0%, #769f8f 100%); color: white; padding: 20px; border-radius: 20px; margin-top: 10px; }
 .dojo-title { display: flex; align-items: center; margin-bottom: 12px; }
 .dojo-title img { width: 48px; height: 48px; margin-right: 12px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2)); }
-.card-mini { background: white; border-radius: 12px; padding: 10px; margin-bottom: 10px; color: var(--text); border: 1px solid #f0ebe4; }
+.card-mini { background: white; border-radius: 12px; padding: 10px; margin-bottom: 10px; color: var(--text); border: 1px solid #f0ebe4; transition: transform 0.2s; }
 
-/* 影片播放鈕 20px */
+/* 影片播放鈕 */
 .video-link-box { position: relative; display: block; margin: 6px 0; border-radius: 8px; overflow: hidden; background: #000; }
 .video-link-box img { width: 100%; display: block; opacity: 0.85; }
 .play-btn-overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: flex; align-items: center; justify-content: center; }
 .play-circle { width: 20px; height: 20px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
 .play-triangle { width: 0; height: 0; border-style: solid; border-width: 3.5px 0 3.5px 6px; border-color: transparent transparent transparent white; margin-left: 1.5px; }
 
-/* 按鈕窄化 */
 .btn-link { display: inline-block; padding: 4px 10px; border-radius: 20px; text-decoration: none; font-weight: bold; font-size: 0.65rem; margin: 3px 0; white-space: nowrap; }
 .btn-tool { background: #4A90E2; color: white; }
-.btn-good { background: var(--primary); color: white; }
-.status-text { display: inline-block; color: #999; font-size: 0.6rem; margin: 2px 0; font-weight: bold; padding-left: 5px; border-left: 2px solid #EEE; }
-
 .install-card { background: #FFF; border: 1px dashed var(--primary); border-radius: 15px; padding: 18px; margin: 30px 0; text-align: center; }
 footer { text-align: center; padding: 30px 20px; font-size: 0.75rem; color: #999; }
 h2 { color: var(--text); border-left: 5px solid var(--primary); padding-left: 8px; margin: 20px 0 10px; font-size: 1rem; }
@@ -107,6 +102,11 @@ h2 { color: var(--text); border-left: 5px solid var(--primary); padding-left: 8p
         </div>
     </div>
 
+    <h2>📦 協作倉庫 (快速標籤篩選)</h2>
+    <div class="repo-filter-box" id="filter-container">
+        <button class="filter-btn active" onclick="filterContent('全部')">全部展示</button>
+        </div>
+
     <h2>💡 核心展廳</h2>
     <div class="nav-grid">
         <div class="nav-item"><img src="assets/brain.webp"><h3>心腦展廳</h3><div id="content-心腦" class="content-area"></div></div>
@@ -132,6 +132,7 @@ if ('serviceWorker' in navigator) { navigator.serviceWorker.register('sw.js'); }
 
 const API_URL = "https://script.google.com/macros/s/AKfycbzeuQFds9g_H5_Wa7CIYSQs5k2KHBdDG45zPNNJF74xPfYU9NkSYXLBSKDZzcCWjaF3OA/exec";
 let newsList = [];
+let allData = [];
 
 function startNewsRotation() {
     const container = document.getElementById('latest-news');
@@ -144,27 +145,15 @@ function startNewsRotation() {
             currentItem.classList.remove('active');
             setTimeout(() => { if(currentItem) currentItem.remove(); }, 800);
         }
-        
         currentIndex = (currentIndex + 1) % newsList.length;
-        
         setTimeout(() => {
             const newItem = document.createElement('div');
             newItem.className = 'news-item active';
             newItem.innerHTML = `📌 ${newsList[currentIndex]}`;
             container.appendChild(newItem);
         }, 100);
-    }, 6000); // 這裡已修改為 6 秒
+    }, 6000);
 }
-
-// 下拉刷新
-let startY = 0;
-window.addEventListener('touchstart', (e) => { startY = e.touches[0].pageY; }, {passive: true});
-window.addEventListener('touchmove', (e) => {
-    const moveY = e.touches[0].pageY;
-    if (window.scrollY === 0 && (moveY - startY) > 65) document.body.classList.add('show-tip');
-    else if ((moveY - startY) < 0) document.body.classList.remove('show-tip');
-}, {passive: true});
-window.addEventListener('touchend', () => { if (document.body.classList.contains('show-tip')) setTimeout(() => location.reload(), 800); });
 
 function getYTId(url) {
     if (!url) return null;
@@ -180,65 +169,125 @@ function extractUrl(text) { const urlRegex = /(https?:\/\/[^\s]+)/g; return (tex
 async function loadData() {
     try {
         const res = await fetch(API_URL);
-        const data = await res.json();
-        const groupsMap = { "緊急": "🆘 緊急區", "心靈": "🧘 心靈區", "檢測": "🔍 觀察區", "教養": "📚 教養區", "其他": "💡 其他" };
-
-        data.forEach(item => {
-            let row = {};
-            Object.keys(item).forEach(k => { row[k.trim()] = item[k]; });
-            const status = String(row["發布狀態"] || row["發佈狀態"] || "");
-            if (!status.includes("上架") && !status.includes("發佈")) return;
-
-            const hall = String(row["展示廳"] || "").trim();
-            const title = String(row["標題"] || "").trim();
-            let concept = String(row["核心理念"] || "").trim();
-            const videoLink = String(row["影音連結"] || "").trim();
-
-            if (hall.includes("最新") || hall.includes("動態")) {
-                newsList.push(title);
-                return;
-            }
-
-            const toolLink = extractUrl(concept);
-            if (toolLink) concept = concept.replace(toolLink, "").trim();
-
-            let isDojoContent = false, container;
-            if (hall.includes("工房") || hall.includes("工具")) {
-                isDojoContent = true;
-                let cat = "其他";
-                for (let k in groupsMap) { if ((title+concept).includes(k)) cat = k; }
-                container = document.getElementById(`group-${cat}`);
-                if (!container) {
-                    container = document.createElement('div');
-                    container.id = `group-${cat}`;
-                    container.innerHTML = `<div style="font-size:0.75rem; font-weight:bold; margin:10px 0 5px; color:rgba(255,255,255,0.95); border-bottom:1px dashed rgba(255,255,255,0.3);">${groupsMap[cat]}</div>`;
-                    document.getElementById('dojo-groups').appendChild(container);
+        allData = await res.json();
+        
+        // 提取所有動態並清理資料標籤
+        const tags = new Set();
+        allData.forEach(item => {
+            const hall = String(item["展示廳"] || "").trim();
+            const title = String(item["標題"] || "").trim();
+            const status = String(item["發布狀態"] || item["發佈狀態"] || "");
+            
+            if (status.includes("上架") || status.includes("發佈")) {
+                if (hall.includes("最新") || hall.includes("動態")) {
+                    newsList.push(title);
+                } else {
+                    // 根據標題或內容關鍵字自動分類標籤 (協作倉庫用)
+                    if (title.includes("情緒")) tags.add("情緒調節");
+                    if (title.includes("溝通")) tags.add("溝通技巧");
+                    if (title.includes("學習")) tags.add("學習成長");
+                    if (hall.includes("工具") || hall.includes("工房")) tags.add("實踐工具");
                 }
-            } else {
-                const targets = ["心腦", "心靈", "關係", "生命"];
-                let found = targets.find(t => hall.includes(t));
-                if (found) container = document.getElementById(`content-${found}`);
             }
+        });
 
-            if (container) {
-                const card = document.createElement('div');
-                card.className = 'card-mini';
-                const ytId = getYTId(videoLink);
-                let videoHTML = ytId ? `<a href="https://www.youtube.com/watch?v=${ytId}" target="_blank"><div class="video-link-box"><img src="https://img.youtube.com/vi/${ytId}/mqdefault.jpg"><div class="play-btn-overlay"><div class="play-circle"><div class="play-triangle"></div></div></div></div></a>` : "";
-                let toolBtnHTML = toolLink ? `<div><a href="${toolLink}" target="_blank" class="btn-link btn-tool">🚀 取用實踐工具</a></div>` : "";
-                card.innerHTML = `<div style="font-weight:bold; font-size:0.85rem; line-height:1.2; margin-bottom:4px;">${title}</div>${videoHTML}${toolBtnHTML}<div style="color:#777; font-size:0.75rem; margin-top:4px;">${concept}</div>`;
-                container.appendChild(card);
-            }
+        // 產生篩選按鈕
+        const filterBox = document.getElementById('filter-container');
+        tags.forEach(tag => {
+            const btn = document.createElement('button');
+            btn.className = 'filter-btn';
+            btn.innerText = tag;
+            btn.onclick = () => filterContent(tag, btn);
+            filterBox.appendChild(btn);
         });
 
         if (newsList.length > 0) {
             document.getElementById('latest-news').innerHTML = `<div class="news-item active">📌 ${newsList[0]}</div>`;
             startNewsRotation();
         }
+
+        renderDisplay('全部');
     } catch (e) { console.error(e); }
 }
 
-// 安裝按鈕
+function filterContent(tag, btnElement) {
+    // 樣式切換
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    if(btnElement) btnElement.classList.add('active');
+    else document.querySelector('.filter-btn').classList.add('active');
+
+    renderDisplay(tag);
+}
+
+function renderDisplay(filterTag) {
+    // 清空現有內容
+    const containers = ["心腦", "心靈", "關係", "生命", "dojo-groups"];
+    containers.forEach(id => {
+        const el = document.getElementById(id.includes('dojo') ? id : `content-${id}`);
+        if(el) el.innerHTML = '';
+    });
+
+    const groupsMap = { "緊急": "🆘 緊急區", "心靈": "🧘 心靈區", "檢測": "🔍 觀察區", "教養": "📚 教養區", "其他": "💡 其他" };
+
+    allData.forEach(item => {
+        const status = String(item["發布狀態"] || item["發佈狀態"] || "");
+        if (!status.includes("上架") && !status.includes("發佈")) return;
+
+        const hall = String(item["展示廳"] || "").trim();
+        const title = String(item["標題"] || "").trim();
+        let concept = String(item["核心理念"] || "").trim();
+        const videoLink = String(item["影音連結"] || "").trim();
+
+        if (hall.includes("動態")) return;
+
+        // 篩選邏輯
+        if (filterTag !== '全部') {
+            const contentString = title + concept + hall;
+            if (!contentString.includes(filterTag)) return;
+        }
+
+        const toolLink = extractUrl(concept);
+        if (toolLink) concept = concept.replace(toolLink, "").trim();
+
+        let container;
+        if (hall.includes("工房") || hall.includes("工具")) {
+            let cat = "其他";
+            for (let k in groupsMap) { if ((title+concept).includes(k)) cat = k; }
+            container = document.getElementById(`group-${cat}`);
+            if (!container) {
+                container = document.createElement('div');
+                container.id = `group-${cat}`;
+                container.innerHTML = `<div style="font-size:0.75rem; font-weight:bold; margin:10px 0 5px; color:rgba(255,255,255,0.95); border-bottom:1px dashed rgba(255,255,255,0.3);">${groupsMap[cat]}</div>`;
+                document.getElementById('dojo-groups').appendChild(container);
+            }
+        } else {
+            const targets = ["心腦", "心靈", "關係", "生命"];
+            let found = targets.find(t => hall.includes(t));
+            if (found) container = document.getElementById(`content-${found}`);
+        }
+
+        if (container) {
+            const card = document.createElement('div');
+            card.className = 'card-mini';
+            const ytId = getYTId(videoLink);
+            let videoHTML = ytId ? `<a href="https://www.youtube.com/watch?v=${ytId}" target="_blank"><div class="video-link-box"><img src="https://img.youtube.com/vi/${ytId}/mqdefault.jpg"><div class="play-btn-overlay"><div class="play-circle"><div class="play-triangle"></div></div></div></div></a>` : "";
+            let toolBtnHTML = toolLink ? `<div><a href="${toolLink}" target="_blank" class="btn-link btn-tool">🚀 取用實踐工具</a></div>` : "";
+            card.innerHTML = `<div style="font-weight:bold; font-size:0.85rem; line-height:1.2; margin-bottom:4px;">${title}</div>${videoHTML}${toolBtnHTML}<div style="color:#777; font-size:0.75rem; margin-top:4px;">${concept}</div>`;
+            container.appendChild(card);
+        }
+    });
+}
+
+// 下拉刷新與安裝邏輯保持不變
+let startY = 0;
+window.addEventListener('touchstart', (e) => { startY = e.touches[0].pageY; }, {passive: true});
+window.addEventListener('touchmove', (e) => {
+    const moveY = e.touches[0].pageY;
+    if (window.scrollY === 0 && (moveY - startY) > 65) document.body.classList.add('show-tip');
+    else if ((moveY - startY) < 0) document.body.classList.remove('show-tip');
+}, {passive: true});
+window.addEventListener('touchend', () => { if (document.body.classList.contains('show-tip')) setTimeout(() => location.reload(), 800); });
+
 let deferredPrompt;
 window.addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); deferredPrompt = e; });
 document.getElementById('installBtn').addEventListener('click', async () => {
