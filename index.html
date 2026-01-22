@@ -135,6 +135,7 @@ function startNewsRotation() {
     }, 6000);
 }
 
+// 下拉刷新
 let startY = 0;
 window.addEventListener('touchstart', (e) => { startY = e.touches[0].pageY; }, {passive: true});
 window.addEventListener('touchmove', (e) => {
@@ -148,6 +149,7 @@ window.addEventListener('touchend', () => {
     }
 });
 
+// 自動背景更新
 window.addEventListener('focus', () => { refreshAllData(); });
 setInterval(() => { refreshAllData(); }, 600000);
 
@@ -165,23 +167,21 @@ function getYTId(url) {
     return (id && id.length === 11) ? id : null;
 }
 
+// 強化的 URL 提取邏輯
 function extractUrl(text) { 
+    if (!text) return null;
     const urlRegex = /(https?:\/\/[^\s]+)/g; 
     const match = text.match(urlRegex);
-    return match ? match[0] : null; 
+    return match ? match[0].replace(/[）)]+$/, '').trim() : null; 
 }
 
 async function loadData(isRefresh = false) {
     try {
-        const res = await fetch(API_URL);
+        const res = await fetch(API_URL + "?t=" + new Date().getTime());
         const data = await res.json();
         
         if(isRefresh) {
-            document.getElementById('dojo-groups').innerHTML = '';
-            document.getElementById('content-心腦').innerHTML = '';
-            document.getElementById('content-心靈').innerHTML = '';
-            document.getElementById('content-關係').innerHTML = '';
-            document.getElementById('content-生命').innerHTML = '';
+            document.querySelectorAll('.content-area').forEach(el => el.innerHTML = '');
         }
 
         const groupsMap = { "緊急": "🆘 緊急區", "心靈": "🧘 心靈區", "檢測": "🔍 觀察區", "教養": "📚 教養區", "其他": "💡 其他" };
@@ -202,14 +202,10 @@ async function loadData(isRefresh = false) {
                 return;
             }
 
-            // 提取工具連結
             const toolLink = extractUrl(concept);
-            let displayConcept = concept;
-            if (toolLink) {
-                displayConcept = concept.replace(toolLink, "").trim();
-            }
-
             let container;
+
+            // 工房邏輯
             if (hall.includes("工房") || hall.includes("工具")) {
                 let cat = "其他";
                 for (let k in groupsMap) { if ((title+concept).includes(k)) cat = k; }
@@ -232,10 +228,12 @@ async function loadData(isRefresh = false) {
                 const ytId = getYTId(videoLink);
                 let videoHTML = ytId ? `<a href="https://www.youtube.com/watch?v=${ytId}" target="_blank"><div class="video-link-box"><img src="https://img.youtube.com/vi/${ytId}/mqdefault.jpg"><div class="play-btn-overlay"><div class="play-circle"><div class="play-triangle"></div></div></div></div></a>` : "";
                 
-                // 確保如果有 toolLink，按鈕就會生成
-                let toolBtnHTML = toolLink ? `<div><a href="${toolLink}" target="_blank" class="btn-link btn-tool">🚀 取用實踐工具</a></div>` : "";
+                let toolBtnHTML = "";
+                if (toolLink) {
+                    toolBtnHTML = `<div><a href="${toolLink}" target="_blank" class="btn-link btn-tool" style="display:block; text-align:center; margin-top:8px;">🚀 取用實踐工具</a></div>`;
+                }
                 
-                card.innerHTML = `<div style="font-weight:bold; font-size:0.85rem; line-height:1.2; margin-bottom:4px;">${title}</div>${videoHTML}${toolBtnHTML}<div style="color:#777; font-size:0.75rem; margin-top:4px;">${displayConcept}</div>`;
+                card.innerHTML = `<div style="font-weight:bold; font-size:0.85rem; line-height:1.2; margin-bottom:4px;">${title}</div>${videoHTML}${toolBtnHTML}<div style="color:#777; font-size:0.75rem; margin-top:6px;">${concept.replace(toolLink, '').trim()}</div>`;
                 container.appendChild(card);
             }
         });
