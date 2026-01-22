@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <title>天使笑長 Angel - 幸福教養概念館</title>
-<link rel="manifest" href="manifest.json?v=20260122">
+<link rel="manifest" href="manifest.json?v=20260123">
 <meta name="theme-color" content="#8FB9A8">
 <style>
 :root { --primary: #8FB9A8; --primary-dark: #6e9485; --bg: #FFF5EE; --text: #5D4037; --accent: #EE3E2B; }
@@ -43,8 +43,8 @@ body.show-tip #pullIndicator { transform: translateY(0); }
 .play-circle { width: 20px; height: 20px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
 .play-triangle { width: 0; height: 0; border-style: solid; border-width: 3.5px 0 3.5px 6px; border-color: transparent transparent transparent white; margin-left: 1.5px; }
 /* 按鈕 */
-.btn-link { display: inline-block; padding: 4px 10px; border-radius: 20px; text-decoration: none; font-weight: bold; font-size: 0.65rem; margin: 3px 0; white-space: nowrap; }
-.btn-tool { background: #4A90E2; color: white; }
+.btn-link { display: inline-block; padding: 6px 14px; border-radius: 20px; text-decoration: none; font-weight: bold; font-size: 0.75rem; margin: 5px 0; white-space: nowrap; }
+.btn-tool { background: #4A90E2; color: white; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
 .btn-good { background: var(--primary); color: white; }
 .install-card { background: #FFF; border: 1px dashed var(--primary); border-radius: 15px; padding: 18px; margin: 30px 0; text-align: center; }
 footer { text-align: center; padding: 30px 20px; font-size: 0.75rem; color: #999; }
@@ -102,7 +102,6 @@ if ('serviceWorker' in navigator) {
             const installingWorker = reg.installing;
             installingWorker.onstatechange = () => {
                 if (installingWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                    // 偵測到新版本程式碼，自動刷新
                     window.location.reload();
                 }
             };
@@ -136,7 +135,6 @@ function startNewsRotation() {
     }, 6000);
 }
 
-// 下拉刷新邏輯 (保留原功能)
 let startY = 0;
 window.addEventListener('touchstart', (e) => { startY = e.touches[0].pageY; }, {passive: true});
 window.addEventListener('touchmove', (e) => {
@@ -150,18 +148,10 @@ window.addEventListener('touchend', () => {
     }
 });
 
-// 自動更新補強：當頁面重新獲得焦點時自動重新載入資料
-window.addEventListener('focus', () => {
-    refreshAllData();
-});
-
-// 自動更新補強：每 10 分鐘自動背景靜默更新資料
-setInterval(() => {
-    refreshAllData();
-}, 600000);
+window.addEventListener('focus', () => { refreshAllData(); });
+setInterval(() => { refreshAllData(); }, 600000);
 
 function refreshAllData() {
-    // 重置容器但不閃爍
     newsList = [];
     loadData(true); 
 }
@@ -175,14 +165,17 @@ function getYTId(url) {
     return (id && id.length === 11) ? id : null;
 }
 
-function extractUrl(text) { const urlRegex = /(https?:\/\/[^\s]+)/g; return (text.match(urlRegex) || [])[0] || null; }
+function extractUrl(text) { 
+    const urlRegex = /(https?:\/\/[^\s]+)/g; 
+    const match = text.match(urlRegex);
+    return match ? match[0] : null; 
+}
 
 async function loadData(isRefresh = false) {
     try {
         const res = await fetch(API_URL);
         const data = await res.json();
         
-        // 如果是刷新，先清空現有內容
         if(isRefresh) {
             document.getElementById('dojo-groups').innerHTML = '';
             document.getElementById('content-心腦').innerHTML = '';
@@ -209,8 +202,12 @@ async function loadData(isRefresh = false) {
                 return;
             }
 
+            // 提取工具連結
             const toolLink = extractUrl(concept);
-            if (toolLink) concept = concept.replace(toolLink, "").trim();
+            let displayConcept = concept;
+            if (toolLink) {
+                displayConcept = concept.replace(toolLink, "").trim();
+            }
 
             let container;
             if (hall.includes("工房") || hall.includes("工具")) {
@@ -234,8 +231,11 @@ async function loadData(isRefresh = false) {
                 card.className = 'card-mini';
                 const ytId = getYTId(videoLink);
                 let videoHTML = ytId ? `<a href="https://www.youtube.com/watch?v=${ytId}" target="_blank"><div class="video-link-box"><img src="https://img.youtube.com/vi/${ytId}/mqdefault.jpg"><div class="play-btn-overlay"><div class="play-circle"><div class="play-triangle"></div></div></div></div></a>` : "";
+                
+                // 確保如果有 toolLink，按鈕就會生成
                 let toolBtnHTML = toolLink ? `<div><a href="${toolLink}" target="_blank" class="btn-link btn-tool">🚀 取用實踐工具</a></div>` : "";
-                card.innerHTML = `<div style="font-weight:bold; font-size:0.85rem; line-height:1.2; margin-bottom:4px;">${title}</div>${videoHTML}${toolBtnHTML}<div style="color:#777; font-size:0.75rem; margin-top:4px;">${concept}</div>`;
+                
+                card.innerHTML = `<div style="font-weight:bold; font-size:0.85rem; line-height:1.2; margin-bottom:4px;">${title}</div>${videoHTML}${toolBtnHTML}<div style="color:#777; font-size:0.75rem; margin-top:4px;">${displayConcept}</div>`;
                 container.appendChild(card);
             }
         });
