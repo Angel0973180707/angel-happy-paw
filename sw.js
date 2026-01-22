@@ -1,12 +1,13 @@
 // sw.js - 天使笑長幸福教養概念館專用
-const CACHE_NAME = 'angel-happy-v20260123'; // 更新版號以觸發自動刷新
+// 每次修改 index.html 後，建議同步修改下方的版號 (如 v20260123_v3)
+const CACHE_NAME = 'angel-happy-v20260123_v3'; 
 
-// 1. 安裝階段：強制跳過等待
+// 1. 安裝階段：強制跳過等待，讓新版立刻準備接管
 self.addEventListener('install', (event) => {
     self.skipWaiting();
 });
 
-// 2. 啟動階段：清理舊快取並接管頁面
+// 2. 啟動階段：清理所有舊的快取，確保空間乾淨
 self.addEventListener('activate', (event) => {
     event.waitUntil(
         Promise.all([
@@ -25,16 +26,16 @@ self.addEventListener('activate', (event) => {
     );
 });
 
-// 3. 抓取階段：網路優先 (確保資料永遠是最新的)
+// 3. 抓取階段：網路優先策略
 self.addEventListener('fetch', (event) => {
-    // 關鍵：對 Google 試算表 API 絕不快取，確保工房工具資料即時更新
+    // 絕對不快取 Google Apps Script API 請求
     if (event.request.url.includes('google.com') || event.request.url.includes('macros')) {
-        return; 
+        return; // 直接走網路，不進入快取邏輯
     }
 
     event.respondWith(
         fetch(event.request).catch(() => {
-            // 沒網路時才讀取快取的 HTML 結構
+            // 只有在完全斷網時，才從快取拿舊的頁面結構
             return caches.match(event.request);
         })
     );
