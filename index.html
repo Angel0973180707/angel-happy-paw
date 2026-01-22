@@ -4,25 +4,22 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <title>天使笑長 Angel - 幸福教養概念館</title>
-<link rel="manifest" href="manifest.json?v=20260123">
+<link rel="manifest" href="manifest.json?v=20260123_v2">
 <meta name="theme-color" content="#8FB9A8">
 <style>
 :root { --primary: #8FB9A8; --primary-dark: #6e9485; --bg: #FFF5EE; --text: #5D4037; --accent: #EE3E2B; }
 body { font-family: 'PingFang TC', sans-serif; background-color: var(--bg); margin: 0; color: var(--text); line-height: 1.4; -webkit-text-size-adjust: none; }
-/* 下拉更新 */
 #pullIndicator { position: fixed; top: 0; left: 0; right: 0; text-align: center; font-size: 0.85rem; color: white; background: var(--primary-dark); padding: 12px 0; z-index: 10000; transform: translateY(-100%); transition: transform 0.2s ease-out; font-weight: bold; pointer-events: none; }
 body.show-tip #pullIndicator { transform: translateY(0); }
 .header { background: white; padding: 12px; text-align: center; border-bottom: 1px solid #f0e6dd; }
 .hero-img { width: 100%; max-width: 1200px; display: block; margin: 0 auto; border-radius: 0 0 20px 20px; }
 .container { padding: 10px; max-width: 800px; margin: 0 auto; }
-/* 館內動態 */
 .news-bar { margin: 8px 0; background: #FFF; border-radius: 12px; padding: 10px; border-left: 5px solid var(--primary); box-shadow: 0 2px 8px rgba(0,0,0,0.05); display: flex; align-items: flex-start; min-height: 1.5rem; height: auto; overflow: hidden; }
 .news-tag { background: var(--primary); color: white; font-size: 0.6rem; padding: 1px 5px; border-radius: 4px; font-weight: bold; margin-right: 8px; flex-shrink: 0; margin-top: 2px; }
 #latest-news { flex: 1; position: relative; min-height: 1.5rem; }
 .news-item { position: absolute; width: 100%; font-size: 0.85rem; font-weight: bold; white-space: normal; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; transform: translateY(20px); opacity: 0; transition: all 0.8s ease-in-out; }
 .news-item.active { transform: translateY(0); opacity: 1; position: relative; }
 .news-item.exit { transform: translateY(-20px); opacity: 0; position: absolute; }
-/* 展廳與介紹區 */
 .spirit-section { background: white; border-radius: 15px; padding: 12px; margin-bottom: 15px; box-shadow: 0 3px 10px rgba(0,0,0,0.05); text-align: center; }
 .bio-text { text-align: left; font-size: 0.85rem; line-height: 1.6; color: var(--text); padding: 0 5px; }
 .nav-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 10px; }
@@ -31,21 +28,17 @@ body.show-tip #pullIndicator { transform: translateY(0); }
 .nav-item h3 { font-size: 1rem; margin: 5px 0; }
 .content-area { flex: 1; max-height: 240px; overflow-y: auto; text-align: left; padding: 0 3px; }
 .content-area::-webkit-scrollbar { width: 2px; }
-/* 工房 */
 .dojo-section { grid-column: span 2; background: linear-gradient(135deg, #8FB9A8 0%, #769f8f 100%); color: white; padding: 20px; border-radius: 20px; margin-top: 10px; }
 .dojo-title { display: flex; align-items: center; margin-bottom: 12px; }
 .dojo-title img { width: 48px; height: 48px; margin-right: 12px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2)); }
 .card-mini { background: white; border-radius: 12px; padding: 10px; margin-bottom: 10px; color: var(--text); border: 1px solid #f0ebe4; }
-/* 影片播放鈕 20px */
 .video-link-box { position: relative; display: block; margin: 6px 0; border-radius: 8px; overflow: hidden; background: #000; }
 .video-link-box img { width: 100%; display: block; opacity: 0.85; }
 .play-btn-overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: flex; align-items: center; justify-content: center; }
 .play-circle { width: 20px; height: 20px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
 .play-triangle { width: 0; height: 0; border-style: solid; border-width: 3.5px 0 3.5px 6px; border-color: transparent transparent transparent white; margin-left: 1.5px; }
-/* 按鈕 */
 .btn-link { display: inline-block; padding: 6px 14px; border-radius: 20px; text-decoration: none; font-weight: bold; font-size: 0.75rem; margin: 5px 0; white-space: nowrap; }
 .btn-tool { background: #4A90E2; color: white; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-.btn-good { background: var(--primary); color: white; }
 .install-card { background: #FFF; border: 1px dashed var(--primary); border-radius: 15px; padding: 18px; margin: 30px 0; text-align: center; }
 footer { text-align: center; padding: 30px 20px; font-size: 0.75rem; color: #999; }
 h2 { color: var(--text); border-left: 5px solid var(--primary); padding-left: 8px; margin: 20px 0 10px; font-size: 1rem; }
@@ -70,12 +63,6 @@ h2 { color: var(--text); border-left: 5px solid var(--primary); padding-left: 8p
 <a href="story_detail.html" style="background:#96B9AD; color:white; padding:12px; display:block; border-radius:30px; text-decoration:none; margin-bottom:12px; font-weight:bold; font-size:0.9rem;">📖 館藏：教養幸福經</a>
 <a href="https://www.youtube.com/@%E5%A4%A9%E4%BD%BF%E7%AC%91%E9%95%B7" target="_blank" style="background:#EE3E2B; color:white; padding:12px; display:block; border-radius:30px; text-decoration:none; font-weight:bold; font-size:0.9rem;">🎬 影音導覽</a>
 </div>
-<h2>👩‍🏫 關於天使館長</h2>
-<div class="spirit-section">
-<div class="bio-text">
-小天使是退休國小教師，也是學校寶貝的大朋友和家裡的幸福姑；更是<b>家長的〔正能量女神〕，也是笑口常開的〔笑長〕。致力結合心腦科學實踐，讓愛發揮力量</b>，熱衷推廣幸福教養。期待在youtube影片留言區看到您的想法和實踐小故事。如果您覺得我們的工具好用，影片內容對您有幫助，請點讚、訂閱並分享，給予我們支持鼓勵，把份幸福的力量傳遞給更多家庭，讓我們一起散播歡樂，散播愛！
-</div>
-</div>
 <h2>💡 核心展廳</h2>
 <div class="nav-grid">
 <div class="nav-item"><img src="assets/brain.webp"><h3>心腦展廳</h3><div id="content-心腦" class="content-area"></div></div>
@@ -88,16 +75,14 @@ h2 { color: var(--text); border-left: 5px solid var(--primary); padding-left: 8p
 </div>
 </div>
 <div class="install-card">
-<div style="font-weight: bold; color: var(--primary); font-size: 0.95rem;">讓幸福教養與您隨行</div>
-<button id="installBtn" style="display:inline-block; background:var(--primary); color:white; padding:10px 30px; border-radius:40px; border:none; font-size:0.85rem; font-weight:bold; margin-top:10px; cursor:pointer;">立即收藏到桌面</button>
+<button id="installBtn" style="display:inline-block; background:var(--primary); color:white; padding:10px 30px; border-radius:40px; border:none; font-size:0.85rem; font-weight:bold; cursor:pointer;">立即收藏到桌面</button>
 </div>
 </div>
 <footer>© ＜幸福教養概念館＞歡迎您！</footer>
 
 <script>
-// 1. Service Worker 註冊與自動更新機制
 if ('serviceWorker' in navigator) { 
-    navigator.serviceWorker.register('sw.js').then(reg => {
+    navigator.serviceWorker.register('sw.js?v=20260123_v2').then(reg => {
         reg.onupdatefound = () => {
             const installingWorker = reg.installing;
             installingWorker.onstatechange = () => {
@@ -149,15 +134,6 @@ window.addEventListener('touchend', () => {
     }
 });
 
-// 自動背景更新
-window.addEventListener('focus', () => { refreshAllData(); });
-setInterval(() => { refreshAllData(); }, 600000);
-
-function refreshAllData() {
-    newsList = [];
-    loadData(true); 
-}
-
 function getYTId(url) {
     if (!url) return null;
     let id = "";
@@ -167,7 +143,7 @@ function getYTId(url) {
     return (id && id.length === 11) ? id : null;
 }
 
-// 強化的 URL 提取邏輯
+// 強化 URL 提取
 function extractUrl(text) { 
     if (!text) return null;
     const urlRegex = /(https?:\/\/[^\s]+)/g; 
@@ -177,11 +153,13 @@ function extractUrl(text) {
 
 async function loadData(isRefresh = false) {
     try {
-        const res = await fetch(API_URL + "?t=" + new Date().getTime());
+        // 核心修正：加上隨機字串強制繞過快取
+        const res = await fetch(API_URL + "?cachebust=" + Date.now());
         const data = await res.json();
         
-        if(isRefresh) {
+        if(isRefresh || data) {
             document.querySelectorAll('.content-area').forEach(el => el.innerHTML = '');
+            newsList = [];
         }
 
         const groupsMap = { "緊急": "🆘 緊急區", "心靈": "🧘 心靈區", "檢測": "🔍 觀察區", "教養": "📚 教養區", "其他": "💡 其他" };
@@ -205,7 +183,6 @@ async function loadData(isRefresh = false) {
             const toolLink = extractUrl(concept);
             let container;
 
-            // 工房邏輯
             if (hall.includes("工房") || hall.includes("工具")) {
                 let cat = "其他";
                 for (let k in groupsMap) { if ((title+concept).includes(k)) cat = k; }
@@ -228,12 +205,10 @@ async function loadData(isRefresh = false) {
                 const ytId = getYTId(videoLink);
                 let videoHTML = ytId ? `<a href="https://www.youtube.com/watch?v=${ytId}" target="_blank"><div class="video-link-box"><img src="https://img.youtube.com/vi/${ytId}/mqdefault.jpg"><div class="play-btn-overlay"><div class="play-circle"><div class="play-triangle"></div></div></div></div></a>` : "";
                 
-                let toolBtnHTML = "";
-                if (toolLink) {
-                    toolBtnHTML = `<div><a href="${toolLink}" target="_blank" class="btn-link btn-tool" style="display:block; text-align:center; margin-top:8px;">🚀 取用實踐工具</a></div>`;
-                }
+                // 強制生成按鈕
+                let toolBtnHTML = toolLink ? `<div><a href="${toolLink}" target="_blank" class="btn-link btn-tool" style="display:block; text-align:center;">🚀 取用實踐工具</a></div>` : "";
                 
-                card.innerHTML = `<div style="font-weight:bold; font-size:0.85rem; line-height:1.2; margin-bottom:4px;">${title}</div>${videoHTML}${toolBtnHTML}<div style="color:#777; font-size:0.75rem; margin-top:6px;">${concept.replace(toolLink, '').trim()}</div>`;
+                card.innerHTML = `<div style="font-weight:bold; font-size:0.85rem; line-height:1.2;">${title}</div>${videoHTML}${toolBtnHTML}<div style="color:#777; font-size:0.75rem; margin-top:6px;">${concept.replace(toolLink, '').trim()}</div>`;
                 container.appendChild(card);
             }
         });
@@ -243,18 +218,8 @@ async function loadData(isRefresh = false) {
             newsContainer.innerHTML = `<div class="news-item active">📌 ${newsList[0]}</div>`;
             startNewsRotation();
         }
-    } catch (e) { console.error(e); }
+    } catch (e) { console.error("API Error:", e); }
 }
-
-let deferredPrompt;
-window.addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); deferredPrompt = e; });
-document.getElementById('installBtn').addEventListener('click', async () => {
-    if (deferredPrompt) {
-        deferredPrompt.prompt();
-        const { outcome } = await deferredPrompt.userChoice;
-        if (outcome === 'accepted') deferredPrompt = null;
-    } else { alert('請點擊瀏覽器選單中的「新增至主螢幕」來收藏館藏喔！'); }
-});
 
 loadData();
 </script>
