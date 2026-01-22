@@ -1,5 +1,5 @@
 // sw.js - 天使笑長幸福教養概念館專用
-const CACHE_NAME = 'angel-happy-v20260122'; // 每次發布重大更新時，請修改此版號
+const CACHE_NAME = 'angel-happy-v20260123'; // 每次發布重大更新時，請修改此版號
 
 // 1. 安裝階段：強制跳過等待
 self.addEventListener('install', (event) => {
