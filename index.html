@@ -30,12 +30,13 @@ body.show-tip #pullIndicator { transform: translateY(0); }
 .content-area { flex: 1; max-height: 240px; overflow-y: auto; text-align: left; padding: 0 3px; }
 .content-area::-webkit-scrollbar { width: 2px; }
 
-/* 🌟 幸福智多星：修正斷字與引導語 */
+/* 🌟 幸福智多星：歡樂扭蛋機 + 祝福金句 */
 .mastermind-section { background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%); border-radius: 25px; padding: 20px; margin: 20px 0; box-shadow: 0 8px 20px rgba(255,165,0,0.3); text-align: center; border: 3px solid white; position: relative; overflow: hidden; }
 .mastermind-title { color: white; font-weight: bold; font-size: 1.2rem; margin-bottom: 10px; text-shadow: 0 2px 4px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center; gap: 8px; }
 .gacha-btn { background: white; color: #E67E22; border: none; padding: 12px 25px; border-radius: 30px; font-weight: bold; font-size: 1rem; cursor: pointer; box-shadow: 0 4px 0 #ddd; transition: all 0.1s; display: inline-flex; align-items: center; gap: 8px; }
 .gacha-btn:active { transform: translateY(3px); box-shadow: 0 1px 0 #ddd; }
-#gacha-display { margin-top: 15px; min-height: 20px; color: #5D4037; font-size: 0.95rem; font-weight: bold; background: rgba(255,255,255,0.8); border-radius: 15px; padding: 12px; display: none; word-break: keep-all; overflow-wrap: break-word; line-height: 1.5; }
+#gacha-display { margin-top: 15px; min-height: 20px; color: #5D4037; font-size: 0.95rem; font-weight: bold; background: rgba(255,255,255,0.85); border-radius: 15px; padding: 15px; display: none; word-break: keep-all; overflow-wrap: break-word; line-height: 1.6; border: 1px solid white; }
+.bless-text { color: #D35400; font-style: italic; font-size: 0.85rem; margin-top: 8px; border-top: 1px dashed rgba(211, 84, 0, 0.3); padding-top: 8px; }
 .confetti { position: absolute; width: 10px; height: 10px; background: white; opacity: 0; pointer-events: none; }
 
 .dojo-section { grid-column: span 2; background: linear-gradient(135deg, #8FB9A8 0%, #769f8f 100%); color: white; padding: 20px; border-radius: 20px; margin-top: 10px; }
@@ -106,7 +107,6 @@ h2 { color: var(--text); border-left: 5px solid var(--primary); padding-left: 8p
 <footer>© ＜幸福教養概念館＞歡迎您！</footer>
 
 <script>
-// --- 原有邏輯保持不變 ---
 if ('serviceWorker' in navigator) { 
     navigator.serviceWorker.register('sw.js?v=20260123_FIX').then(reg => {
         reg.onupdatefound = () => {
@@ -125,11 +125,25 @@ let newsList = [];
 let allTitles = []; 
 let rotationInterval;
 
-// 🌟 修正後的扭蛋引導語
+// ✨ 笑長愛的叮嚀金句庫
+const blessings = [
+    "世界因你而甜美，記得先善待你自己。🌸",
+    "狀態回來了，世界觀自會對位。加油！✨",
+    "放輕鬆，你已經是很棒的家長了。🫂",
+    "每一個孩子，都是一顆飛得慢的衛星。🛰️",
+    "愛，是教養中最有力量的魔法。🪄",
+    "今天的你，值得大笑三聲！哈哈哈！😄",
+    "不急不急，讓靈魂跟上腳步。🐌",
+    "你不是答案的來源，你是愛的守護者。🛡️",
+    "今天的疲憊，就在概念館裡歇歇腳吧。☕",
+    "每一齣生活劇本，都有變幸福的可能。🎬"
+];
+
 function spinGacha() {
     const display = document.getElementById('gacha-display');
     const mastermind = document.getElementById('mastermind');
     
+    // 噴發紙屑
     for(let i=0; i<15; i++) {
         const confetti = document.createElement('div');
         confetti.className = 'confetti';
@@ -148,7 +162,13 @@ function spinGacha() {
         display.innerHTML = "💡 先逛逛展廳，靈感正在醞釀中...";
     } else {
         const randomTitle = allTitles[Math.floor(Math.random() * allTitles.length)];
-        display.innerHTML = `🎉 抽中了靈感：<br><span style="color:var(--accent); font-size:1.1rem; display:block; margin:5px 0;">「${randomTitle}」</span><small>去各展廳或實踐工房找找看吧！</small>`;
+        const randomBlessing = blessings[Math.floor(Math.random() * blessings.length)];
+        display.innerHTML = `
+            <div>🎉 抽中了靈感：</div>
+            <div style="color:var(--accent); font-size:1.1rem; margin:8px 0;">「${randomTitle}」</div>
+            <div style="font-size:0.8rem; color:#888; margin-bottom:10px;">去展廳或實踐工房找找看吧！</div>
+            <div class="bless-text">🧡 笑長愛的叮嚀：<br>${randomBlessing}</div>
+        `;
     }
     display.style.display = 'block';
 }
