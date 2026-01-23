@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <title>天使笑長 Angel - 幸福教養概念館</title>
-<link rel="manifest" href="manifest.json?v=20260123_FIX">
+<link rel="manifest" href="manifest.json?v=20260124">
 <meta name="theme-color" content="#8FB9A8">
 <style>
 :root { --primary: #8FB9A8; --primary-dark: #6e9485; --bg: #FFF5EE; --text: #5D4037; --accent: #EE3E2B; --happiness: #FFD700; }
@@ -30,7 +30,7 @@ body.show-tip #pullIndicator { transform: translateY(0); }
 .content-area { flex: 1; max-height: 240px; overflow-y: auto; text-align: left; padding: 0 3px; }
 .content-area::-webkit-scrollbar { width: 2px; }
 
-/* 🌟 幸福智多星：歡樂扭蛋機 */
+/* 🎡 幸福智多星：靈感扭蛋機 */
 .mastermind-section { background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%); border-radius: 25px; padding: 20px; margin: 20px 0; box-shadow: 0 8px 20px rgba(255,165,0,0.3); text-align: center; border: 3px solid white; position: relative; overflow: hidden; }
 .mastermind-title { color: white; font-weight: bold; font-size: 1.2rem; margin-bottom: 10px; text-shadow: 0 2px 4px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center; gap: 8px; }
 .gacha-btn { background: white; color: #E67E22; border: none; padding: 12px 25px; border-radius: 30px; font-weight: bold; font-size: 1rem; cursor: pointer; box-shadow: 0 4px 0 #ddd; transition: all 0.1s; display: inline-flex; align-items: center; gap: 8px; }
@@ -39,7 +39,7 @@ body.show-tip #pullIndicator { transform: translateY(0); }
 .bless-text { color: #D35400; font-style: italic; font-size: 0.85rem; margin-top: 8px; border-top: 1px dashed rgba(211, 84, 0, 0.3); padding-top: 8px; }
 .confetti { position: absolute; width: 10px; height: 10px; background: white; opacity: 0; pointer-events: none; }
 
-/* 💖 新增：幸福能量瓶樣式 */
+/* 💖 幸福能量瓶互動區 */
 .energy-section { background: white; border-radius: 20px; padding: 15px; margin: 20px 0; text-align: center; border: 2px solid #FFE4E1; box-shadow: 0 4px 15px rgba(255,182,193,0.2); }
 .energy-bottle { font-size: 3rem; cursor: pointer; display: inline-block; transition: transform 0.2s; position: relative; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1)); }
 .energy-bottle:active { transform: scale(1.2) rotate(10deg); }
@@ -122,9 +122,9 @@ h2 { color: var(--text); border-left: 5px solid var(--primary); padding-left: 8p
 <footer>© ＜幸福教養概念館＞歡迎您！</footer>
 
 <script>
-// --- 原有邏輯：Service Worker 與 API 設定 ---
+// --- 🌟 Service Worker 註冊 (版本已更新至 20260124) ---
 if ('serviceWorker' in navigator) { 
-    navigator.serviceWorker.register('sw.js?v=20260123_FIX').then(reg => {
+    navigator.serviceWorker.register('sw.js?v=20260124').then(reg => {
         reg.onupdatefound = () => {
             const installingWorker = reg.installing;
             installingWorker.onstatechange = () => {
@@ -141,7 +141,6 @@ let newsList = [];
 let allTitles = []; 
 let rotationInterval;
 
-// ✨ 笑長愛的叮嚀金句庫
 const blessings = [
     "世界因你而甜美，記得先善待你自己。🌸",
     "狀態回來了，世界觀自會對位。加油！✨",
@@ -155,7 +154,6 @@ const blessings = [
     "每一齣生活劇本，都有變幸福的可能。🎬"
 ];
 
-// --- 🌟 幸福能量瓶邏輯 (新增) ---
 let energyValue = parseInt(localStorage.getItem('angel_energy') || '0');
 document.getElementById('energy-val').innerText = energyValue;
 
@@ -163,8 +161,6 @@ function addEnergy(event) {
     energyValue++;
     localStorage.setItem('angel_energy', energyValue);
     document.getElementById('energy-val').innerText = energyValue;
-    
-    // 產生漂浮愛心
     const heart = document.createElement('div');
     heart.className = 'floating-heart';
     heart.innerHTML = '❤️';
@@ -174,7 +170,6 @@ function addEnergy(event) {
     setTimeout(() => heart.remove(), 1000);
 }
 
-// --- 原有邏輯：扭蛋功能 ---
 function spinGacha() {
     const display = document.getElementById('gacha-display');
     const mastermind = document.getElementById('mastermind');
@@ -206,7 +201,6 @@ function spinGacha() {
     display.style.display = 'block';
 }
 
-// --- 原有邏輯：新聞輪播、影片 ID 提取、資料載入等 (完整不變) ---
 function startNewsRotation() {
     if (rotationInterval) clearInterval(rotationInterval);
     const container = document.getElementById('latest-news');
