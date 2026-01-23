@@ -1,6 +1,6 @@
 // sw.js - 天使笑長幸福教養概念館專用
 // 每次修改 index.html 後，建議同步修改下方的版號 (如 v20260124)
-const CACHE_NAME = 'angel-happy-v20260123_v3'; 
+const CACHE_NAME = 'angel-happy-v20260124; 
 
 // 1. 安裝階段：強制跳過等待，讓新版立刻準備接管
 self.addEventListener('install', (event) => {
