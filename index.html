@@ -30,12 +30,12 @@ body.show-tip #pullIndicator { transform: translateY(0); }
 .content-area { flex: 1; max-height: 240px; overflow-y: auto; text-align: left; padding: 0 3px; }
 .content-area::-webkit-scrollbar { width: 2px; }
 
-/* 🌟 幸福智多星：歡樂扭蛋機樣式 */
+/* 🌟 幸福智多星：修正斷字與引導語 */
 .mastermind-section { background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%); border-radius: 25px; padding: 20px; margin: 20px 0; box-shadow: 0 8px 20px rgba(255,165,0,0.3); text-align: center; border: 3px solid white; position: relative; overflow: hidden; }
 .mastermind-title { color: white; font-weight: bold; font-size: 1.2rem; margin-bottom: 10px; text-shadow: 0 2px 4px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center; gap: 8px; }
 .gacha-btn { background: white; color: #E67E22; border: none; padding: 12px 25px; border-radius: 30px; font-weight: bold; font-size: 1rem; cursor: pointer; box-shadow: 0 4px 0 #ddd; transition: all 0.1s; display: inline-flex; align-items: center; gap: 8px; }
 .gacha-btn:active { transform: translateY(3px); box-shadow: 0 1px 0 #ddd; }
-#gacha-display { margin-top: 15px; min-height: 20px; color: #5D4037; font-size: 0.9rem; font-weight: bold; background: rgba(255,255,255,0.8); border-radius: 15px; padding: 10px; display: none; }
+#gacha-display { margin-top: 15px; min-height: 20px; color: #5D4037; font-size: 0.95rem; font-weight: bold; background: rgba(255,255,255,0.8); border-radius: 15px; padding: 12px; display: none; word-break: keep-all; overflow-wrap: break-word; line-height: 1.5; }
 .confetti { position: absolute; width: 10px; height: 10px; background: white; opacity: 0; pointer-events: none; }
 
 .dojo-section { grid-column: span 2; background: linear-gradient(135deg, #8FB9A8 0%, #769f8f 100%); color: white; padding: 20px; border-radius: 20px; margin-top: 10px; }
@@ -70,7 +70,7 @@ h2 { color: var(--text); border-left: 5px solid var(--primary); padding-left: 8p
 
 <div class="mastermind-section" id="mastermind">
     <div class="mastermind-title">🎡 幸福智多星：靈感扭蛋機</div>
-    <div style="color: white; font-size: 0.8rem; margin-bottom: 15px; opacity: 0.9;">在這裡，你可以放鬆地找尋屬於你的生命觸動</div>
+    <div style="color: white; font-size: 0.85rem; margin-bottom: 15px; opacity: 0.9; word-break: keep-all;">放鬆心情找尋屬於你的生命觸動</div>
     <button class="gacha-btn" onclick="spinGacha()">✨ 點我抽一個幸福啟示</button>
     <div id="gacha-display"></div>
 </div>
@@ -106,7 +106,7 @@ h2 { color: var(--text); border-left: 5px solid var(--primary); padding-left: 8p
 <footer>© ＜幸福教養概念館＞歡迎您！</footer>
 
 <script>
-// --- 原有 Service Worker 邏輯保持不變 ---
+// --- 原有邏輯保持不變 ---
 if ('serviceWorker' in navigator) { 
     navigator.serviceWorker.register('sw.js?v=20260123_FIX').then(reg => {
         reg.onupdatefound = () => {
@@ -122,15 +122,14 @@ if ('serviceWorker' in navigator) {
 
 const API_URL = "https://script.google.com/macros/s/AKfycbzeuQFds9g_H5_Wa7CIYSQs5k2KHBdDG45zPNNJF74xPfYU9NkSYXLBSKDZzcCWjaF3OA/exec";
 let newsList = [];
-let allTitles = []; // 用於智多星隨機推薦
+let allTitles = []; 
 let rotationInterval;
 
-// 🌟 幸福智多星：扭蛋隨機推薦邏輯
+// 🌟 修正後的扭蛋引導語
 function spinGacha() {
     const display = document.getElementById('gacha-display');
     const mastermind = document.getElementById('mastermind');
     
-    // 噴發小紙屑動畫 (歡樂感)
     for(let i=0; i<15; i++) {
         const confetti = document.createElement('div');
         confetti.className = 'confetti';
@@ -138,7 +137,6 @@ function spinGacha() {
         confetti.style.top = '50%';
         confetti.style.backgroundColor = ['#FFD700', '#FF69B4', '#00FF7F', '#87CEFA'][Math.floor(Math.random()*4)];
         mastermind.appendChild(confetti);
-        
         const anim = confetti.animate([
             { transform: 'translate(0,0) rotate(0)', opacity: 1 },
             { transform: `translate(${(Math.random()-0.5)*200}px, ${(Math.random()-0.5)*200}px) rotate(720deg)`, opacity: 0 }
@@ -150,7 +148,7 @@ function spinGacha() {
         display.innerHTML = "💡 先逛逛展廳，靈感正在醞釀中...";
     } else {
         const randomTitle = allTitles[Math.floor(Math.random() * allTitles.length)];
-        display.innerHTML = `🎉 抽中了靈感：<br><span style="color:var(--accent); font-size:1.1rem;">「${randomTitle}」</span><br><small>去展廳找找這個故事吧！</small>`;
+        display.innerHTML = `🎉 抽中了靈感：<br><span style="color:var(--accent); font-size:1.1rem; display:block; margin:5px 0;">「${randomTitle}」</span><small>去展廳或實踐工房找找看吧！</small>`;
     }
     display.style.display = 'block';
 }
@@ -192,41 +190,27 @@ async function loadData() {
     try {
         const res = await fetch(API_URL + "?t=" + Date.now());
         const data = await res.json();
-        
         document.querySelectorAll('.content-area').forEach(el => el.innerHTML = '');
         newsList = [];
         allTitles = [];
-
         const groupsMap = { "緊急": "🆘 緊急區", "心靈": "🧘 心靈區", "檢測": "🔍 觀察區", "教養": "📚 教養區", "其他": "💡 其他" };
-        
         data.forEach(item => {
             let row = {};
             Object.keys(item).forEach(k => { row[k.trim()] = item[k]; });
-
             const status = String(row["發布狀態"] || row["發佈狀態"] || "");
             if (!status.includes("上架") && !status.includes("發佈")) return;
-
             const hall = String(row["展示廳"] || "").trim();
             const title = String(row["標題"] || "").trim();
             let concept = String(row["核心理念"] || "").trim();
             const videoLink = String(row["影音連結"] || "").trim();
-
-            if (hall.includes("最新") || hall.includes("動態")) {
-                newsList.push(title);
-                return;
-            }
-            
-            // 收集標題給扭蛋機用
+            if (hall.includes("最新") || hall.includes("動態")) { newsList.push(title); return; }
             if (title) allTitles.push(title);
-
             const urlInConcept = extractUrl(concept);
             const urlInVideo = extractUrl(videoLink);
             const ytId = getYTId(videoLink) || getYTId(concept);
-            
             let finalToolLink = null;
             if (urlInVideo && !getYTId(urlInVideo)) finalToolLink = urlInVideo;
             else if (urlInConcept && !getYTId(urlInConcept)) finalToolLink = urlInConcept;
-
             let container;
             if (hall.includes("工房") || hall.includes("工具")) {
                 let cat = "其他";
@@ -243,7 +227,6 @@ async function loadData() {
                 let found = targets.find(t => hall.includes(t));
                 if (found) container = document.getElementById(`content-${found}`);
             }
-
             if (container) {
                 const card = document.createElement('div');
                 card.className = 'card-mini';
@@ -255,7 +238,6 @@ async function loadData() {
                 container.appendChild(card);
             }
         });
-
         if (newsList.length > 0) {
             const newsContainer = document.getElementById('latest-news');
             newsContainer.innerHTML = `<div class="news-item active">📌 ${newsList[0]}</div>`;
@@ -272,7 +254,6 @@ window.addEventListener('touchmove', (e) => {
     else if ((moveY - startY) < 0) document.body.classList.remove('show-tip');
 }, {passive: true});
 window.addEventListener('touchend', () => { if (document.body.classList.contains('show-tip')) { setTimeout(() => location.reload(), 800); } });
-
 loadData();
 </script>
 </body>
