@@ -30,7 +30,7 @@ body.show-tip #pullIndicator { transform: translateY(0); }
 .content-area { flex: 1; max-height: 240px; overflow-y: auto; text-align: left; padding: 0 3px; }
 .content-area::-webkit-scrollbar { width: 2px; }
 
-/* 🌟 幸福智多星：歡樂扭蛋機 + 祝福金句 */
+/* 🌟 幸福智多星：歡樂扭蛋機 */
 .mastermind-section { background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%); border-radius: 25px; padding: 20px; margin: 20px 0; box-shadow: 0 8px 20px rgba(255,165,0,0.3); text-align: center; border: 3px solid white; position: relative; overflow: hidden; }
 .mastermind-title { color: white; font-weight: bold; font-size: 1.2rem; margin-bottom: 10px; text-shadow: 0 2px 4px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center; gap: 8px; }
 .gacha-btn { background: white; color: #E67E22; border: none; padding: 12px 25px; border-radius: 30px; font-weight: bold; font-size: 1rem; cursor: pointer; box-shadow: 0 4px 0 #ddd; transition: all 0.1s; display: inline-flex; align-items: center; gap: 8px; }
@@ -38,6 +38,14 @@ body.show-tip #pullIndicator { transform: translateY(0); }
 #gacha-display { margin-top: 15px; min-height: 20px; color: #5D4037; font-size: 0.95rem; font-weight: bold; background: rgba(255,255,255,0.85); border-radius: 15px; padding: 15px; display: none; word-break: keep-all; overflow-wrap: break-word; line-height: 1.6; border: 1px solid white; }
 .bless-text { color: #D35400; font-style: italic; font-size: 0.85rem; margin-top: 8px; border-top: 1px dashed rgba(211, 84, 0, 0.3); padding-top: 8px; }
 .confetti { position: absolute; width: 10px; height: 10px; background: white; opacity: 0; pointer-events: none; }
+
+/* 💖 新增：幸福能量瓶樣式 */
+.energy-section { background: white; border-radius: 20px; padding: 15px; margin: 20px 0; text-align: center; border: 2px solid #FFE4E1; box-shadow: 0 4px 15px rgba(255,182,193,0.2); }
+.energy-bottle { font-size: 3rem; cursor: pointer; display: inline-block; transition: transform 0.2s; position: relative; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1)); }
+.energy-bottle:active { transform: scale(1.2) rotate(10deg); }
+.energy-count { color: #DB7093; font-weight: bold; font-size: 1.1rem; margin-top: 5px; }
+.floating-heart { position: absolute; pointer-events: none; color: #FF69B4; font-size: 1.5rem; animation: floatUp 1s ease-out forwards; z-index: 100; }
+@keyframes floatUp { 0% { transform: translateY(0) scale(1); opacity: 1; } 100% { transform: translateY(-100px) scale(1.5); opacity: 0; } }
 
 .dojo-section { grid-column: span 2; background: linear-gradient(135deg, #8FB9A8 0%, #769f8f 100%); color: white; padding: 20px; border-radius: 20px; margin-top: 10px; }
 .dojo-title { display: flex; align-items: center; margin-bottom: 12px; }
@@ -76,6 +84,13 @@ h2 { color: var(--text); border-left: 5px solid var(--primary); padding-left: 8p
     <div id="gacha-display"></div>
 </div>
 
+<div class="energy-section">
+    <div style="font-weight: bold; font-size: 0.9rem; color: #5D4037; margin-bottom: 10px;">🌟 點擊能量瓶，領取今日幸福力</div>
+    <div class="energy-bottle" onclick="addEnergy(event)">🏺</div>
+    <div class="energy-count">已累積能量：<span id="energy-val">0</span> 度</div>
+    <div style="font-size: 0.75rem; color: #999; margin-top: 5px;">每一次點擊，都是對自己的一份肯定</div>
+</div>
+
 <h2>🌿 概念館精神</h2>
 <div class="spirit-section">
 <a href="story_detail.html" style="background:#96B9AD; color:white; padding:12px; display:block; border-radius:30px; text-decoration:none; margin-bottom:12px; font-weight:bold; font-size:0.9rem;">📖 館藏：教養幸福經</a>
@@ -107,6 +122,7 @@ h2 { color: var(--text); border-left: 5px solid var(--primary); padding-left: 8p
 <footer>© ＜幸福教養概念館＞歡迎您！</footer>
 
 <script>
+// --- 原有邏輯：Service Worker 與 API 設定 ---
 if ('serviceWorker' in navigator) { 
     navigator.serviceWorker.register('sw.js?v=20260123_FIX').then(reg => {
         reg.onupdatefound = () => {
@@ -139,11 +155,29 @@ const blessings = [
     "每一齣生活劇本，都有變幸福的可能。🎬"
 ];
 
+// --- 🌟 幸福能量瓶邏輯 (新增) ---
+let energyValue = parseInt(localStorage.getItem('angel_energy') || '0');
+document.getElementById('energy-val').innerText = energyValue;
+
+function addEnergy(event) {
+    energyValue++;
+    localStorage.setItem('angel_energy', energyValue);
+    document.getElementById('energy-val').innerText = energyValue;
+    
+    // 產生漂浮愛心
+    const heart = document.createElement('div');
+    heart.className = 'floating-heart';
+    heart.innerHTML = '❤️';
+    heart.style.left = (event.clientX - 10) + 'px';
+    heart.style.top = (event.clientY - 20) + 'px';
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 1000);
+}
+
+// --- 原有邏輯：扭蛋功能 ---
 function spinGacha() {
     const display = document.getElementById('gacha-display');
     const mastermind = document.getElementById('mastermind');
-    
-    // 噴發紙屑
     for(let i=0; i<15; i++) {
         const confetti = document.createElement('div');
         confetti.className = 'confetti';
@@ -157,7 +191,6 @@ function spinGacha() {
         ], { duration: 1000, easing: 'ease-out' });
         anim.onfinish = () => confetti.remove();
     }
-
     if (allTitles.length === 0) {
         display.innerHTML = "💡 先逛逛展廳，靈感正在醞釀中...";
     } else {
@@ -173,6 +206,7 @@ function spinGacha() {
     display.style.display = 'block';
 }
 
+// --- 原有邏輯：新聞輪播、影片 ID 提取、資料載入等 (完整不變) ---
 function startNewsRotation() {
     if (rotationInterval) clearInterval(rotationInterval);
     const container = document.getElementById('latest-news');
