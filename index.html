@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>天使笑長 Angel - 幸福教養概念館</title>
+<link rel="manifest" href="manifest.json?v=20260124">
+<meta name="theme-color" content="#8FB9A8">
+<style>
+:root { --primary: #8FB9A8; --primary-dark: #6e9485; --bg: #FFF5EE; --text: #5D4037; --accent: #EE3E2B; --happiness: #FFD700; }
+body { font-family: 'PingFang TC', sans-serif; background-color: var(--bg); margin: 0; color: var(--text); line-height: 1.4; -webkit-text-size-adjust: none; }
+#pullIndicator { position: fixed; top: 0; left: 0; right: 0; text-align: center; font-size: 0.85rem; color: white; background: var(--primary-dark); padding: 12px 0; z-index: 10000; transform: translateY(-100%); transition: transform 0.2s ease-out; font-weight: bold; pointer-events: none; }
+body.show-tip #pullIndicator { transform: translateY(0); }
+.header { background: white; padding: 12px; text-align: center; border-bottom: 1px solid #f0e6dd; }
+.hero-img { width: 100%; max-width: 1200px; display: block; margin: 0 auto; border-radius: 0 0 20px 20px; }
+.container { padding: 10px; max-width: 800px; margin: 0 auto; }
+.news-bar { margin: 8px 0; background: #FFF; border-radius: 12px; padding: 10px; border-left: 5px solid var(--primary); box-shadow: 0 2px 8px rgba(0,0,0,0.05); display: flex; align-items: flex-start; min-height: 1.5rem; height: auto; overflow: hidden; }
+.news-tag { background: var(--primary); color: white; font-size: 0.6rem; padding: 1px 5px; border-radius: 4px; font-weight: bold; margin-right: 8px; flex-shrink: 0; margin-top: 2px; }
+#latest-news { flex: 1; position: relative; min-height: 1.5rem; }
+.news-item { position: absolute; width: 100%; font-size: 0.85rem; font-weight: bold; white-space: normal; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; transform: translateY(20px); opacity: 0; transition: all 0.8s ease-in-out; }
+.news-item.active { transform: translateY(0); opacity: 1; position: relative; }
+.news-item.exit { transform: translateY(-20px); opacity: 0; position: absolute; }
+.spirit-section { background: white; border-radius: 15px; padding: 12px; margin-bottom: 15px; box-shadow: 0 3px 10px rgba(0,0,0,0.05); text-align: center; }
+.bio-text { text-align: left; font-size: 0.85rem; line-height: 1.6; color: var(--text); padding: 0 5px; }
+.nav-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 10px; }
+.nav-item { background: white; border-radius: 18px; padding: 15px 8px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.04); display: flex; flex-direction: column; transition: transform 0.2s; }
+.nav-item:active { transform: scale(0.95); }
+.nav-item img { width: 85%; border-radius: 12px; margin: 0 auto 8px; }
+.nav-item h3 { font-size: 1rem; margin: 5px 0; }
+.content-area { flex: 1; max-height: 240px; overflow-y: auto; text-align: left; padding: 0 3px; }
+.content-area::-webkit-scrollbar { width: 2px; }
+
+/* 🎡 幸福智多星：靈感扭蛋機 */
+.mastermind-section { background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%); border-radius: 25px; padding: 20px; margin: 20px 0; box-shadow: 0 8px 20px rgba(255,165,0,0.3); text-align: center; border: 3px solid white; position: relative; overflow: hidden; }
+.mastermind-title { color: white; font-weight: bold; font-size: 1.2rem; margin-bottom: 10px; text-shadow: 0 2px 4px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center; gap: 8px; }
+.gacha-btn { background: white; color: #E67E22; border: none; padding: 12px 25px; border-radius: 30px; font-weight: bold; font-size: 1rem; cursor: pointer; box-shadow: 0 4px 0 #ddd; transition: all 0.1s; display: inline-flex; align-items: center; gap: 8px; }
+.gacha-btn:active { transform: translateY(3px); box-shadow: 0 1px 0 #ddd; }
+#gacha-display { margin-top: 15px; min-height: 20px; color: #5D4037; font-size: 0.95rem; font-weight: bold; background: rgba(255,255,255,0.85); border-radius: 15px; padding: 15px; display: none; word-break: keep-all; overflow-wrap: break-word; line-height: 1.6; border: 1px solid white; }
+.bless-text { color: #D35400; font-style: italic; font-size: 0.85rem; margin-top: 8px; border-top: 1px dashed rgba(211, 84, 0, 0.3); padding-top: 8px; }
+.confetti { position: absolute; width: 10px; height: 10px; background: white; opacity: 0; pointer-events: none; }
+
+/* 💖 幸福能量瓶互動區 */
+.energy-section { background: white; border-radius: 20px; padding: 15px; margin: 20px 0; text-align: center; border: 2px solid #FFE4E1; box-shadow: 0 4px 15px rgba(255,182,193,0.2); }
+.energy-bottle { font-size: 3rem; cursor: pointer; display: inline-block; transition: transform 0.2s; position: relative; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1)); }
+.energy-bottle:active { transform: scale(1.2) rotate(10deg); }
+.energy-count { color: #DB7093; font-weight: bold; font-size: 1.1rem; margin-top: 5px; }
+.floating-heart { position: absolute; pointer-events: none; color: #FF69B4; font-size: 1.5rem; animation: floatUp 1s ease-out forwards; z-index: 100; }
+@keyframes floatUp { 0% { transform: translateY(0) scale(1); opacity: 1; } 100% { transform: translateY(-100px) scale(1.5); opacity: 0; } }
+
+.dojo-section { grid-column: span 2; background: linear-gradient(135deg, #8FB9A8 0%, #769f8f 100%); color: white; padding: 20px; border-radius: 20px; margin-top: 10px; }
+.dojo-title { display: flex; align-items: center; margin-bottom: 12px; }
+.dojo-title img { width: 48px; height: 48px; margin-right: 12px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2)); }
+.card-mini { background: white; border-radius: 12px; padding: 10px; margin-bottom: 10px; color: var(--text); border: 1px solid #f0ebe4; }
+.video-link-box { position: relative; display: block; margin: 6px 0; border-radius: 8px; overflow: hidden; background: #000; }
+.video-link-box img { width: 100%; display: block; opacity: 0.85; }
+.play-btn-overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: flex; align-items: center; justify-content: center; }
+.play-circle { width: 20px; height: 20px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+.play-triangle { width: 0; height: 0; border-style: solid; border-width: 3.5px 0 3.5px 6px; border-color: transparent transparent transparent white; margin-left: 1.5px; }
+.btn-link { display: inline-block; padding: 8px 16px; border-radius: 20px; text-decoration: none; font-weight: bold; font-size: 0.8rem; margin: 8px 0; white-space: nowrap; }
+.btn-tool { background: #4A90E2; color: white; box-shadow: 0 2px 5px rgba(0,0,0,0.15); border: 1px solid rgba(255,255,255,0.2); }
+footer { text-align: center; padding: 30px 20px; font-size: 0.75rem; color: #999; }
+h2 { color: var(--text); border-left: 5px solid var(--primary); padding-left: 8px; margin: 20px 0 10px; font-size: 1rem; }
+</style>
+</head>
+<body>
+<div id="pullIndicator">✨ 鬆開即可刷新館藏 ✨</div>
+<div class="header">
+<h1 style="margin:0; font-size: 1.3rem;">天使笑長 Angel</h1>
+<div style="font-size: 0.75rem; color: var(--primary); font-weight: bold;">幸福教養概念館</div>
+</div>
+<img src="assets/home.webp" class="hero-img">
+<div class="container">
+<div class="news-bar">
+<span class="news-tag">館內動態</span>
+<div id="latest-news">
+<div class="news-item active">📌 載入最新館藏動態中...</div>
+</div>
+</div>
+
+<div class="mastermind-section" id="mastermind">
+    <div class="mastermind-title">🎡 幸福智多星：靈感扭蛋機</div>
+    <div style="color: white; font-size: 0.85rem; margin-bottom: 15px; opacity: 0.9; word-break: keep-all;">放鬆心情找尋屬於你的生命觸動</div>
+    <button class="gacha-btn" onclick="spinGacha()">✨ 點我抽一個幸福啟示</button>
+    <div id="gacha-display"></div>
+</div>
+
+<div class="energy-section">
+    <div style="font-weight: bold; font-size: 0.9rem; color: #5D4037; margin-bottom: 10px;">🌟 點擊能量瓶，鼓勵自己的用心</div>
+    <div class="energy-bottle" onclick="addEnergy(event)">🏺</div>
+    <div class="energy-count">已累積能量：<span id="energy-val">0</span> 度</div>
+    <div style="font-size: 0.75rem; color: #999; margin-top: 5px;">給愛一個儀式感，為幸福補充能量</div>
+</div>
+
+<h2>🌿 概念館精神</h2>
+<div class="spirit-section">
+<a href="story_detail.html" style="background:#96B9AD; color:white; padding:12px; display:block; border-radius:30px; text-decoration:none; margin-bottom:12px; font-weight:bold; font-size:0.9rem;">📖 館藏：教養幸福經</a>
+<a href="https://www.youtube.com/@%E5%A4%A9%E4%BD%BF%E7%AC%91%E9%95%B7" target="_blank" style="background:#EE3E2B; color:white; padding:12px; display:block; border-radius:30px; text-decoration:none; font-weight:bold; font-size:0.9rem;">🎬 影音導覽</a>
+</div>
+
+<h2>👩‍🏫 關於天使館長</h2>
+<div class="spirit-section">
+<div class="bio-text">
+小天使是退休國小教師，也是學校寶貝的大朋友和家裡的幸福姑；更是<b>家長的〔正能量女神〕，也是笑口常開的〔笑長〕。致力結合心腦科學實踐，讓愛發揮力量</b>，熱衷推廣幸福教養。本館將不定期推出有趣的互動驚喜與策展活動，期待在youtube影片留言區看到您的想法與故事，那裡是和笑長互動交流的天地，每個pwa工具都有附有回饋表單，期待您能分享使用工具的寶貴經驗，讓工具能更優化。如果您覺得工具好用，請分享給更多家庭，讓我們一起散播歡樂散播愛
+</div>
+</div>
+
+<h2>💡 核心展廳</h2>
+<div class="nav-grid">
+<div class="nav-item"><img src="assets/brain.webp"><h3>心腦展廳</h3><div id="content-心腦" class="content-area"></div></div>
+<div class="nav-item"><img src="assets/soul.webp"><h3>心靈會所</h3><div id="content-心靈" class="content-area"></div></div>
+<div class="nav-item"><img src="assets/relation.webp"><h3>關係雅座</h3><div id="content-關係" class="content-area"></div></div>
+<div class="nav-item"><img src="assets/story.webp"><h3>生命劇場</h3><div id="content-生命" class="content-area"></div></div>
+<div class="dojo-section">
+<div class="dojo-title"><img src="assets/tool.webp" alt="百寶箱"><h3 style="margin:0;">實踐工房</h3></div>
+<div id="dojo-groups" class="content-area" style="max-height:400px;"></div>
+</div>
+</div>
+<div class="install-card" style="text-align:center; padding: 20px;">
+<button id="installBtn" style="display:inline-block; background:var(--primary); color:white; padding:10px 30px; border-radius:40px; border:none; font-size:0.85rem; font-weight:bold; cursor:pointer;">立即收藏到桌面</button>
+</div>
+</div>
+<footer>© ＜幸福教養概念館＞歡迎您！</footer>
+
+<script>
+// --- 🌟 Service Worker 註冊 (版本已更新至 20260124) ---
+if ('serviceWorker' in navigator) { 
+    navigator.serviceWorker.register('sw.js?v=20260124').then(reg => {
+        reg.onupdatefound = () => {
+            const installingWorker = reg.installing;
+            installingWorker.onstatechange = () => {
+                if (installingWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                    window.location.reload();
+                }
+            };
+        };
+    });
+}
+
+const API_URL = "https://script.google.com/macros/s/AKfycbzeuQFds9g_H5_Wa7CIYSQs5k2KHBdDG45zPNNJF74xPfYU9NkSYXLBSKDZzcCWjaF3OA/exec";
+let newsList = [];
+let allTitles = []; 
+let rotationInterval;
+
+const blessings = [
+    "世界因你而甜美，記得先善待你自己。🌸",
+    "愉悅自的狀態回來了，世界觀自會有彈性。加油！✨",
+    "放輕鬆，你已經是很棒的家長了。🫂",
+    "每一個孩子，都是來陪伴我們開發愛的潛能。🛰️",
+    "愛，是教養中最有力量的魔法。🪄",
+    "今天的你，值得大笑三聲！哈哈哈！😄",
+    "不急不急，輕~慢～柔～靜～陪伴你。🐌",
+    "不急著找答案的，只要讓愛的溫暖感覺充滿自己。🛡️",
+    "今天的疲憊，就在概念館裡歇歇腳吧。☕",
+    "與其想怎麼教，不如想怎麼愛，穩定溫和就是身教。🎬"
+];
+
+let energyValue = parseInt(localStorage.getItem('angel_energy') || '0');
+document.getElementById('energy-val').innerText = energyValue;
+
+function addEnergy(event) {
+    energyValue++;
+    localStorage.setItem('angel_energy', energyValue);
+    document.getElementById('energy-val').innerText = energyValue;
+    const heart = document.createElement('div');
+    heart.className = 'floating-heart';
+    heart.innerHTML = '❤️';
+    heart.style.left = (event.clientX - 10) + 'px';
+    heart.style.top = (event.clientY - 20) + 'px';
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 1000);
+}
+
+function spinGacha() {
+    const display = document.getElementById('gacha-display');
+    const mastermind = document.getElementById('mastermind');
+    for(let i=0; i<15; i++) {
+        const confetti = document.createElement('div');
+        confetti.className = 'confetti';
+        confetti.style.left = Math.random() * 100 + '%';
+        confetti.style.top = '50%';
+        confetti.style.backgroundColor = ['#FFD700', '#FF69B4', '#00FF7F', '#87CEFA'][Math.floor(Math.random()*4)];
+        mastermind.appendChild(confetti);
+        const anim = confetti.animate([
+            { transform: 'translate(0,0) rotate(0)', opacity: 1 },
+            { transform: `translate(${(Math.random()-0.5)*200}px, ${(Math.random()-0.5)*200}px) rotate(720deg)`, opacity: 0 }
+        ], { duration: 1000, easing: 'ease-out' });
+        anim.onfinish = () => confetti.remove();
+    }
+    if (allTitles.length === 0) {
+        display.innerHTML = "💡 先逛逛展廳，靈感正在醞釀中...";
+    } else {
+        const randomTitle = allTitles[Math.floor(Math.random() * allTitles.length)];
+        const randomBlessing = blessings[Math.floor(Math.random() * blessings.length)];
+        display.innerHTML = `
+            <div>🎉 抽中了靈感：</div>
+            <div style="color:var(--accent); font-size:1.1rem; margin:8px 0;">「${randomTitle}」</div>
+            <div style="font-size:0.8rem; color:#888; margin-bottom:10px;">去展廳或實踐工房找找看吧！</div>
+            <div class="bless-text">🧡 笑長愛的叮嚀：<br>${randomBlessing}</div>
+        `;
+    }
+    display.style.display = 'block';
+}
+
+function startNewsRotation() {
+    if (rotationInterval) clearInterval(rotationInterval);
+    const container = document.getElementById('latest-news');
+    if (newsList.length <= 1) return;
+    let currentIndex = 0;
+    rotationInterval = setInterval(() => {
+        const currentItems = container.querySelectorAll('.news-item');
+        currentItems.forEach(item => { item.classList.add('exit'); item.classList.remove('active'); setTimeout(() => item.remove(), 800); });
+        currentIndex = (currentIndex + 1) % newsList.length;
+        const newItem = document.createElement('div');
+        newItem.className = 'news-item active';
+        newItem.innerHTML = `📌 ${newsList[currentIndex]}`;
+        container.appendChild(newItem);
+    }, 6000);
+}
+
+function getYTId(url) {
+    if (!url || typeof url !== 'string') return null;
+    if (!url.includes("youtube.com") && !url.includes("youtu.be")) return null;
+    let id = "";
+    if (url.includes("shorts/")) id = url.split("shorts/")[1].split(/[?#]/)[0];
+    else if (url.includes("youtu.be/")) id = url.split("youtu.be/")[1].split(/[?#]/)[0];
+    else if (url.includes("v=")) id = url.split("v=")[1].split("&")[0].split(/[?#]/)[0];
+    return (id && id.length === 11) ? id : null;
+}
+
+function extractUrl(text) { 
+    if (!text || typeof text !== 'string') return null;
+    const urlRegex = /(https?:\/\/[^\s]+)/g; 
+    const match = text.match(urlRegex);
+    return match ? match[0].replace(/[）)]+$/, '').trim() : null; 
+}
+
+async function loadData() {
+    try {
+        const res = await fetch(API_URL + "?t=" + Date.now());
+        const data = await res.json();
+        document.querySelectorAll('.content-area').forEach(el => el.innerHTML = '');
+        newsList = [];
+        allTitles = [];
+        const groupsMap = { "緊急": "🆘 緊急區", "心靈": "🧘 心靈區", "檢測": "🔍 觀察區", "教養": "📚 教養區", "其他": "💡 其他" };
+        data.forEach(item => {
+            let row = {};
+            Object.keys(item).forEach(k => { row[k.trim()] = item[k]; });
+            const status = String(row["發布狀態"] || row["發佈狀態"] || "");
+            if (!status.includes("上架") && !status.includes("發佈")) return;
+            const hall = String(row["展示廳"] || "").trim();
+            const title = String(row["標題"] || "").trim();
+            let concept = String(row["核心理念"] || "").trim();
+            const videoLink = String(row["影音連結"] || "").trim();
+            if (hall.includes("最新") || hall.includes("動態")) { newsList.push(title); return; }
+            if (title) allTitles.push(title);
+            const urlInConcept = extractUrl(concept);
+            const urlInVideo = extractUrl(videoLink);
+            const ytId = getYTId(videoLink) || getYTId(concept);
+            let finalToolLink = null;
+            if (urlInVideo && !getYTId(urlInVideo)) finalToolLink = urlInVideo;
+            else if (urlInConcept && !getYTId(urlInConcept)) finalToolLink = urlInConcept;
+            let container;
+            if (hall.includes("工房") || hall.includes("工具")) {
+                let cat = "其他";
+                for (let k in groupsMap) { if ((title+concept).includes(k)) cat = k; }
+                container = document.getElementById(`group-${cat}`);
+                if (!container) {
+                    container = document.createElement('div');
+                    container.id = `group-${cat}`;
+                    container.innerHTML = `<div style="font-size:0.75rem; font-weight:bold; margin:10px 0 5px; color:rgba(255,255,255,0.95); border-bottom:1px dashed rgba(255,255,255,0.3);">${groupsMap[cat]}</div>`;
+                    document.getElementById('dojo-groups').appendChild(container);
+                }
+            } else {
+                const targets = ["心腦", "心靈", "關係", "生命"];
+                let found = targets.find(t => hall.includes(t));
+                if (found) container = document.getElementById(`content-${found}`);
+            }
+            if (container) {
+                const card = document.createElement('div');
+                card.className = 'card-mini';
+                let videoHTML = ytId ? `<a href="https://www.youtube.com/watch?v=${ytId}" target="_blank"><div class="video-link-box"><img src="https://img.youtube.com/vi/${ytId}/mqdefault.jpg"><div class="play-btn-overlay"><div class="play-circle"><div class="play-triangle"></div></div></div></div></a>` : "";
+                let toolBtnHTML = finalToolLink ? `<div><a href="${finalToolLink}" target="_blank" class="btn-link btn-tool" style="display:block; text-align:center;">🚀 取用實踐工具</a></div>` : "";
+                let cleanConcept = concept;
+                if (urlInConcept) cleanConcept = concept.replace(urlInConcept, '').trim();
+                card.innerHTML = `<div style="font-weight:bold; font-size:0.85rem; line-height:1.2;">${title}</div>${videoHTML}${toolBtnHTML}<div style="color:#777; font-size:0.75rem; margin-top:6px;">${cleanConcept}</div>`;
+                container.appendChild(card);
+            }
+        });
+        if (newsList.length > 0) {
+            const newsContainer = document.getElementById('latest-news');
+            newsContainer.innerHTML = `<div class="news-item active">📌 ${newsList[0]}</div>`;
+            startNewsRotation();
+        }
+    } catch (e) { console.error("Load Error:", e); }
+}
+
+let startY = 0;
+window.addEventListener('touchstart', (e) => { startY = e.touches[0].pageY; }, {passive: true});
+window.addEventListener('touchmove', (e) => {
+    const moveY = e.touches[0].pageY;
+    if (window.scrollY === 0 && (moveY - startY) > 65) document.body.classList.add('show-tip');
+    else if ((moveY - startY) < 0) document.body.classList.remove('show-tip');
+}, {passive: true});
+window.addEventListener('touchend', () => { if (document.body.classList.contains('show-tip')) { setTimeout(() => location.reload(), 800); } });
+loadData();
+</script>
+</body>
+</html>
