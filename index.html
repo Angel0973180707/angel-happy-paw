@@ -39,6 +39,17 @@ body.show-tip #pullIndicator { transform: translateY(0); }
 .bless-text { color: #D35400; font-style: italic; font-size: 0.85rem; margin-top: 8px; border-top: 1px dashed rgba(211, 84, 0, 0.3); padding-top: 8px; }
 .confetti { position: absolute; width: 10px; height: 10px; background: white; opacity: 0; pointer-events: none; }
 
+/* ✨ 智多星諮詢窗口入口樣式 */
+.mastermind-window { cursor:pointer; display:flex; align-items:center; gap:15px; padding:18px; background: white; border: 2px solid #ffb6c1; border-radius: 22px; margin: 20px 0; box-shadow: 0 6px 15px rgba(214,51,132,0.1); transition: transform 0.2s; }
+.mastermind-window:active { transform: scale(0.98); }
+.mastermind-avatar { width: 65px; height: 65px; border-radius: 50%; overflow: hidden; border: 3px solid #fff; box-shadow: 0 3px 8px rgba(0,0,0,0.1); flex-shrink: 0; }
+.mastermind-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.mastermind-info { text-align: left; flex: 1; }
+.mastermind-info b { color: #d63384; font-size: 1.15rem; display: block; margin-bottom: 2px; }
+.mastermind-info span { color: #888; font-size: 0.85rem; font-weight: bold; }
+.charge-icon { color: #ffb6c1; font-weight: bold; font-size: 0.9rem; animation: pulse 1.5s infinite; }
+@keyframes pulse { 0% { opacity: 0.5; } 50% { opacity: 1; } 100% { opacity: 0.5; } }
+
 /* 💖 幸福能量瓶互動區 */
 .energy-section { background: white; border-radius: 20px; padding: 15px; margin: 20px 0; text-align: center; border: 2px solid #FFE4E1; box-shadow: 0 4px 15px rgba(255,182,193,0.2); }
 .energy-bottle { font-size: 3rem; cursor: pointer; display: inline-block; transition: transform 0.2s; position: relative; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1)); }
@@ -102,6 +113,17 @@ h2 { color: var(--text); border-left: 5px solid var(--primary); padding-left: 8p
 <div class="bio-text">
 小天使是退休國小教師，也是學校寶貝的大朋友和家裡的幸福姑；更是<b>家長的〔正能量女神〕，也是笑口常開的〔笑長〕。致力結合心腦科學實踐，讓愛發揮力量</b>，熱衷推廣幸福教養。本館將不定期推出有趣的互動驚喜與策展活動，期待在youtube影片留言區看到您的想法與故事，那裡是和笑長互動交流的天地，每個pwa工具都有附有回饋表單，期待您能分享使用工具的寶貴經驗，讓工具能更優化。如果您覺得工具好用，請分享給更多家庭，讓我們一起散播歡樂散播愛
 </div>
+</div>
+
+<div class="mastermind-window" onclick="location.href='mastermind.html'">
+    <div class="mastermind-avatar">
+        <img src="1769671255343.jpg" alt="形象大使">
+    </div>
+    <div class="mastermind-info">
+        <b>幸福智多星</b>
+        <span>讓我們一起為幸福充電</span>
+    </div>
+    <div class="charge-icon">⚡ 諮詢入口</div>
 </div>
 
 <h2>💡 核心展廳</h2>
