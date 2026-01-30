@@ -5,34 +5,57 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>幸福智多星</title>
     <style>
-        :root { --angel-pink: #ffb6c1; --deep-pink: #d63384; --soft-bg: #fff5f7; --think-blue: #e3f2fd; --tool-green: #8bc34a; }
+        :root { --angel-pink: #ffb6c1; --deep-pink: #d63384; --soft-bg: #fff5f7; --think-blue: #007bff; --soft-blue: #e3f2fd; }
         body { font-family: "Microsoft JhengHei", sans-serif; background-color: var(--soft-bg); margin: 0; display: flex; justify-content: center; }
         .container { width: 100%; max-width: 480px; background: white; min-height: 100vh; box-shadow: 0 0 20px rgba(0,0,0,0.05); }
-        .header-section { padding: 30px 20px 20px; text-align: center; background: linear-gradient(to bottom, #fff0f3, #ffffff); }
-        .ambassador-mini { width: 120px; height: 120px; border-radius: 50%; border: 4px solid white; box-shadow: 0 4px 15px rgba(214,51,132,0.2); margin: 0 auto 15px; overflow: hidden; }
+        .header-section { padding: 20px 20px 5px; text-align: center; background: linear-gradient(to bottom, #fff0f3, #ffffff); }
+        .ambassador-mini { width: 85px; height: 85px; border-radius: 50%; border: 3px solid white; box-shadow: 0 4px 10px rgba(214,51,132,0.15); margin: 0 auto 10px; overflow: hidden; }
         .ambassador-mini img { width: 100%; height: 100%; object-fit: cover; }
-        .header-text h2 { margin: 0; color: var(--deep-pink); font-size: 1.8rem; }
-        .header-text p { margin: 5px 0 0; color: #888; font-size: 1rem; font-weight: bold; }
-        .main-content { padding: 0 20px 30px; }
-        .action-row { display: flex; gap: 8px; margin: 20px 0; }
-        .search-group { display: flex; background: #fff; border: 2px solid var(--angel-pink); border-radius: 50px; padding: 4px; flex: 1; }
-        .search-group input { flex: 1; border: none; padding: 10px 15px; border-radius: 50px; outline: none; font-size: 1.1rem; width: 100px; }
-        .ask-btn { background: var(--deep-pink); color: white; border: none; padding: 0 20px; border-radius: 50px; cursor: pointer; font-weight: bold; }
-        .happy-btn { background: #fbc02d; border: none; padding: 0 15px; border-radius: 50px; cursor: pointer; box-shadow: 0 4px 10px rgba(251, 192, 45, 0.3); white-space: nowrap; font-weight: bold; color: #5d4037; }
-        .category-title { font-size: 1.1rem; color: var(--deep-pink); margin: 25px 0 12px; font-weight: bold; border-bottom: 1px solid #ffeef1; padding-bottom: 5px; }
-        .suggest-tags { display: flex; flex-wrap: wrap; gap: 10px; }
-        .tag { background: white; border: 1.5px solid var(--angel-pink); color: var(--deep-pink); padding: 8px 16px; border-radius: 20px; font-size: 1rem; cursor: pointer; }
+        .header-text h2 { margin: 0; color: var(--deep-pink); font-size: 1.3rem; }
+        .header-text p { margin: 3px 0 0; color: #888; font-size: 0.85rem; font-weight: bold; }
         
-        #loading { display: none; text-align: center; margin: 20px 0; color: var(--deep-pink); font-weight: bold; }
-        #response-panel { display: none; margin-top: 20px; animation: fadeIn 0.5s; }
-        .angel-talk { background: #fffafb; padding: 20px; border-radius: 18px; border-left: 6px solid var(--deep-pink); line-height: 1.8; color: #333; font-size: 1.1rem; white-space: pre-wrap; margin-bottom: 15px; word-break: break-all; }
-        .think-box { background: var(--think-blue); border-radius: 18px; padding: 18px; margin: 15px 0; color: #1565c0; border: 1px dashed #2196f3; }
+        .main-content { padding: 0 15px 30px; }
+        .action-row { display: flex; gap: 6px; margin: 12px 0; align-items: stretch; }
+        .search-group { display: flex; background: #fff; border: 1.5px solid var(--angel-pink); border-radius: 50px; padding: 3px; flex: 1; }
+        .search-group input { flex: 1; border: none; padding: 6px 12px; border-radius: 50px; outline: none; font-size: 0.95rem; width: 60px; }
+        
+        .ask-btn { 
+            background: var(--deep-pink); color: white; border: none; padding: 0 15px; border-radius: 50px; cursor: pointer; font-weight: bold; font-size: 0.85rem;
+            border-bottom: 3px solid #a61b5a; transition: 0.1s;
+        }
+        .ask-btn:active { transform: translateY(2px); border-bottom: 1px solid #a61b5a; }
 
-        /* 🎀 新增：網址按鈕化樣式 */
-        .url-button { display: inline-block; background-color: var(--deep-pink); color: white !important; padding: 10px 20px; border-radius: 25px; text-decoration: none !important; font-weight: bold; margin: 8px 0; font-size: 0.95rem; box-shadow: 0 3px 6px rgba(214,51,132,0.2); transition: 0.3s; }
-        .url-button:active { transform: scale(0.95); }
+        .happy-btn { 
+            background: #fbc02d; border: none; padding: 0 12px; border-radius: 50px; cursor: pointer; font-weight: bold; color: #5d4037; font-size: 0.85rem; white-space: nowrap;
+            border-bottom: 3px solid #c49000; transition: 0.1s;
+        }
+        .happy-btn:active { transform: translateY(2px); border-bottom: 1px solid #c49000; }
+
+        .category-title { font-size: 0.9rem; color: var(--deep-pink); margin: 18px 0 8px; font-weight: bold; border-bottom: 1px solid #ffeef1; padding-bottom: 3px; }
         
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .suggest-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+        .tag { 
+            background: white; border: 1px solid var(--angel-pink); border-bottom: 3px solid var(--angel-pink);
+            color: var(--deep-pink); padding: 6px 12px; border-radius: 12px; font-size: 0.82rem; cursor: pointer; font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05); transition: all 0.1s;
+        }
+        .tag:active { transform: translateY(2px); border-bottom: 1px solid var(--angel-pink); }
+        
+        #loading { display: none; text-align: center; margin: 15px 0; color: var(--deep-pink); font-size: 0.85rem; }
+        #response-panel { display: none; margin-top: 12px; animation: fadeIn 0.4s; }
+        
+        .angel-talk { background: #fffafb; padding: 15px; border-radius: 15px; border-left: 4px solid var(--deep-pink); line-height: 1.6; color: #333; font-size: 0.9rem; white-space: pre-wrap; margin-bottom: 10px; text-align: justify; }
+        .think-box { background: var(--soft-blue); border-radius: 15px; padding: 12px; margin: 8px 0; color: #1565c0; border: 1px dashed #2196f3; font-size: 0.85rem; }
+
+        .url-button { display: block; width: 100%; text-align: center; color: white !important; padding: 12px 5px; border-radius: 10px; text-decoration: none !important; font-weight: bold; margin: 12px 0; font-size: 0.9rem; transition: 0.1s; box-sizing: border-box; }
+        .url-button:active { transform: translateY(2px); border-bottom-width: 1px !important; }
+        
+        /* 工具包：藍色立體 */
+        .btn-tool { background-color: var(--think-blue) !important; border-bottom: 4px solid #0056b3; } 
+        /* 調味包：粉色立體 */
+        .btn-vid { background-color: var(--deep-pink) !important; border-bottom: 4px solid #a61b5a; }  
+        
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
@@ -50,18 +73,22 @@
 
         <div class="category-title">✨ 大人篇：情緒照顧與穩定</div>
         <div class="suggest-tags">
+            <div class="tag" onclick="quickSearch('感恩科學')">#感恩科學</div>
             <div class="tag" onclick="quickSearch('教養衝動')">#教養衝動</div>
             <div class="tag" onclick="quickSearch('教養挫折')">#教養挫折</div>
             <div class="tag" onclick="quickSearch('教養焦慮')">#教養焦慮</div>
-            <div class="tag" onclick="quickSearch('壓力山大')">#壓力山大</div>
+            <div class="tag" onclick="quickSearch('教養衝突')">#教養衝突</div>
+            <div class="tag" onclick="quickSearch('關係疏離')">#關係疏離</div>
         </div>
 
         <div class="category-title">✨ 教養篇：孩子行為與溝通</div>
         <div class="suggest-tags">
-            <div class="tag" onclick="quickSearch('不專心')">#孩子不專心</div>
-            <div class="tag" onclick="quickSearch('衝突')">#孩子衝突</div>
+            <div class="tag" onclick="quickSearch('孩子不專心')">#孩子不專心</div>
+            <div class="tag" onclick="quickSearch('孩子衝突')">#孩子衝突</div>
             <div class="tag" onclick="quickSearch('頂嘴')">#孩子頂嘴</div>
             <div class="tag" onclick="quickSearch('拒學')">#孩子拒學</div>
+            <div class="tag" onclick="quickSearch('抱怨')">#孩子抱怨</div>
+            <div class="tag" onclick="quickSearch('不合群')">#孩子不合群</div>
         </div>
 
         <div id="loading">✨ 智多星正在調配幸福配方...</div>
@@ -76,14 +103,26 @@
     const API_URL = "https://script.google.com/macros/s/AKfycby2XB5lJ1E72dO25yNtNpI9VOOGJkJXJfCbtCxT19oU1Be6E3RaUP4zzjsYkUjVGLNT/exec";
 
     const localJokes = [
-        "所謂的『優雅育兒』，就是你在心裡已經把孩子吊起來打了兩百次，但臉上依然保持微笑說：『沒關係，我們再來一次。』",
-        "現在的教養書都在教我們如何「不打不罵」，但沒一本書教我們如何在孩子把化妝品塗滿馬桶時，還能維持正常血壓。",
-        "所謂「父愛如山」，意思就是不管家裡發生什麼事，爸爸都像一座山一樣，坐在沙發上一動也不動。",
-        "每個家長都有特異功能：我們能聽見兩層樓外孩子偷開冰箱的聲音，卻聽不見他在耳邊說『我功課寫完了』。",
-        "生孩子前，以為家裡是文青風；生孩子後，變成了「命案現場風」——到處是樂高殘肢和受害者的尖叫。",
-        "育兒就是一場長達 20 年的修行，孩子是你的業障，老公是你的考驗，而你的忍耐力是唯一的法號。",
-        "如果你發現你的孩子突然變得安靜，請不要慶幸，趕快去檢查你的筆電鍵盤是不是少了好幾個按鍵。",
-        "世界上最遠的距離，不是生與死。而是我叫你趕快去洗澡，你卻依然在看 YouTube。"
+        "所謂的『優雅育兒』，就是你在心裡已經把孩子吊起來打了兩百次，但臉上依然保持微笑。",
+        "育兒就是一場長達 20 年的修行，孩子是你的業障，老公是你的考驗。",
+        "如果你發現孩子突然安靜，趕快檢查鍵盤是不是少了好幾個鍵。",
+        "當媽後最想念的地方不是百貨公司，而是沒有人在門口喊『媽～』的廁所。",
+        "教養書說要給孩子選擇權：『你是要現在乖乖睡覺，還是要等我發火再睡覺？』",
+        "所謂父愛如山，意思就是不管家裡發生什麼事，爸爸都像一座山一樣，坐在沙發上一動不動。",
+        "孩子是看著父母的背影長大的，但如果你一直在玩手機，他看的是你的低頭姿勢。",
+        "為什麼孩子總在睡前突然想討論人生哲學？因為他們發現這樣可以晚睡 10 分鐘。",
+        "生孩子前，以為家裡是文青風；生後，變成了命案現場風，到處是樂高殘肢。",
+        "有一種餓，是奶奶覺得你餓；有一種冷，是媽媽覺得你冷。",
+        "聽說睡眠對發育很重要，但我更覺得睡眠對我的脾氣控制很重要。",
+        "教孩子寫作業的過程，本質上是一場關於心肌梗塞的預演。",
+        "所謂『歲月靜好』，指的是孩子都去上學的那 8 個小時。",
+        "當你開始覺得孩子很可愛時，通常是因為他已經睡著了。",
+        "減肥失敗的原因：不想浪費孩子沒吃完的雞塊、薯條、披薩。",
+        "育兒最大的謊言：『等你長大後，我就輕鬆了。』",
+        "孩子就像 WiFi，有的訊號強，有的訊號弱，但只要斷線，全家人都會崩潰。",
+        "帶孩子出門旅遊，不叫旅遊，那叫『換個地方帶小孩』。",
+        "家長聚會只有一個主題：比慘。比誰的孩子更早起，比誰的肝更累。",
+        "每天早上起床支撐我的動力，不是夢想，是孩子在床頭蹦跳的聲音。"
     ];
     
     function quickSearch(word) { document.getElementById('userInput').value = word; fetchFromCloud(false); }
@@ -95,15 +134,13 @@
         const rBox = document.getElementById('reflectionBox');
         const inputVal = document.getElementById('userInput').value;
         
-        loading.style.display = "block"; 
-        panel.style.display = "none";
+        loading.style.display = "block"; panel.style.display = "none";
 
         if (isJoke) {
             const randomJoke = localJokes[Math.floor(Math.random() * localJokes.length)];
-            loading.style.display = "none";
-            panel.style.display = "block";
+            loading.style.display = "none"; panel.style.display = "block";
             gBox.innerHTML = "【🔥 教養大實話】<br><br>" + randomJoke;
-            rBox.innerText = "笑一笑，世界更甜美！";
+            rBox.innerText = "笑一笑，幸福就來了！";
             return;
         }
 
@@ -115,12 +152,27 @@
             
             if (data) {
                 panel.style.display = "block";
-                let content = data.guidance || "智多星正在為您準備建議...";
-                
-                // 🚀 重點：將網址轉換為漂亮的粉紅按鈕
-                let linkedContent = content.replace(/(https?:\/\/[^\s]+)/g, '<br><a href="$1" target="_blank" class="url-button">👉 點我開啟連結</a><br>');
-                
-                gBox.innerHTML = linkedContent;
+                let lines = (data.guidance || "").split('\n');
+                let finalHtml = "";
+
+                for (let i = 0; i < lines.length; i++) {
+                    let line = lines[i];
+                    if (line.includes('https://')) {
+                        let url = line.match(/https?:\/\/[^\s]+/)[0];
+                        // 🛠️ 關鍵修正：檢查這行或「前一行」是否包含工具字眼
+                        let isTool = line.includes('工具') || (i > 0 && lines[i-1].includes('工具'));
+                        
+                        if (isTool) {
+                            finalHtml += `<a href="${url}" target="_blank" class="url-button btn-tool">🛠️ 領取幸福工具包</a>`;
+                        } else {
+                            finalHtml += `<a href="${url}" target="_blank" class="url-button btn-vid">🎬 打開幸福調味包</a>`;
+                        }
+                    } else {
+                        finalHtml += line + "<br>";
+                    }
+                }
+
+                gBox.innerHTML = finalHtml;
                 rBox.innerText = data.reflection || "您的用心是孩子的福氣！";
             }
         } catch (e) { 
