@@ -119,11 +119,14 @@
         }
         .ask-btn:active { transform: translateY(2px); border-bottom-width: 2px; }
 
+        /* 開心按鈕彈動效果 */
         .happy-btn { 
             background: #fbc02d; border: none; padding: 0 12px; border-radius: 50px; 
             cursor: pointer; font-weight: bold; color: #5d4037; font-size: 0.85rem; white-space: nowrap; 
-            border-bottom: 4px solid #c49000; transition: 0.1s;
+            border-bottom: 4px solid #c49000; transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
+        .happy-btn:hover { transform: scale(1.05); }
+        .happy-btn:active { transform: scale(0.9) translateY(2px); }
 
         .category-title { font-size: 0.9rem; color: var(--deep-pink); margin: 25px 0 10px; font-weight: bold; border-left: 5px solid var(--deep-pink); padding-left: 10px; white-space: nowrap; }
         
@@ -144,8 +147,8 @@
             background: white; border: 2px solid #eee; border-bottom: 5px solid #eee;
             padding: 15px 4px; border-radius: 15px; text-align: center; 
             cursor: pointer; transition: 0.2s; 
-            font-size: clamp(0.7rem, 3.6vw, 0.92rem); 
-            letter-spacing: -0.6px;
+            font-size: clamp(0.75rem, 3.8vw, 0.92rem); 
+            letter-spacing: -0.2px;
             white-space: nowrap; 
             overflow: hidden;
             display: flex;
@@ -198,7 +201,7 @@
             border-radius: 28px; 
             box-shadow: 0 10px 30px rgba(0,0,0,0.08); 
             padding: 35px 20px; 
-            border: 1.5 solid #f1e7c5; 
+            border: 1.5px solid #f1e7c5; 
             margin-bottom: 20px;
             position: relative;
             overflow: hidden;
@@ -224,8 +227,9 @@
         .card-ritual { 
             background: #fff; padding: 18px; border-radius: 18px; 
             border: 1px dashed var(--angel-pink); 
-            font-size: 0.98rem; color: #444; margin: 15px 0; 
+            font-size: 1.05rem; color: #444; margin: 15px 0; 
             line-height: 1.6; text-align: center;
+            word-break: keep-all;
         }
         
         .action-btn { 
@@ -291,16 +295,15 @@
             </div>
         </div>
 
-        <!-- 家長能量卡模組 -->
         <div id="module-parent" class="module-content">
-            <div class="option-label" style="white-space: nowrap !important; letter-spacing: -0.5px !important;">💎 此刻的心情狀態</div>
+            <div class="option-label">💎 此刻的心情狀態</div>
             <div class="grid-options">
                 <div class="opt-card" onclick="selectCardOpt('pState', this, '焦慮混亂')">😵 焦慮混亂</div>
                 <div class="opt-card" onclick="selectCardOpt('pState', this, '疲憊無力')">🥱 疲憊無力</div>
                 <div class="opt-card" onclick="selectCardOpt('pState', this, '自責內疚')">😔 自責內疚</div>
                 <div class="opt-card" onclick="selectCardOpt('pState', this, '憤怒衝動')">🌋 憤怒衝動</div>
             </div>
-            <div class="option-label" style="white-space: nowrap !important; letter-spacing: -0.5px !important;">💎 渴望注入的能量</div>
+            <div class="option-label">💎 渴望注入的能量</div>
             <div class="grid-options">
                 <div class="opt-card" onclick="selectCardOpt('pEnergy', this, '溫柔平靜')">🌿 溫柔平靜</div>
                 <div class="opt-card" onclick="selectCardOpt('pEnergy', this, '堅定力量')">🦁 堅定力量</div>
@@ -311,14 +314,14 @@
         </div>
 
         <div id="module-kids" class="module-content">
-            <div class="option-label" style="white-space: nowrap !important; letter-spacing: -0.5px !important;">✨ 寶貝的小情緒</div>
+            <div class="option-label">✨ 寶貝的小情緒</div>
             <div class="grid-options">
                 <div class="opt-card" onclick="selectCardOpt('kState', this, '火冒三丈')">😡 火冒三丈</div>
                 <div class="opt-card" onclick="selectCardOpt('kState', this, '悶悶不樂')">😢 悶悶不樂</div>
                 <div class="opt-card" onclick="selectCardOpt('kState', this, '緊張怕怕')">😨 緊張怕怕</div>
                 <div class="opt-card" onclick="selectCardOpt('kState', this, '調皮好動')">🤪 調皮好動</div>
             </div>
-            <div class="option-label" style="white-space: nowrap !important; letter-spacing: -0.5px !important;">✨ 啟動魔法能量</div>
+            <div class="option-label">✨ 啟動魔法能量</div>
             <div class="grid-options">
                 <div class="opt-card" onclick="selectCardOpt('kEnergy', this, '冷靜魔法')">❄️ 冷靜魔法</div>
                 <div class="opt-card" onclick="selectCardOpt('kEnergy', this, '勇敢力氣')">🛡️ 勇敢力氣</div>
@@ -359,8 +362,8 @@
         '接納寬容': '展開雙臂，接納所有情緒。',
         '冷靜魔法': '對著手心吹氣，把心中的火吹涼。', 
         '勇敢力氣': '用力握拳 3 秒再放開，感受力量。',
-        '快樂氣球': '原地輕跳三次，想像身體變輕盈。', // 修改此處：更新快樂氣球動作描述
-        '專心種子': '食指輕點眉心，讓思緒回到當下。'
+        '快樂氣球': '原地輕跳三次，想像身體變輕盈。', 
+        '專心種子': '食指輕點眉心，讓專心回來。'
     };
 
     let selections = { pState:'', pEnergy:'', kState:'', kEnergy:'' };
@@ -374,7 +377,6 @@
         document.getElementById(`tab-${mod==='ask'?'ask':mod}`).classList.add('active');
         
         const titles = { 'ask': '幸福智多星', 'parent': '家長能量卡', 'kids': '寶貝能量卡' };
-        
         const descs = { 
             'ask': '讓我們一起為幸福充電', 
             'parent': '<span style="white-space:nowrap; font-size:0.72rem; letter-spacing:-0.2px;">先照顧自己，才有力氣愛孩子</span>', 
@@ -401,7 +403,7 @@
         document.getElementById('res-state').innerText = s;
         document.getElementById('res-energy').innerText = e;
         document.getElementById('res-ritual').innerText = rituals[e] || "深呼吸三次。";
-        document.getElementById('res-quote').innerText = isP ? "「世界因我而甜美，愛讓力量發生。」" : "「我有好厲害的魔法，我可以做得到！」";
+        document.getElementById('res-quote').innerText = isP ? "世界因我甜美，愛讓力量發生！" : "我有超級魔法，讓我可以做到！";
         
         document.querySelectorAll('.module-content').forEach(m => m.classList.remove('active'));
         document.getElementById('result-area').style.display = 'block';
@@ -421,7 +423,28 @@
         
         if (isJoke) {
             loading.style.display = "none"; panel.style.display = "block";
-            const jokes = ["所謂的『優雅育兒』，就是你在心裡已經把孩子吊起來打了兩百次，但臉上依然保持微笑。", "育兒就是一場修行。"];
+            const jokes = [
+                "所謂的『優雅育兒』，就是你在心裡已經把孩子吊起來打了兩百次，但臉上依然保持微笑。",
+                "育兒就是一場長達 20 年的修行，孩子是你的業障，老公是你的考驗。",
+                "如果你發現孩子突然安靜，趕快檢查鍵盤是不是少了好幾個鍵。",
+                "當媽後最想念的地方不是百貨公司，而是沒有人在門口喊『媽～』的廁所。",
+                "教養書說要給孩子選擇權：『你是要現在乖乖睡覺，還是要等我發火再睡覺？』",
+                "所謂父愛如山，意思就是不管家裡發生什麼事，爸爸都像一座山一樣，坐在沙發上一動不動。",
+                "孩子是看著父母的背影長大的，但如果你一直在玩手機，他看的是你的低頭姿勢。",
+                "為什麼孩子總在睡前突然想討論人生哲學？因為他們發現這樣可以晚睡 10 分鐘。",
+                "生孩子前，以為家裡是文青風；生後，變成了命案現場風，到處是樂高殘肢。",
+                "有一種餓，是奶奶覺得你餓；有一種冷，是媽媽覺得你冷。",
+                "聽說睡眠對發育很重要，但我更覺得睡眠對我的脾氣控制很重要。",
+                "教孩子寫作業的過程，本質上是一場關於心肌梗塞的預演。",
+                "所謂『歲月靜好』，指的是孩子都去上學的那 8 個小時。",
+                "當你開始覺得孩子很可愛時，通常是因為他已經睡著了。",
+                "減肥失敗的原因：不想浪費孩子沒吃完的雞塊、薯條、披薩。",
+                "育兒最大的謊言：『等你長大後，我就輕鬆了。』",
+                "孩子就像 WiFi，有的訊號強，有的訊號弱，但只要斷線，全家人都會崩潰。",
+                "帶孩子出門旅遊，不叫旅遊，那叫『換個地方帶小孩』。",
+                "家長聚會只有一個主題：比慘。比誰的孩子更早起，比誰的肝更累。",
+                "每天早上起床支撐我的動力，不是夢想，是孩子在床頭蹦跳的聲音。"
+            ];
             gBox.innerHTML = "【🔥 教養大實話】\n\n" + jokes[Math.floor(Math.random() * jokes.length)];
             rBox.innerText = "笑一笑，幸福就來了！";
             return;
